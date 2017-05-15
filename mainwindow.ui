@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>海天鹰画图</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="filename.qrc">
+    <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_file">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="action_new"/>
+    <addaction name="action_open"/>
+    <addaction name="action_import"/>
+    <addaction name="action_save"/>
+    <addaction name="action_saveas"/>
+    <addaction name="action_quit"/>
+   </widget>
+   <widget class="QMenu" name="menu_edit">
+    <property name="title">
+     <string>编辑</string>
+    </property>
+    <addaction name="action_undo"/>
+    <addaction name="action_redo"/>
+    <addaction name="action_copy"/>
+    <addaction name="action_cut"/>
+    <addaction name="action_paste"/>
+    <addaction name="action_selectAll"/>
+    <addaction name="action_delete"/>
+   </widget>
+   <widget class="QMenu" name="menu_image">
+    <property name="title">
+     <string>图像</string>
+    </property>
+    <addaction name="action_flip"/>
+    <addaction name="action_excude"/>
+    <addaction name="action_property"/>
+    <addaction name="action_setWallpaper"/>
+    <addaction name="action_gray"/>
+    <addaction name="action_invert"/>
+    <addaction name="action_blur"/>
+   </widget>
+   <widget class="QMenu" name="menu_about">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="action_help"/>
+    <addaction name="action_changelog"/>
+    <addaction name="action_aboutQt"/>
+    <addaction name="action_about"/>
+   </widget>
+   <addaction name="menu_file"/>
+   <addaction name="menu_edit"/>
+   <addaction name="menu_image"/>
+   <addaction name="menu_about"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionPencil"/>
+   <addaction name="actionLine"/>
+   <addaction name="actionRect"/>
+   <addaction name="actionEllipse"/>
+   <addaction name="actionText"/>
+   <addaction name="actionColorPicker"/>
+   <addaction name="actionFill"/>
+   <addaction name="actionErase"/>
+   <addaction name="actionMove"/>
+   <addaction name="actionRectselect"/>
+   <addaction name="actionCutSelect"/>
+   <addaction name="actionRotateLeft"/>
+   <addaction name="actionRotateRight"/>
+   <addaction name="actionMirrorHorizontal"/>
+   <addaction name="actionMirrorVertical"/>
+   <addaction name="actionZoomin"/>
+   <addaction name="actionZoomout"/>
+   <addaction name="actionZoom1"/>
+   <addaction name="actionFont"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_open">
+   <property name="text">
+    <string>打开</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="action_save">
+   <property name="text">
+    <string>保存</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="action_saveas">
+   <property name="text">
+    <string>另存为</string>
+   </property>
+  </action>
+  <action name="action_quit">
+   <property name="text">
+    <string>退出</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="action_undo">
+   <property name="text">
+    <string>撤销</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="action_redo">
+   <property name="text">
+    <string>重做</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="action_copy">
+   <property name="text">
+    <string>复制</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="action_cut">
+   <property name="text">
+    <string>剪切</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="action_paste">
+   <property name="text">
+    <string>粘贴</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="action_selectAll">
+   <property name="text">
+    <string>全选</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="action_delete">
+   <property name="text">
+    <string>删除</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
+  </action>
+  <action name="action_flip">
+   <property name="text">
+    <string>翻转/旋转</string>
+   </property>
+   <property name="toolTip">
+    <string>翻转/旋转</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="action_excude">
+   <property name="text">
+    <string>拉伸/扭曲</string>
+   </property>
+   <property name="toolTip">
+    <string>拉伸/扭曲</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="action_property">
+   <property name="text">
+    <string>属性</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="action_setWallpaper">
+   <property name="text">
+    <string>设为壁纸</string>
+   </property>
+  </action>
+  <action name="action_help">
+   <property name="text">
+    <string>帮助</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="action_changelog">
+   <property name="text">
+    <string>更新日志</string>
+   </property>
+  </action>
+  <action name="action_about">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+  <action name="action_new">
+   <property name="text">
+    <string>新建</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionPencil">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/pencil.png</normaloff>:/pencil.png</iconset>
+   </property>
+   <property name="text">
+    <string>铅笔</string>
+   </property>
+   <property name="toolTip">
+    <string>铅笔</string>
+   </property>
+  </action>
+  <action name="actionLine">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/line.png</normaloff>:/line.png</iconset>
+   </property>
+   <property name="text">
+    <string>直线</string>
+   </property>
+   <property name="toolTip">
+    <string>直线</string>
+   </property>
+  </action>
+  <action name="actionEllipse">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/ellipse.png</normaloff>:/ellipse.png</iconset>
+   </property>
+   <property name="text">
+    <string>椭圆</string>
+   </property>
+   <property name="toolTip">
+    <string>椭圆</string>
+   </property>
+  </action>
+  <action name="actionRect">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/rect.png</normaloff>:/rect.png</iconset>
+   </property>
+   <property name="text">
+    <string>矩形</string>
+   </property>
+   <property name="toolTip">
+    <string>矩形</string>
+   </property>
+  </action>
+  <action name="actionText">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/text.png</normaloff>:/text.png</iconset>
+   </property>
+   <property name="text">
+    <string>文本</string>
+   </property>
+   <property name="toolTip">
+    <string>文本</string>
+   </property>
+  </action>
+  <action name="actionErase">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/eraser.png</normaloff>:/eraser.png</iconset>
+   </property>
+   <property name="text">
+    <string>擦子</string>
+   </property>
+   <property name="toolTip">
+    <string>擦子</string>
+   </property>
+  </action>
+  <action name="actionMove">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/move.png</normaloff>:/move.png</iconset>
+   </property>
+   <property name="text">
+    <string>move</string>
+   </property>
+   <property name="toolTip">
+    <string>移动</string>
+   </property>
+  </action>
+  <action name="actionRectselect">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/rectselect.png</normaloff>:/rectselect.png</iconset>
+   </property>
+   <property name="text">
+    <string>rectselect</string>
+   </property>
+   <property name="toolTip">
+    <string>框选</string>
+   </property>
+  </action>
+  <action name="actionColorFill">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>■</string>
+   </property>
+   <property name="toolTip">
+    <string>填充</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="actionColorBorder">
+   <property name="text">
+    <string>□</string>
+   </property>
+   <property name="toolTip">
+    <string>边框</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="text">
+    <string>字体</string>
+   </property>
+   <property name="toolTip">
+    <string>字体</string>
+   </property>
+  </action>
+  <action name="actionCutSelect">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/clip.png</normaloff>:/clip.png</iconset>
+   </property>
+   <property name="text">
+    <string>剪切选区</string>
+   </property>
+   <property name="toolTip">
+    <string>剪切选区</string>
+   </property>
+  </action>
+  <action name="actionFill">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/fill.png</normaloff>:/fill.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fill</string>
+   </property>
+   <property name="toolTip">
+    <string>填充</string>
+   </property>
+  </action>
+  <action name="action_aboutQt">
+   <property name="text">
+    <string>关于Qt</string>
+   </property>
+  </action>
+  <action name="actionZoomin">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/zoomin.png</normaloff>:/zoomin.png</iconset>
+   </property>
+   <property name="text">
+    <string>+</string>
+   </property>
+   <property name="toolTip">
+    <string>放大</string>
+   </property>
+  </action>
+  <action name="actionZoomout">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/zoomout.png</normaloff>:/zoomout.png</iconset>
+   </property>
+   <property name="text">
+    <string>-</string>
+   </property>
+   <property name="toolTip">
+    <string>缩小</string>
+   </property>
+  </action>
+  <action name="actionZoom1">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/zoom1.png</normaloff>:/zoom1.png</iconset>
+   </property>
+   <property name="text">
+    <string>1</string>
+   </property>
+   <property name="toolTip">
+    <string>实际大小</string>
+   </property>
+  </action>
+  <action name="actionRotateRight">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/rr.png</normaloff>:/rr.png</iconset>
+   </property>
+   <property name="text">
+    <string>rotateRight</string>
+   </property>
+   <property name="toolTip">
+    <string>右转90°</string>
+   </property>
+  </action>
+  <action name="actionRotateLeft">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/rl.png</normaloff>:/rl.png</iconset>
+   </property>
+   <property name="text">
+    <string>RotateLeft</string>
+   </property>
+   <property name="toolTip">
+    <string>左转90°</string>
+   </property>
+  </action>
+  <action name="actionMirrorHorizontal">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/MirrorHorizontal.png</normaloff>:/MirrorHorizontal.png</iconset>
+   </property>
+   <property name="text">
+    <string>MirrorHorizontal</string>
+   </property>
+   <property name="toolTip">
+    <string>水平镜像</string>
+   </property>
+  </action>
+  <action name="actionMirrorVertical">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/MirrorVertical.png</normaloff>:/MirrorVertical.png</iconset>
+   </property>
+   <property name="text">
+    <string>MirrorVertical</string>
+   </property>
+   <property name="toolTip">
+    <string>垂直镜像</string>
+   </property>
+  </action>
+  <action name="action_gray">
+   <property name="text">
+    <string>灰度</string>
+   </property>
+  </action>
+  <action name="action_invert">
+   <property name="text">
+    <string>反色</string>
+   </property>
+  </action>
+  <action name="action_import">
+   <property name="text">
+    <string>导入图片</string>
+   </property>
+  </action>
+  <action name="action_blur">
+   <property name="text">
+    <string>模糊</string>
+   </property>
+  </action>
+  <action name="actionColorPicker">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/color_picker.png</normaloff>:/color_picker.png</iconset>
+   </property>
+   <property name="text">
+    <string>颜色拾取</string>
+   </property>
+   <property name="toolTip">
+    <string>颜色拾取</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="filename.qrc"/>
+ </resources>
+ <connections/>
+</ui>
