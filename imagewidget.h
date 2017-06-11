@@ -100,6 +100,8 @@ private:
     void mouseMoveEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
 
+signals:
+    void statusbar2Message(QString);
 };
 
 #endif // IMAGEWIDGET_H

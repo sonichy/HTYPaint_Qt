@@ -24,7 +24,8 @@ protected:
 
 private:
     QScrollArea *scrollArea;
-    ImageWidget *imageWidget;    
+    ImageWidget *imageWidget;
+    QLabel *LSB1,*LSB2;
 
 private slots:
     void on_action_new_triggered();

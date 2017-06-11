@@ -8,7 +8,6 @@
 #include <QClipboard>
 #include <QShortcut>
 #include <QRect>
-//#include <QtGlobal>
 
 QImage imgload,imgpaste;
 int cundo=0;
@@ -38,7 +37,7 @@ ImageWidget::ImageWidget(QWidget *parent)
     connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Left),this), SIGNAL(activated()),this, SLOT(moveRightLeft()));
     connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Right),this), SIGNAL(activated()),this, SLOT(moveRightRight()));
     connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Up),this), SIGNAL(activated()),this, SLOT(moveBottomUp()));
-    connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down),this), SIGNAL(activated()),this, SLOT(moveBottomDown()));    
+    connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down),this), SIGNAL(activated()),this, SLOT(moveBottomDown()));
 }
 
 ImageWidget::~ImageWidget()
@@ -167,8 +166,8 @@ void ImageWidget::mouseMoveEvent(QMouseEvent *e){
         //ui->statusBar->showMessage(QString::number(e->pos().x())+","+QString::number(e->pos().y()));
     //}
     //static_cast<MainWindow*>(parent())->statusBar()->showMessage("mousemove");
-    //static_cast<MainWindow*>(parent())->statusBar()->showMessage("("+QString::number(startPnt.x())+","+QString::number(startPnt.y())+") - ("+QString::number(endPnt.x())+","+QString::number(endPnt.y())+")");
-
+    //static_cast<MainWindow*>(parent())->statusBar()->showMessage("("+QString::number(startPnt.x())+","+QString::number(startPnt.y())+") - ("+QString::number(endPnt.x())+","+QString::number(endPnt.y())+")");    
+    emit statusbar2Message("("+QString::number(startPnt.x())+","+QString::number(startPnt.y())+") - ("+QString::number(endPnt.x())+","+QString::number(endPnt.y())+")");
 }
 
 void ImageWidget::mouseReleaseEvent(QMouseEvent *e){
