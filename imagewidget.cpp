@@ -15,6 +15,7 @@ int cundo=0;
 ImageWidget::ImageWidget(QWidget *parent)
     : QWidget(parent)
 {
+    qApp->installEventFilter(this);
     labelFont=new QLabel;
     //imgtemp=QImage(600,500,QImage::Format_RGB32);
     //imgtemp.fill(Qt::white);
@@ -647,4 +648,13 @@ void ImageWidget::blur(int p)
     QPainter painter(&imgtemp);
     painter.drawImage(xs,ys,imgBlur);
     update();
+}
+
+bool ImageWidget::eventFilter(QObject *obj, QEvent *event)
+{
+  if(event->type() == QEvent::MouseMove){
+    QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+    emit statusbar2Message(QString::number(mouseEvent->pos().x())+","+QString::number(mouseEvent->pos().y()));
+  }
+  return false;
 }

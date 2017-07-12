@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <vector>
+//#include <vector>
 #include <QScrollArea>
 #include <imagewidget.h>
 using namespace std;
@@ -21,6 +21,8 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent *);
+    void dragEnterEvent(QDragEnterEvent *e);
+    void dropEvent(QDropEvent *e);
 
 private:
     QScrollArea *scrollArea;

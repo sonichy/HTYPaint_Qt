@@ -99,6 +99,7 @@ private:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
+    bool eventFilter(QObject *obj, QEvent *event);
 
 signals:
     void statusbar2Message(QString);
