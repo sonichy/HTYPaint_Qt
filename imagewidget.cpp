@@ -55,6 +55,7 @@ void ImageWidget::paintEvent(QPaintEvent *)
 void ImageWidget::draw(QImage &img){
     QPainter painter(&img);
     painter.setPen(pen);
+    painter.setRenderHint(QPainter::Antialiasing, true);
     switch(draw_type){
     case POINT_DRAW:
         painter.drawLine(startPnt,endPnt);
@@ -271,7 +272,6 @@ void ImageWidget::drawPoint()
 {
     image=imgtemp;
     draw_type=POINT_DRAW;
-    pen.setJoinStyle(Qt::RoundJoin);
     QCursor cursor;
     QPixmap pixmap(":/pencil.png");
     cursor = QCursor(pixmap);
