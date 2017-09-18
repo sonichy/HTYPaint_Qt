@@ -127,7 +127,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::resizeEvent(QResizeEvent *)
+void MainWindow::resizeEvent(QResizeEvent *event)
 {
     //QRect childRect = scrollArea->childrenRect();
     //imageWidget->resize(childRect.size());
@@ -135,7 +135,7 @@ void MainWindow::resizeEvent(QResizeEvent *)
 
 void MainWindow::on_action_changelog_triggered()
 {
-    QString s="1.6\n(2017-07)\n更新日志消息窗口写不下了，改成带滚动条的文本框。\n自定义信号结合事件过滤器，把鼠标移动位置发送到主窗体信息栏。\n增加拖放打开文件。\n(2017-06)\n使用自定义信号解决子类发信息给主窗体状态栏问题，致谢rekols。\n(2017-05)\n右键打开文件记忆文件路径。\n\n1.5 (2017-04)\n透明色反色不改变。\n增加取色工具，橡皮擦颜色不再固定为白色，而是填充色。\n\n1.4 (2017-03)\n支持命令行打开文件和打开方式打开文件。\n修复鼠标指针引用本地文件，没引用资源文件，引起启动path参数改变不能加载图标的问题。\n菜单的SIGNAL-SLOT改为on_action_triggered()\n修复PNG图片裁剪丢失透明度问题。\n新建图像为透明图像。\n\n1.3 (2017-03)\n实现选区模糊。\n加入模糊滤镜。\n\n1.2 (2017-02)\n文件名显示在窗口标题栏。\n区别保存和另存为。\n增加导入图片。\n\n1.1 (2017-01)\n新增灰度、反色。\n\n1.0 (2017-01)\n解决删除选区后画不出选框的问题。\n恢复撤销。\n增加全选。\n实现选区或剪贴板移动！\n保存时自动获取打开文件的路径。\n增加按像素、比例缩放。\n实现在属性窗口设置画布大小。\n2016-12\n增加快捷键控制选框及其边框移动。\n绘图代码从MainWindow向imageWidget迁移。\n实现水平镜像、垂直镜像。\n实现放大、缩小、原始大小。\n为了增加滚动条，增加自定义imageWidget。\n状态栏显示绘图详情。\n复制选区到系统剪贴板，从系统剪贴板获取图像粘贴。\n优化颜色选择交互。\n增加撤销、重做功能，有BUG。\n设为壁纸。\n画选区，剪裁选区。\n新建图片，打开图片，保存图片。\n实现画点、线、框、圆、字。";
+    QString s="1.7\n(2017-09)\n增加箭头工具。\n\n1.6\n(2017-07)\n更新日志消息窗口写不下了，改成带滚动条的文本框。\n自定义信号结合事件过滤器，把鼠标移动位置发送到主窗体信息栏。\n增加拖放打开文件。\n(2017-06)\n使用自定义信号解决子类发信息给主窗体状态栏问题，致谢rekols。\n(2017-05)\n右键打开文件记忆文件路径。\n\n1.5 (2017-04)\n透明色反色不改变。\n增加取色工具，橡皮擦颜色不再固定为白色，而是填充色。\n\n1.4 (2017-03)\n支持命令行打开文件和打开方式打开文件。\n修复鼠标指针引用本地文件，没引用资源文件，引起启动path参数改变不能加载图标的问题。\n菜单的SIGNAL-SLOT改为on_action_triggered()\n修复PNG图片裁剪丢失透明度问题。\n新建图像为透明图像。\n\n1.3 (2017-03)\n实现选区模糊。\n加入模糊滤镜。\n\n1.2 (2017-02)\n文件名显示在窗口标题栏。\n区别保存和另存为。\n增加导入图片。\n\n1.1 (2017-01)\n新增灰度、反色。\n\n1.0 (2017-01)\n解决删除选区后画不出选框的问题。\n恢复撤销。\n增加全选。\n实现选区或剪贴板移动！\n保存时自动获取打开文件的路径。\n增加按像素、比例缩放。\n实现在属性窗口设置画布大小。\n2016-12\n增加快捷键控制选框及其边框移动。\n绘图代码从MainWindow向imageWidget迁移。\n实现水平镜像、垂直镜像。\n实现放大、缩小、原始大小。\n为了增加滚动条，增加自定义imageWidget。\n状态栏显示绘图详情。\n复制选区到系统剪贴板，从系统剪贴板获取图像粘贴。\n优化颜色选择交互。\n增加撤销、重做功能，有BUG。\n设为壁纸。\n画选区，剪裁选区。\n新建图片，打开图片，保存图片。\n实现画点、线、框、圆、字。";
     QDialog *dialog=new QDialog;
     dialog->setWindowTitle("更新历史");
     dialog->setFixedSize(400,300);
@@ -165,7 +165,7 @@ void MainWindow::on_action_aboutQt_triggered()
 
 void MainWindow::on_action_about_triggered()
 {
-    QMessageBox aboutMB(QMessageBox::NoIcon, "关于", "海天鹰画图 1.6\n一款基于Qt的画图程序。\n作者：黄颖\nE-mail: sonichy@163.com\n主页：sonichy.96.lt\n参考文献：\n绘图：\nhttp://tzc.is-programmer.com/posts/534.html\nhttp://lizhigg.love.blog.163.com/blog/static/62611781201222105550184/\n滚动条：http://down.51cto.com/data/233634\n灰度图：http://www.cnblogs.com/xianglan/archive/2010/12/24/1915905.html\n拖放打开文件：http://blog.csdn.net/rl529014/article/details/53057577");
+    QMessageBox aboutMB(QMessageBox::NoIcon, "关于", "海天鹰画图 1.7\n一款基于Qt的画图程序。\n作者：黄颖\nE-mail: sonichy@163.com\n主页：sonichy.96.lt\n参考文献：\n绘图：\nhttp://tzc.is-programmer.com/posts/534.html\nhttp://lizhigg.love.blog.163.com/blog/static/62611781201222105550184/\n滚动条：http://down.51cto.com/data/233634\n灰度图：http://www.cnblogs.com/xianglan/archive/2010/12/24/1915905.html\n拖放打开文件：http://blog.csdn.net/rl529014/article/details/53057577");
     aboutMB.setIconPixmap(QPixmap(":/icon.png"));
     aboutMB.exec();
 }
@@ -205,6 +205,11 @@ void MainWindow::on_actionPencil_triggered()
 void MainWindow::on_actionLine_triggered()
 {
     imageWidget->drawLine();
+}
+
+void MainWindow::on_actionArrow_triggered()
+{
+    imageWidget->drawArrow();
 }
 
 void MainWindow::on_actionRect_triggered()
@@ -343,11 +348,10 @@ void MainWindow::on_actionFont_triggered()
 {
     bool ok;
     QFont font = QFontDialog::getFont(&ok, labelFont->font(), this, "选择字体");
-    if(ok)
-    {
+    if(ok){
        labelFont->setFont(font);
        imageWidget->labelFont->setFont(font);
-       ui->actionFont->setText(labelFont->font().family()+","+QString::number(labelFont->font().pointSize()));
+       ui->actionFont->setText(labelFont->font().family() + "," + QString::number(labelFont->font().pointSize()));
     }
 }
 

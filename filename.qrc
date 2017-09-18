@@ -19,5 +19,6 @@
         <file>MirrorHorizontal.png</file>
         <file>MirrorVertical.png</file>
         <file>color_picker.png</file>
+        <file>arrow.png</file>
     </qresource>
 </RCC>

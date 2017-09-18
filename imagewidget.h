@@ -20,6 +20,7 @@ public:
         NONE_DRAW,
         POINT_DRAW,
         LINE_DRAW,
+        ARROW_DRAW,
         RECT_DRAW,
         ELLIPSE_DRAW,
         TEXT_DRAW,
@@ -53,6 +54,7 @@ public:
     void mirror(bool bh,bool bv);
     void drawPoint();
     void drawLine();
+    void drawArrow();
     void drawRect();
     void drawEllipse();
     void drawText();

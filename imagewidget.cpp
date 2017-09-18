@@ -8,7 +8,7 @@
 #include <QClipboard>
 #include <QShortcut>
 #include <QRect>
-
+#include "math.h"
 QImage imgload,imgpaste;
 int cundo=0;
 
@@ -62,6 +62,33 @@ void ImageWidget::draw(QImage &img){
     case LINE_DRAW:
         painter.drawLine(startPnt,endPnt);
         break;
+    case ARROW_DRAW:{
+        painter.drawLine(startPnt,endPnt);
+        float pi=3.14;
+        float a=pi/12;
+        float l=sqrt(pow(endPnt.y()-startPnt.y(),2)+pow(endPnt.x()-startPnt.x(),2));
+        float b=asin((endPnt.y()-startPnt.y())/l);
+        float d=10;
+        float x2,x3;
+        if(startPnt.x()>endPnt.x()){
+            x2=endPnt.x()+d*cos(a+b);
+        }else{
+            x2=endPnt.x()-d*cos(a+b);
+        }
+        float y2=endPnt.y()-d*sin(a+b);
+        if(startPnt.x()>endPnt.x()){
+            x3=endPnt.x()+d*cos(b-a);
+        }else{
+            x3=endPnt.x()-d*cos(b-a);
+        }
+        float y3=endPnt.y()-d*sin(b-a);
+        QPointF points[3] = {
+            QPointF(endPnt),
+            QPointF(x2, y2),
+            QPointF(x3, y3)
+        };
+        painter.drawPolygon(points,3);
+        break;}
     case RECT_DRAW:{        
         if(boolFill){painter.setBrush(brush);}else{painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));}
         QRect rect(startPnt,endPnt);
@@ -166,12 +193,12 @@ void ImageWidget::mouseMoveEvent(QMouseEvent *e){
     //    draw(imgtemp);
         //ui->statusBar->showMessage(QString::number(e->pos().x())+","+QString::number(e->pos().y()));
     //}
-    //static_cast<MainWindow*>(parent())->statusBar()->showMessage("mousemove");
-    //static_cast<MainWindow*>(parent())->statusBar()->showMessage("("+QString::number(startPnt.x())+","+QString::number(startPnt.y())+") - ("+QString::number(endPnt.x())+","+QString::number(endPnt.y())+")");    
     emit statusbar2Message("("+QString::number(startPnt.x())+","+QString::number(startPnt.y())+") - ("+QString::number(endPnt.x())+","+QString::number(endPnt.y())+")");
 }
 
-void ImageWidget::mouseReleaseEvent(QMouseEvent *e){
+void ImageWidget::mouseReleaseEvent(QMouseEvent *e)
+{
+    Q_UNUSED(e);
     //this->isPressed = false;
     if(draw_type!=SELECT_DRAW && draw_type!=MOVE_DRAW){
         image=imgtemp;
@@ -250,12 +277,23 @@ void ImageWidget::drawPoint()
     cursor = QCursor(pixmap);
     setCursor(cursor);
 }
+
 void ImageWidget::drawLine()
 {
     image=imgtemp;
     draw_type=LINE_DRAW;
     QCursor cursor;
     QPixmap pixmap(":/line.png");
+    cursor = QCursor(pixmap);
+    setCursor(cursor);
+}
+
+void ImageWidget::drawArrow()
+{
+    image=imgtemp;
+    draw_type=ARROW_DRAW;
+    QCursor cursor;
+    QPixmap pixmap(":/arrow.png");
     cursor = QCursor(pixmap);
     setCursor(cursor);
 }
@@ -652,9 +690,10 @@ void ImageWidget::blur(int p)
 
 bool ImageWidget::eventFilter(QObject *obj, QEvent *event)
 {
-  if(event->type() == QEvent::MouseMove){
-    QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
-    emit statusbar2Message(QString::number(mouseEvent->pos().x())+","+QString::number(mouseEvent->pos().y()));
-  }
-  return false;
+    Q_UNUSED(obj);
+    if(event->type() == QEvent::MouseMove){
+        QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
+        emit statusbar2Message(QString::number(mouseEvent->pos().x())+","+QString::number(mouseEvent->pos().y()));
+    }
+    return false;
 }

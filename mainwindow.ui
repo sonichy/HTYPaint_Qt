@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
+    <width>1050</width>
     <height>600</height>
    </rect>
   </property>
@@ -26,7 +26,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1050</width>
      <height>24</height>
     </rect>
    </property>
@@ -88,6 +88,7 @@
    </attribute>
    <addaction name="actionPencil"/>
    <addaction name="actionLine"/>
+   <addaction name="actionArrow"/>
    <addaction name="actionRect"/>
    <addaction name="actionEllipse"/>
    <addaction name="actionText"/>
@@ -541,6 +542,18 @@
    </property>
    <property name="toolTip">
     <string>颜色拾取</string>
+   </property>
+  </action>
+  <action name="actionArrow">
+   <property name="icon">
+    <iconset resource="filename.qrc">
+     <normaloff>:/arrow.png</normaloff>:/arrow.png</iconset>
+   </property>
+   <property name="text">
+    <string>箭头</string>
+   </property>
+   <property name="toolTip">
+    <string>箭头</string>
    </property>
   </action>
  </widget>

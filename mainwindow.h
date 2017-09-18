@@ -54,6 +54,7 @@ private slots:
 
     void on_actionPencil_triggered();
     void on_actionLine_triggered();
+    void on_actionArrow_triggered();
     void on_actionRect_triggered();
     void on_actionEllipse_triggered();
     void on_actionText_triggered();
