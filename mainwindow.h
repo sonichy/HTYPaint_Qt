@@ -75,8 +75,8 @@ private slots:
 
     void setColorFill();
     void setColorBorder();
-    void onSpinValueChanged(int i);
-    void onTextChanged(QString text);
+    void spinValueChanged(int i);
+    void textChange(QString);
     void onSpinwChanged(int i);
     void onSpinhChanged(int i);
     void onSpinwrChanged(int i);

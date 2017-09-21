@@ -64,31 +64,50 @@ void ImageWidget::draw(QImage &img){
         painter.drawLine(startPnt,endPnt);
         break;
     case ARROW_DRAW:{
-        painter.drawLine(startPnt,endPnt);
+        if(boolFill){painter.setBrush(brush);}else{painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));}
+        if(!boolBorder){pen.setColor(Qt::transparent);}
+        QPen pena=pen;
+        pena.setWidth(1);
+        painter.setPen(pena);
         float pi=3.14;
-        float a=pi/12;
+        float a=pi/9;
         float l=sqrt(pow(endPnt.y()-startPnt.y(),2)+pow(endPnt.x()-startPnt.x(),2));
-        float b=asin((endPnt.y()-startPnt.y())/l);
-        float d=10;
-        float x2,x3;
+        float b=asin((endPnt.y()-startPnt.y())/l);        
+        int LW=pen.width();
+        float x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,l56;
+        l56=LW/2;
+        float d=(l56+LW/2)/sin(a);
         if(startPnt.x()>endPnt.x()){
-            x2=endPnt.x()+d*cos(a+b);
+            x1=startPnt.x()-LW/2*sin(b);
+            x2=startPnt.x()+LW/2*sin(b);
+            x4=endPnt.x()+d*cos(b-a);
+            x3=x4-l56*sin(b);
+            x5=endPnt.x()+d*cos(a+b);
+            x6=x5+l56*sin(b);
         }else{
-            x2=endPnt.x()-d*cos(a+b);
+            x1=startPnt.x()+LW/2*sin(b);
+            x2=startPnt.x()-LW/2*sin(b);
+            x4=endPnt.x()-d*cos(b-a);
+            x3=x4+l56*sin(b);
+            x5=endPnt.x()-d*cos(a+b);
+            x6=x5-l56*sin(b);
         }
-        float y2=endPnt.y()-d*sin(a+b);
-        if(startPnt.x()>endPnt.x()){
-            x3=endPnt.x()+d*cos(b-a);
-        }else{
-            x3=endPnt.x()-d*cos(b-a);
-        }
-        float y3=endPnt.y()-d*sin(b-a);
-        QPointF points[3] = {
+        y1=startPnt.y()-LW/2*cos(b);
+        y2=startPnt.y()+LW/2*cos(b);
+        y5=endPnt.y()-d*sin(a+b);
+        y6=y5+l56*cos(b);
+        y4=endPnt.y()-d*sin(b-a);
+        y3=y4-l56*cos(b);
+        QPointF points[7] = {
+            QPointF(x1,y1),
+            QPointF(x2,y2),
+            QPointF(x3,y3),
+            QPointF(x4,y4),
             QPointF(endPnt),
-            QPointF(x2, y2),
-            QPointF(x3, y3)
+            QPointF(x5,y5),
+            QPointF(x6,y6)
         };
-        painter.drawPolygon(points,3);
+        painter.drawPolygon(points,7);
         break;}
     case RECT_DRAW:{        
         if(boolFill){painter.setBrush(brush);}else{painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));}
@@ -402,8 +421,8 @@ void ImageWidget::delSelect()
 
 void ImageWidget::newfile()
 {
-    QImage imgnew=QImage(600,500,QImage::Format_ARGB32);
-    //imgnew.fill(Qt::transparent);
+    QImage imgnew=QImage(800,600,QImage::Format_ARGB32);
+    imgnew.fill(Qt::transparent);
     imgtemp=imgnew;
     image=imgnew;
     setMinimumSize(imgnew.size());

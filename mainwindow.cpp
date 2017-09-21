@@ -80,7 +80,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addWidget(checkFill);
     spinbox=new QSpinBox(this);
     spinbox->setSingleStep(1);
-    spinbox->setRange(1,50);
+    spinbox->setRange(1,100);
     spinbox->setValue(1);
     ui->mainToolBar->addWidget(spinbox);
     labelFont=new QLabel;
@@ -92,8 +92,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(btnColorFill, SIGNAL(clicked()), this, SLOT(setColorFill()));
     connect(btnColorBorder, SIGNAL(clicked()), this, SLOT(setColorBorder()));
-    connect(spinbox, SIGNAL(valueChanged(int)), this, SLOT(onSpinValueChanged(int)));
-    connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(onTextChanged(QString)));
+    connect(spinbox, SIGNAL(valueChanged(int)), this, SLOT(spinValueChanged(int)));
+    connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(textChange(QString)));
     connect(checkBorder, SIGNAL(stateChanged(int)), this, SLOT(checkBorderChanged(int)));
     connect(checkFill, SIGNAL(stateChanged(int)), this, SLOT(checkFillChanged(int)));
 
@@ -190,7 +190,7 @@ void MainWindow::setColorFill()
     btnColorFill->setPalette(plt);
 }
 
-void MainWindow::onSpinValueChanged(int i)
+void MainWindow::spinValueChanged(int i)
 {
     imageWidget->pen.setWidth(i);
     imageWidget->pen.setJoinStyle(Qt::MiterJoin);
@@ -267,7 +267,7 @@ void MainWindow::on_action_delete_triggered()
     imageWidget->delSelect();
 }
 
-void MainWindow::onTextChanged(QString s)
+void MainWindow::textChange(QString s)
 {
     imageWidget->text=s;
 }
