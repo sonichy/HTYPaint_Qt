@@ -9,13 +9,12 @@
 #include <QShortcut>
 #include <QRect>
 #include "math.h"
-QImage imgload,imgpaste;
-int cundo=0;
 
 ImageWidget::ImageWidget(QWidget *parent)
     : QWidget(parent)
 {
     qApp->installEventFilter(this);
+    cundo=0;
     labelFont=new QLabel;
     //imgtemp=QImage(600,500,QImage::Format_RGB32);
     //imgtemp.fill(Qt::white);
@@ -141,6 +140,14 @@ void ImageWidget::draw(QImage &img){
     case DEL_DRAW:{
         painter.setPen(QPen(Qt::white,1,Qt::SolidLine));
         painter.setBrush(QBrush(Qt::white,Qt::SolidPattern));        
+//        if(startPnt.x()<endPnt.x()){
+//            startPnt.setX(startPnt.x()-1);
+//            endPnt.setX(endPnt.x()+1);
+//        }
+//        if(startPnt.y()<endPnt.y()){
+//            startPnt.setY(startPnt.y()-1);
+//            endPnt.setY(endPnt.y()+1);
+//        }
         QRect rect(startPnt,endPnt);
         painter.drawRect(rect);
         painter.setPen(pen);
@@ -291,30 +298,32 @@ void ImageWidget::drawPoint()
 {
     image=imgtemp;
     draw_type=POINT_DRAW;
-    QCursor cursor;
-    QPixmap pixmap(":/pencil.png");
-    cursor = QCursor(pixmap);
-    setCursor(cursor);
+//    QCursor cursor;
+//    QPixmap pixmap(":/pencil.png");
+//    cursor = QCursor(pixmap);
+//    setCursor(cursor);
+    setCursor(QCursor(QPixmap(":/pencil.png")));
 }
 
 void ImageWidget::drawLine()
 {
     image=imgtemp;
     draw_type=LINE_DRAW;
-    QCursor cursor;
-    QPixmap pixmap(":/line.png");
-    cursor = QCursor(pixmap);
-    setCursor(cursor);
+//    QCursor cursor;
+//    QPixmap pixmap(":/line.png");
+//    cursor = QCursor(pixmap);
+    setCursor(QCursor(QPixmap(":/line.png")));
 }
 
 void ImageWidget::drawArrow()
 {
     image=imgtemp;
     draw_type=ARROW_DRAW;
-    QCursor cursor;
-    QPixmap pixmap(":/arrow.png");
-    cursor = QCursor(pixmap);
-    setCursor(cursor);
+//    QCursor cursor;
+//    QPixmap pixmap(":/arrow.png");
+//    cursor = QCursor(pixmap);
+//    setCursor(cursor);
+    setCursor(QCursor(QPixmap(":/arrow.png")));
 }
 
 void ImageWidget::drawRect()
@@ -322,50 +331,55 @@ void ImageWidget::drawRect()
     image=imgtemp;
     draw_type=RECT_DRAW;
     //pen.setJoinStyle(Qt::MiterJoin);
-    QCursor cursor;
-    QPixmap pixmap(":/rect.png");
-    cursor = QCursor(pixmap);
-    setCursor(cursor);
+//    QCursor cursor;
+//    QPixmap pixmap(":/rect.png");
+//    cursor = QCursor(pixmap);
+//    setCursor(cursor);
+    setCursor(QCursor(QPixmap(":/rect.png")));
 }
 
 void ImageWidget::drawEllipse()
 {
     image=imgtemp;
     draw_type=ELLIPSE_DRAW;
-    QCursor cursor;
-    QPixmap pixmap(":/ellipse.png");
-    cursor = QCursor(pixmap);
-    setCursor(cursor);
+//    QCursor cursor;
+//    QPixmap pixmap(":/ellipse.png");
+//    cursor = QCursor(pixmap);
+//    setCursor(cursor);
+    setCursor(QCursor(QPixmap(":/ellipse.png")));
 }
 
 void ImageWidget::drawText()
 {
     image=imgtemp;
     draw_type=TEXT_DRAW;
-    QCursor cursor;
-    QPixmap pixmap(":/text.png");
-    cursor = QCursor(pixmap);
-    setCursor(cursor);
+//    QCursor cursor;
+//    QPixmap pixmap(":/text.png");
+//    cursor = QCursor(pixmap);
+//    setCursor(cursor);
+    setCursor(QCursor(QPixmap(":/text.png")));
 }
 
 void ImageWidget::drawFill()
 {
     image=imgtemp;
     draw_type=FILL_DRAW;
-    QCursor cursor;
-    QPixmap pixmap(":/fill.png");
-    cursor = QCursor(pixmap);
-    setCursor(cursor);
+//    QCursor cursor;
+//    QPixmap pixmap(":/fill.png");
+//    cursor = QCursor(pixmap);
+//    setCursor(cursor);
+    setCursor(QCursor(QPixmap(":/fill.png")));
 }
 
 void ImageWidget::drawErase()
 {
     image=imgtemp;
     draw_type=ERASE_DRAW;
-    QCursor cursor;
-    QPixmap pixmap(":/eraser.png");
-    cursor = QCursor(pixmap);
-    setCursor(cursor);
+//    QCursor cursor;
+//    QPixmap pixmap(":/eraser.png");
+//    cursor = QCursor(pixmap);
+//    setCursor(cursor);
+    setCursor(QCursor(QPixmap(":/eraser.png")));
     //spinbox->setValue(20);
 }
 
@@ -377,29 +391,32 @@ void ImageWidget::drawMove()
         imgmove=imgpaste;
     }
     draw_type=MOVE_DRAW;
-    QCursor cursor;
-    QPixmap pixmap(":/move.png");
-    cursor = QCursor(pixmap);
-    setCursor(cursor);
+//    QCursor cursor;
+//    QPixmap pixmap(":/move.png");
+//    cursor = QCursor(pixmap);
+//    setCursor(cursor);
+    setCursor(QCursor(QPixmap(":/move.png")));
 }
 
 void ImageWidget::drawRectselect()
 {
     image=imgtemp;
     draw_type=SELECT_DRAW;
-    QCursor cursor;
-    QPixmap pixmap(":/rectselect.png");
-    cursor = QCursor(pixmap);
-    setCursor(cursor);
+//    QCursor cursor;
+//    QPixmap pixmap(":/rectselect.png");
+//    cursor = QCursor(pixmap);
+//    setCursor(cursor);
+    setCursor(QCursor(QPixmap(":/rectselect.png")));
 }
 
 void ImageWidget::colorPicker()
 {
     draw_type=COLORPICKER_DRAW;
-    QCursor cursor;
-    QPixmap pixmap(":/color_picker.png");
-    cursor = QCursor(pixmap);
-    setCursor(cursor);
+//    QCursor cursor;
+//    QPixmap pixmap(":/color_picker.png");
+//    cursor = QCursor(pixmap);
+//    setCursor(cursor);
+    setCursor(QCursor(QPixmap(":/color_picker.png")));
 }
 
 void ImageWidget::selectAll()

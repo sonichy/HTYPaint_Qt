@@ -2,10 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-//#include <vector>
 #include <QScrollArea>
 #include <imagewidget.h>
-using namespace std;
+#include <QToolButton>
+#include <QLineEdit>
+#include <QCheckBox>
+#include <QSpinBox>
+
 namespace Ui {
     class MainWindow;
 }
@@ -18,11 +21,19 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     Ui::MainWindow *ui;
+    QToolButton *btnColorFill,*btnColorBorder;
+    QLineEdit *lineEdit;
+    QSpinBox *spinbox,*spinw,*spinwr,*spinh,*spinhr;
+    QString text,path;
+    QColor colorf;
+    QCheckBox *checkFill,*checkBorder;
+    QLabel *labelFont;
+    QString filename;
 
 protected:
-    void resizeEvent(QResizeEvent *);
-    void dragEnterEvent(QDragEnterEvent *e);
-    void dropEvent(QDropEvent *e);
+    void resizeEvent(QResizeEvent*);
+    void dragEnterEvent(QDragEnterEvent*);
+    void dropEvent(QDropEvent*);
 
 private:
     QScrollArea *scrollArea;
@@ -30,13 +41,12 @@ private:
     QLabel *LSB1,*LSB2;
 
 private slots:
-    void on_action_new_triggered();
+//  void on_action_new_triggered();
     void on_action_open_triggered();
     void on_action_changelog_triggered();
     void on_action_aboutQt_triggered();
     void on_action_about_triggered();
-    void on_action_selectAll_triggered();
-    void on_action_delete_triggered();
+
     void on_action_undo_triggered();
     void on_action_redo_triggered();
     void on_action_copy_triggered();
@@ -52,38 +62,40 @@ private slots:
     void on_action_import_triggered();
     void on_action_blur_triggered();
 
-    void on_actionPencil_triggered();
-    void on_actionLine_triggered();
-    void on_actionArrow_triggered();
-    void on_actionRect_triggered();
-    void on_actionEllipse_triggered();
-    void on_actionText_triggered();
-    void on_actionFill_triggered();
-    void on_actionErase_triggered();
-    void on_actionMove_triggered();
-    void on_actionRectselect_triggered();
-    void on_actionCutSelect_triggered();
+//    void on_actionPencil_triggered();
+//    void on_actionLine_triggered();
+//    void on_actionArrow_triggered();
+//    void on_actionRect_triggered();
+//    void on_actionEllipse_triggered();
+//    void on_actionText_triggered();
+//    void on_actionFill_triggered();
+//    void on_actionErase_triggered();
+//    void on_actionMove_triggered();
+//    void on_actionRectselect_triggered();
+//    void on_actionCutSelect_triggered();
+//    void on_actionZoomin_triggered();
+//    void on_actionZoomout_triggered();
+//    void on_actionZoom1_triggered();
+//    void on_actionColorPicker_triggered();
+//    void on_action_selectAll_triggered();
+//    void on_action_delete_triggered();
+
     void on_actionRotateLeft_triggered();
     void on_actionRotateRight_triggered();
     void on_actionMirrorHorizontal_triggered();
     void on_actionMirrorVertical_triggered();
-    void on_actionZoomin_triggered();
-    void on_actionZoomout_triggered();
-    void on_actionZoom1_triggered();
     void on_actionFont_triggered();
-    void on_actionColorPicker_triggered();
-
     void setColorFill();
     void setColorBorder();
-    void spinValueChanged(int i);
+    void spinValueChange(int);
     void textChange(QString);
-    void onSpinwChanged(int i);
-    void onSpinhChanged(int i);
-    void onSpinwrChanged(int i);
-    void onSpinhrChanged(int i);
-    void checkBorderChanged(int state);
-    void checkFillChanged(int state);
-    void open(QString path);
+    void onSpinwChanged(int);
+    void onSpinhChanged(int);
+    void onSpinwrChanged(int);
+    void onSpinhrChanged(int);
+    void checkBorderChanged(int);
+    void checkFillChanged(int);
+    void open(QString);
 };
 
 #endif // MAINWINDOW_H

@@ -26,20 +26,13 @@
 #include <QMimeData>
 #include <QTextBrowser>
 
-QToolButton *btnColorFill,*btnColorBorder;
-QLineEdit *lineEdit;
-QSpinBox *spinbox,*spinw,*spinwr,*spinh,*spinhr;
-QString text="文字内容",path="";
-QColor colorf;
-QCheckBox *checkFill,*checkBorder;
-QLabel *labelFont;
-QString filename;
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    text="文字内容";
+    path="";
     QDesktopWidget* desktop = QApplication::desktop();
     move((desktop->width() - this->width())/2, (desktop->height() - this->height())/2);
     imageWidget = new ImageWidget;
@@ -89,13 +82,36 @@ MainWindow::MainWindow(QWidget *parent) :
     lineEdit->setFixedWidth(60);
     ui->mainToolBar->addWidget(lineEdit);
     imageWidget->text=text;
-    connect(ui->action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
+
     connect(btnColorFill, SIGNAL(clicked()), this, SLOT(setColorFill()));
     connect(btnColorBorder, SIGNAL(clicked()), this, SLOT(setColorBorder()));
-    connect(spinbox, SIGNAL(valueChanged(int)), this, SLOT(spinValueChanged(int)));
+    connect(spinbox, SIGNAL(valueChanged(int)), this, SLOT(spinValueChange(int)));
     connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(textChange(QString)));
     connect(checkBorder, SIGNAL(stateChanged(int)), this, SLOT(checkBorderChanged(int)));
     connect(checkFill, SIGNAL(stateChanged(int)), this, SLOT(checkFillChanged(int)));
+
+    connect(ui->actionPencil,SIGNAL(triggered(bool)),imageWidget,SLOT(drawPoint()));
+    connect(ui->actionLine,SIGNAL(triggered(bool)),imageWidget,SLOT(drawLine()));
+    connect(ui->actionArrow,SIGNAL(triggered(bool)),imageWidget,SLOT(drawArrow()));
+    connect(ui->actionRect,SIGNAL(triggered(bool)),imageWidget,SLOT(drawRect()));
+    connect(ui->actionEllipse,SIGNAL(triggered(bool)),imageWidget,SLOT(drawEllipse()));
+    connect(ui->actionText,SIGNAL(triggered(bool)),imageWidget,SLOT(drawText()));
+    connect(ui->actionFill,SIGNAL(triggered(bool)),imageWidget,SLOT(drawFill()));
+    connect(ui->actionLine,SIGNAL(triggered(bool)),imageWidget,SLOT(drawLine()));
+    connect(ui->actionErase,SIGNAL(triggered(bool)),imageWidget,SLOT(drawErase()));
+    connect(ui->actionMove,SIGNAL(triggered(bool)),imageWidget,SLOT(drawMove()));
+    connect(ui->actionRectselect,SIGNAL(triggered(bool)),imageWidget,SLOT(drawRectselect()));
+    connect(ui->actionCutSelect,SIGNAL(triggered(bool)),imageWidget,SLOT(cutSelect()));
+    connect(ui->actionColorPicker,SIGNAL(triggered(bool)),imageWidget,SLOT(colorPicker()));
+    connect(ui->actionZoomin,SIGNAL(triggered(bool)),imageWidget,SLOT(zoomin()));
+    connect(ui->actionZoomout,SIGNAL(triggered(bool)),imageWidget,SLOT(zoomout()));
+    connect(ui->actionZoom1,SIGNAL(triggered(bool)),imageWidget,SLOT(zoom1()));
+
+    connect(ui->action_new,SIGNAL(triggered(bool)),imageWidget,SLOT(newfile()));
+    connect(ui->action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
+    connect(ui->action_selectAll,SIGNAL(triggered(bool)),imageWidget,SLOT(selectAll()));
+    connect(ui->action_delete,SIGNAL(triggered(bool)),imageWidget,SLOT(delSelect()));
+
 
     //状态栏
     LSB1=new QLabel("欢迎使用海天鹰画图！");
@@ -111,7 +127,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //LSB2->setFrameShadow(QFrame::Sunken);
     ui->statusBar->addWidget(LSB1);
     ui->statusBar->addWidget(LSB2);
-    //connect(imageWidget, SIGNAL(statusbarMessage(QString)), ui->statusBar, SLOT(showMessage(QString)));
     connect(imageWidget, SIGNAL(statusbar2Message(QString)), LSB2, SLOT(setText(QString)));
 
     QStringList Largs=QApplication::arguments();
@@ -135,7 +150,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::on_action_changelog_triggered()
 {
-    QString s="1.7\n(2017-09)\n增加箭头工具。\n增加抗锯齿。\n\n1.6\n(2017-07)\n更新日志消息窗口写不下了，改成带滚动条的文本框。\n自定义信号结合事件过滤器，把鼠标移动位置发送到主窗体信息栏。\n增加拖放打开文件。\n(2017-06)\n使用自定义信号解决子类发信息给主窗体状态栏问题，致谢rekols。\n(2017-05)\n右键打开文件记忆文件路径。\n\n1.5 (2017-04)\n透明色反色不改变。\n增加取色工具，橡皮擦颜色不再固定为白色，而是填充色。\n\n1.4 (2017-03)\n支持命令行打开文件和打开方式打开文件。\n修复鼠标指针引用本地文件，没引用资源文件，引起启动path参数改变不能加载图标的问题。\n菜单的SIGNAL-SLOT改为on_action_triggered()\n修复PNG图片裁剪丢失透明度问题。\n新建图像为透明图像。\n\n1.3 (2017-03)\n实现选区模糊。\n加入模糊滤镜。\n\n1.2 (2017-02)\n文件名显示在窗口标题栏。\n区别保存和另存为。\n增加导入图片。\n\n1.1 (2017-01)\n新增灰度、反色。\n\n1.0 (2017-01)\n解决删除选区后画不出选框的问题。\n恢复撤销。\n增加全选。\n实现选区或剪贴板移动！\n保存时自动获取打开文件的路径。\n增加按像素、比例缩放。\n实现在属性窗口设置画布大小。\n2016-12\n增加快捷键控制选框及其边框移动。\n绘图代码从MainWindow向imageWidget迁移。\n实现水平镜像、垂直镜像。\n实现放大、缩小、原始大小。\n为了增加滚动条，增加自定义imageWidget。\n状态栏显示绘图详情。\n复制选区到系统剪贴板，从系统剪贴板获取图像粘贴。\n优化颜色选择交互。\n增加撤销、重做功能，有BUG。\n设为壁纸。\n画选区，剪裁选区。\n新建图片，打开图片，保存图片。\n实现画点、线、框、圆、字。";
+    QString s="1.7\n(2017-10)\n简化工具信号，简化setCursor()。\n(2017-09)\n增加箭头工具。\n增加抗锯齿。\n\n1.6\n(2017-07)\n更新日志消息窗口写不下了，改成带滚动条的文本框。\n自定义信号结合事件过滤器，把鼠标移动位置发送到主窗体信息栏。\n增加拖放打开文件。\n(2017-06)\n使用自定义信号解决子类发信息给主窗体状态栏问题，致谢rekols。\n(2017-05)\n右键打开文件记忆文件路径。\n\n1.5 (2017-04)\n透明色反色不改变。\n增加取色工具，橡皮擦颜色不再固定为白色，而是填充色。\n\n1.4 (2017-03)\n支持命令行打开文件和打开方式打开文件。\n修复鼠标指针引用本地文件，没引用资源文件，引起启动path参数改变不能加载图标的问题。\n菜单的SIGNAL-SLOT改为on_action_triggered()\n修复PNG图片裁剪丢失透明度问题。\n新建图像为透明图像。\n\n1.3 (2017-03)\n实现选区模糊。\n加入模糊滤镜。\n\n1.2 (2017-02)\n文件名显示在窗口标题栏。\n区别保存和另存为。\n增加导入图片。\n\n1.1 (2017-01)\n新增灰度、反色。\n\n1.0 (2017-01)\n解决删除选区后画不出选框的问题。\n恢复撤销。\n增加全选。\n实现选区或剪贴板移动！\n保存时自动获取打开文件的路径。\n增加按像素、比例缩放。\n实现在属性窗口设置画布大小。\n2016-12\n增加快捷键控制选框及其边框移动。\n绘图代码从MainWindow向imageWidget迁移。\n实现水平镜像、垂直镜像。\n实现放大、缩小、原始大小。\n为了增加滚动条，增加自定义imageWidget。\n状态栏显示绘图详情。\n复制选区到系统剪贴板，从系统剪贴板获取图像粘贴。\n优化颜色选择交互。\n增加撤销、重做功能，有BUG。\n设为壁纸。\n画选区，剪裁选区。\n新建图片，打开图片，保存图片。\n实现画点、线、框、圆、字。";
     QDialog *dialog=new QDialog;
     dialog->setWindowTitle("更新历史");
     dialog->setFixedSize(400,300);
@@ -190,91 +205,106 @@ void MainWindow::setColorFill()
     btnColorFill->setPalette(plt);
 }
 
-void MainWindow::spinValueChanged(int i)
+void MainWindow::spinValueChange(int i)
 {
     imageWidget->pen.setWidth(i);
     imageWidget->pen.setJoinStyle(Qt::MiterJoin);
 }
 
 
-void MainWindow::on_actionPencil_triggered()
-{
-    imageWidget->drawPoint();
-}
+//void MainWindow::on_actionPencil_triggered()
+//{
+//    imageWidget->drawPoint();
+//}
 
-void MainWindow::on_actionLine_triggered()
-{
-    imageWidget->drawLine();
-}
+//void MainWindow::on_actionLine_triggered()
+//{
+//    imageWidget->drawLine();
+//}
 
-void MainWindow::on_actionArrow_triggered()
-{
-    imageWidget->drawArrow();
-}
+//void MainWindow::on_actionArrow_triggered()
+//{
+//    imageWidget->drawArrow();
+//}
 
-void MainWindow::on_actionRect_triggered()
-{
-    imageWidget->drawRect();
-}
+//void MainWindow::on_actionRect_triggered()
+//{
+//    imageWidget->drawRect();
+//}
 
-void MainWindow::on_actionEllipse_triggered()
-{
-    imageWidget->drawEllipse();
-}
+//void MainWindow::on_actionEllipse_triggered()
+//{
+//    imageWidget->drawEllipse();
+//}
 
-void MainWindow::on_actionText_triggered()
-{
-    imageWidget->drawText();
-}
+//void MainWindow::on_actionText_triggered()
+//{
+//    imageWidget->drawText();
+//}
 
-void MainWindow::on_actionFill_triggered()
-{
-    imageWidget->drawFill();
-}
+//void MainWindow::on_actionFill_triggered()
+//{
+//    imageWidget->drawFill();
+//}
 
-void MainWindow::on_actionErase_triggered()
-{
-    imageWidget->drawErase();
-}
+//void MainWindow::on_actionErase_triggered()
+//{
+//    imageWidget->drawErase();
+//}
 
-void MainWindow::on_actionMove_triggered()
-{    
-    imageWidget->drawMove();
-}
+//void MainWindow::on_actionMove_triggered()
+//{
+//    imageWidget->drawMove();
+//}
 
-void MainWindow::on_actionRectselect_triggered()
-{
-    imageWidget->drawRectselect();
-}
+//void MainWindow::on_actionRectselect_triggered()
+//{
+//    imageWidget->drawRectselect();
+//}
 
-void MainWindow::on_action_selectAll_triggered()
-{
-    imageWidget->selectAll();
-}
+//void MainWindow::on_action_selectAll_triggered()
+//{
+//    imageWidget->selectAll();
+//}
 
-void MainWindow::on_actionCutSelect_triggered()
-{
-    imageWidget->cutSelect();
-}
+//void MainWindow::on_actionCutSelect_triggered()
+//{
+//    imageWidget->cutSelect();
+//}
 
-void MainWindow::on_actionColorPicker_triggered()
-{
-    imageWidget->colorPicker();
-}
+//void MainWindow::on_actionColorPicker_triggered()
+//{
+//    imageWidget->colorPicker();
+//}
 
-void MainWindow::on_action_delete_triggered()
-{
-    imageWidget->delSelect();
-}
+//void MainWindow::on_action_delete_triggered()
+//{
+//    imageWidget->delSelect();
+//}
+
+//void MainWindow::on_actionZoomin_triggered()
+//{
+//    imageWidget->zoomin();
+//}
+
+//void MainWindow::on_actionZoomout_triggered()
+//{
+//    imageWidget->zoomout();
+//}
+
+//void MainWindow::on_actionZoom1_triggered()
+//{
+//    imageWidget->zoom1();
+//}
+
+//void MainWindow::on_action_new_triggered()
+//{
+//    imageWidget->newfile();
+//}
 
 void MainWindow::textChange(QString s)
 {
     imageWidget->text=s;
-}
-
-void MainWindow::on_action_new_triggered()
-{
-    imageWidget->newfile();
 }
 
 void MainWindow::on_action_open_triggered()
@@ -294,7 +324,6 @@ void MainWindow::open(QString path)
     imageWidget->load(path);
     filename=QFileInfo(path).fileName();
     setWindowTitle(filename+" - 海天鹰画图");
-    //ui->statusBar->showMessage("打开 "+path);
     LSB1->setText("打开 "+path);
 }
 
@@ -305,7 +334,7 @@ void MainWindow::on_action_import_triggered(){
     }else{
         filenamei = QFileDialog::getOpenFileName(this,"导入图片", path, "图片文件(*.jpg *.png *.bmp)");
     }
-    ui->statusBar->showMessage("导入 "+filenamei);
+    LSB1->setText("导入 "+filenamei);
     if(path.length()!=0){
         imageWidget->image=imageWidget->imgtemp;
         QImage imgImport(filenamei);
@@ -320,7 +349,7 @@ void MainWindow::on_action_import_triggered(){
 void MainWindow::on_action_save_triggered(){
     qDebug() << "save path=" << path;
     if(path.length() != 0){
-        ui->statusBar->showMessage("保存 "+path);
+        LSB1->setText("保存 "+path);
         imageWidget->image=imageWidget->imgtemp;
         imageWidget->save(path);
     }else{
@@ -336,7 +365,7 @@ void MainWindow::on_action_saveas_triggered()
         path = QFileDialog::getSaveFileName(this,"保存图片",path,"图片文件(*.jpg *.png *.bmp)");
     }
     if(path.length() != 0){        
-        ui->statusBar->showMessage("保存 "+path);
+        LSB1->setText("保存 "+path);
         imageWidget->image=imageWidget->imgtemp;
         imageWidget->save(path);
         filename=QFileInfo(path).fileName();
@@ -505,30 +534,16 @@ void MainWindow::on_action_copy_triggered()
 {
     if(imageWidget->draw_type==imageWidget->SELECT_DRAW){
         imageWidget->copy();
-        ui->statusBar->showMessage("选区已复制到剪贴板");
+        LSB1->setText("选区已复制到剪贴板");
     }
 }
 
 void MainWindow::on_action_paste_triggered()
 {
     imageWidget->paste();
-    ui->statusBar->showMessage("剪贴板已粘贴");
+    LSB1->setText("剪贴板已粘贴");
 }
 
-void MainWindow::on_actionZoomin_triggered()
-{
-    imageWidget->zoomin();
-}
-
-void MainWindow::on_actionZoomout_triggered()
-{
-    imageWidget->zoomout();
-}
-
-void MainWindow::on_actionZoom1_triggered()
-{
-    imageWidget->zoom1();
-}
 
 void MainWindow::on_actionRotateLeft_triggered()
 {

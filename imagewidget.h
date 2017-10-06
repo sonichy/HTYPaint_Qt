@@ -47,11 +47,20 @@ public:
     void load(QString fileName);
     void save(QString path);
     void setAngle(qreal rotateAngle);
-    void zoomin();
-    void zoomout();
-    void zoom1();
     void rotate(qreal degrees);
     void mirror(bool bh,bool bv);
+    void copy();
+    void paste();
+    void draw(QImage &img);    
+    void newsize(int width,int height);
+    void scale(int ratioW,int ratioH);
+    void moveImgbuf();
+
+    void gray();
+    void invert();
+    void blur(int p);
+
+public slots:
     void drawPoint();
     void drawLine();
     void drawArrow();
@@ -64,23 +73,15 @@ public:
     void drawRectselect();
     void colorPicker();
     void cutSelect();
-    void delSelect();    
-    void copy();
-    void paste();
-    void draw(QImage &img);    
-    void newsize(int width,int height);
-    void scale(int ratioW,int ratioH);
-    void moveImgbuf();
+    void delSelect();
+    void zoomin();
+    void zoomout();
+    void zoom1();
     void selectAll();
-    void gray();
-    void invert();
-    void blur(int p);
-
-public slots:
     void undo();
     void redo();
 
-private slots:
+private slots:    
     void moveUp();
     void moveDown();
     void moveLeft();
@@ -98,6 +99,8 @@ protected:
     void paintEvent(QPaintEvent *);
 
 private:
+    QImage imgload,imgpaste;
+    int cundo;
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
