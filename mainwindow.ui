@@ -128,6 +128,9 @@
    <property name="text">
     <string>另存为</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
   </action>
   <action name="action_quit">
    <property name="text">
@@ -525,6 +528,9 @@
   <action name="action_import">
    <property name="text">
     <string>导入图片</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
    </property>
   </action>
   <action name="action_blur">

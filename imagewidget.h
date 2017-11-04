@@ -42,8 +42,7 @@ public:
     QBrush brush;
     QString text;
     QLabel *labelFont;
-    bool boolBorder,boolFill;
-    void newfile();
+    bool boolBorder,boolFill;    
     void load(QString fileName);
     void save(QString path);
     void setAngle(qreal rotateAngle);
@@ -61,6 +60,7 @@ public:
     void blur(int p);
 
 public slots:
+    void newfile();
     void drawPoint();
     void drawLine();
     void drawArrow();
