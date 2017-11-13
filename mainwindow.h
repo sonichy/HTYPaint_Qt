@@ -62,7 +62,6 @@ private slots:
     void on_action_invert_triggered();
     void on_action_blur_triggered();
     void on_action_transparent_triggered();
-
     void on_actionRotateLeft_triggered();
     void on_actionRotateRight_triggered();
     void on_actionMirrorHorizontal_triggered();
@@ -79,6 +78,7 @@ private slots:
     void checkBorderChanged(int);
     void checkFillChanged(int);
     void open(QString);
+    void setPicker(QColor color);
 };
 
 #endif // MAINWINDOW_H

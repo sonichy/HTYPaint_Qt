@@ -15,17 +15,14 @@ ImageWidget::ImageWidget(QWidget *parent)
 {    
     qApp->installEventFilter(this);
     cundo=0;
-    labelFont=new QLabel;
-    //imgtemp=QImage(600,500,QImage::Format_RGB32);
-    //imgtemp.fill(Qt::white);
-    //image=imgtemp;
+    labelFont = new QLabel;
     newfile();
     pen.setColor(Qt::black);
     pen.setWidth(1);
-    brush=QBrush(Qt::transparent,Qt::SolidPattern);
+    brush = QBrush(Qt::transparent,Qt::SolidPattern);
     brush.setColor(Qt::black);
-    boolBorder=true;
-    boolFill=false;
+    boolBorder = true;
+    boolFill = false;
     connect(new QShortcut(QKeySequence(Qt::ALT + Qt::Key_Up),this), SIGNAL(activated()),this, SLOT(moveUp()));
     connect(new QShortcut(QKeySequence(Qt::ALT + Qt::Key_Down),this), SIGNAL(activated()),this, SLOT(moveDown()));
     connect(new QShortcut(QKeySequence(Qt::ALT + Qt::Key_Left),this), SIGNAL(activated()),this, SLOT(moveLeft()));
@@ -71,35 +68,35 @@ void ImageWidget::draw(QImage &img)
         QPen pena=pen;
         pena.setWidth(1);
         painter.setPen(pena);
-        float pi=3.14;
-        float a=pi/9;
-        float l=sqrt(pow(endPnt.y()-startPnt.y(),2)+pow(endPnt.x()-startPnt.x(),2));
-        float b=asin((endPnt.y()-startPnt.y())/l);
-        int LW=pen.width();
+        float pi = 3.14;
+        float a = pi/9;
+        float l = sqrt(pow(endPnt.y()-startPnt.y(),2)+pow(endPnt.x()-startPnt.x(),2));
+        float b = asin((endPnt.y()-startPnt.y())/l);
+        int LW = pen.width();
         float x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,l56;
-        l56=LW/2;
-        float d=(l56+LW/2)/sin(a);
+        l56 = LW/2;
+        float d = (l56 + LW/2)/sin(a);
         if(startPnt.x()>endPnt.x()){
-            x1=startPnt.x()-LW/2*sin(b);
-            x2=startPnt.x()+LW/2*sin(b);
-            x4=endPnt.x()+d*cos(b-a);
-            x3=x4-l56*sin(b);
-            x5=endPnt.x()+d*cos(a+b);
-            x6=x5+l56*sin(b);
+            x1 = startPnt.x() - LW/2*sin(b);
+            x2 = startPnt.x() + LW/2*sin(b);
+            x4 = endPnt.x() + d*cos(b-a);
+            x3 = x4 - l56*sin(b);
+            x5 = endPnt.x() + d*cos(a + b);
+            x6 = x5 + l56*sin(b);
         }else{
-            x1=startPnt.x()+LW/2*sin(b);
-            x2=startPnt.x()-LW/2*sin(b);
-            x4=endPnt.x()-d*cos(b-a);
-            x3=x4+l56*sin(b);
-            x5=endPnt.x()-d*cos(a+b);
-            x6=x5-l56*sin(b);
+            x1 = startPnt.x() + LW/2*sin(b);
+            x2 = startPnt.x() - LW/2*sin(b);
+            x4 = endPnt.x() - d*cos(b-a);
+            x3 = x4+l56*sin(b);
+            x5 = endPnt.x() - d*cos(a+b);
+            x6 = x5-l56*sin(b);
         }
-        y1=startPnt.y()-LW/2*cos(b);
-        y2=startPnt.y()+LW/2*cos(b);
-        y5=endPnt.y()-d*sin(a+b);
-        y6=y5+l56*cos(b);
-        y4=endPnt.y()-d*sin(b-a);
-        y3=y4-l56*cos(b);
+        y1 = startPnt.y() - LW/2*cos(b);
+        y2 = startPnt.y() + LW/2*cos(b);
+        y5 = endPnt.y() - d*sin(a+b);
+        y6 = y5 + l56*cos(b);
+        y4 = endPnt.y() - d*sin(b-a);
+        y3 = y4 - l56*cos(b);
         QPointF points[7] = {
             QPointF(x1,y1),
             QPointF(x2,y2),
@@ -112,9 +109,15 @@ void ImageWidget::draw(QImage &img)
         painter.drawPolygon(points,7);
         break;}
     case RECT_DRAW:{
-        if(boolFill){painter.setBrush(brush);}else{painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));}
+        if(boolFill){
+            painter.setBrush(brush);
+        }else{
+            painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));
+        }
         QRect rect(startPnt,endPnt);
-        if(!boolBorder){pen.setColor(Qt::transparent);}
+        if(!boolBorder){
+            pen.setColor(Qt::transparent);
+        }
         painter.drawRect(rect);
         break;}
     case SELECT_DRAW:{
@@ -125,7 +128,11 @@ void ImageWidget::draw(QImage &img)
         break;}
     case ELLIPSE_DRAW:{
         QRect rect(startPnt,endPnt);
-        if(boolFill){painter.setBrush(brush);}else{painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));}
+        if(boolFill){
+            painter.setBrush(brush);
+        }else{
+            painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));
+        }
         painter.drawEllipse(rect);
         break;}
     case TEXT_DRAW:
@@ -155,7 +162,7 @@ void ImageWidget::draw(QImage &img)
         painter.drawRect(rect);
         painter.setPen(pen);
         painter.setBrush(brush);
-        draw_type=SELECT_DRAW;
+        draw_type = SELECT_DRAW;
         break;}
     case MOVE_DRAW:{
         QRect target(endPnt,imgmove.size());
@@ -168,6 +175,7 @@ void ImageWidget::draw(QImage &img)
         pen.setColor(RGB);
         brush.setColor(RGB);
         painter.setBrush(brush);
+        emit pick(pen.color());
     }
     update();
 }
@@ -219,12 +227,6 @@ void ImageWidget::mouseMoveEvent(QMouseEvent *e)
             draw(imgtemp);
         }
     }
-    //if(draw_type==ERASE_DRAW){
-    //qDebug()<<"mouseMove"<<QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss:zzz");
-    //    endPnt = e->pos();
-    //    draw(imgtemp);
-    //ui->statusBar->showMessage(QString::number(e->pos().x())+","+QString::number(e->pos().y()));
-    //}
     emit statusbar2Message("("+QString::number(startPnt.x())+","+QString::number(startPnt.y())+") - ("+QString::number(endPnt.x())+","+QString::number(endPnt.y())+")");
 }
 
@@ -358,51 +360,51 @@ void ImageWidget::drawErase()
 
 void ImageWidget::drawMove()
 {
-    if(draw_type==SELECT_DRAW){
-        imgmove=imgtemp.copy(startPnt.x()+1,startPnt.y()+1,endPnt.x()-startPnt.x()-1,endPnt.y()-startPnt.y()-1);
+    if(draw_type == SELECT_DRAW){
+        imgmove = imgtemp.copy(startPnt.x()+1,startPnt.y()+1,endPnt.x()-startPnt.x()-1,endPnt.y()-startPnt.y()-1);
     }else{
-        imgmove=imgpaste;
+        imgmove = imgpaste;
     }
-    draw_type=MOVE_DRAW;
+    draw_type = MOVE_DRAW;
     setCursor(QCursor(QPixmap(":/move.png")));
 }
 
 void ImageWidget::drawRectselect()
 {
-    image=imgtemp;
-    draw_type=SELECT_DRAW;
+    image = imgtemp;
+    draw_type = SELECT_DRAW;
     setCursor(QCursor(QPixmap(":/rectselect.png")));
 }
 
 void ImageWidget::colorPicker()
 {
-    draw_type=COLORPICKER_DRAW;
+    draw_type = COLORPICKER_DRAW;
     setCursor(QCursor(QPixmap(":/color_picker.png")));
 }
 
 void ImageWidget::selectAll()
 {
     //image=imgtemp;
-    draw_type=SELECT_DRAW;
-    startPnt=QPoint(0,0);
-    endPnt=QPoint(imgtemp.width()-2,imgtemp.height()-2);
+    draw_type = SELECT_DRAW;
+    startPnt = QPoint(0,0);
+    endPnt = QPoint(imgtemp.width()-2,imgtemp.height()-2);
     draw(imgtemp);
 }
 
 void ImageWidget::delSelect()
 {
-    image=imgtemp;
-    draw_type=DEL_DRAW;
+    image = imgtemp;
+    draw_type = DEL_DRAW;
     draw(imgtemp);
-    image=imgtemp;
+    image = imgtemp;
 }
 
 void ImageWidget::newfile()
 {
-    QImage imgnew=QImage(800,600,QImage::Format_ARGB32);
+    QImage imgnew = QImage(800,600,QImage::Format_ARGB32);
     imgnew.fill(Qt::transparent);
-    imgtemp=imgnew;
-    image=imgnew;
+    imgtemp = imgnew;
+    image = imgnew;
     //setMinimumSize(imgnew.size());
     //resize(imgnew.size());
     update();
@@ -416,11 +418,11 @@ void ImageWidget::load(QString fileName)
     //setMinimumSize(imgload.size());
     resize(imgload.size());
     update();
-    draw_type=NONE_DRAW;
+    draw_type = NONE_DRAW;
     setCursor(Qt::ArrowCursor);
-    cundo=0;
-    for(int i=0;i<10;i++){
-        imgbuf[i]=image;
+    cundo = 0;
+    for(int i=0; i<10; i++){
+        imgbuf[i] = image;
     }
 }
 
@@ -652,7 +654,7 @@ void ImageWidget::invert()
     moveImgbuf();
 }
 
-void ImageWidget::transparent(QColor color)
+void ImageWidget::transparent()
 {
     int w,h;
     w = imgtemp.width();
@@ -661,7 +663,7 @@ void ImageWidget::transparent(QColor color)
     for(int x=0; x<w; x++){
         for(int y=0;y<h; y++){
             QRgb RGB = image.pixel(x,y);
-            if (RGB == color.rgb()){
+            if (RGB == pen.color().rgb()){
                 QRgb RGBT = qRgba(qRed(RGB),qGreen(RGB),qBlue(RGB),0);
                 imgTansparent.setPixel(x,y,RGBT);
             }else{
@@ -713,6 +715,8 @@ bool ImageWidget::eventFilter(QObject *obj, QEvent *event)
     if(event->type() == QEvent::MouseMove){
         QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
         emit statusbar2Message(QString::number(mouseEvent->pos().x())+","+QString::number(mouseEvent->pos().y()));
+    }else if(event->type() == QEvent::Leave){
+        emit statusbar2Message("");
     }
     return false;
 }

@@ -56,7 +56,7 @@ public:
     void moveImgbuf();
     void gray();
     void invert();
-    void transparent(QColor color);
+    void transparent();
     void blur(int p);
 
 public slots:
@@ -108,6 +108,7 @@ private:
 
 signals:
     void statusbar2Message(QString);
+    void pick(QColor color);
 };
 
 #endif // IMAGEWIDGET_H

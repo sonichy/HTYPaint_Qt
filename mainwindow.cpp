@@ -32,11 +32,28 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setStyleSheet("QScrollArea{background-color:#cccccc;}");
+    //状态栏
+    LSB1 = new QLabel("欢迎使用海天鹰画图！");
+    LSB1->setMinimumSize(500,20);
+    LSB1->setStyleSheet("padding:0px 3px;");
+    //LSB1->setFrameShape(QFrame::WinPanel);
+    //LSB1->setFrameShadow(QFrame::Sunken);
+    LSB2 = new QLabel("");
+    LSB2->setMinimumSize(150,20);
+    LSB2->setStyleSheet("padding:0px 3px;");
+    LSB2->setAlignment(Qt::AlignCenter);
+    //LSB2->setFrameShape(QFrame::WinPanel);
+    //LSB2->setFrameShadow(QFrame::Sunken);
+    ui->statusBar->addWidget(LSB1);
+    ui->statusBar->addWidget(LSB2);
+
     text="文字内容";
     path="";
     QDesktopWidget* desktop = QApplication::desktop();
     move((desktop->width() - this->width())/2, (desktop->height() - this->height())/2);
     imageWidget = new ImageWidget;
+    connect(imageWidget, SIGNAL(statusbar2Message(QString)), LSB2, SLOT(setText(QString)));
+    connect(imageWidget, SIGNAL(pick(QColor)), this, SLOT(setPicker(QColor)));
     scrollArea = new QScrollArea;
     scrollArea->setWidget(imageWidget);
     scrollArea->widget()->setMinimumSize(600,500);
@@ -112,21 +129,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(checkBorder, SIGNAL(stateChanged(int)), this, SLOT(checkBorderChanged(int)));
     connect(checkFill, SIGNAL(stateChanged(int)), this, SLOT(checkFillChanged(int)));
 
-    //状态栏
-    LSB1=new QLabel("欢迎使用海天鹰画图！");
-    LSB1->setMinimumSize(500,20);
-    LSB1->setStyleSheet("padding:0px 3px;");
-    //LSB1->setFrameShape(QFrame::WinPanel);
-    //LSB1->setFrameShadow(QFrame::Sunken);
-    LSB2=new QLabel("");
-    LSB2->setMinimumSize(150,20);
-    LSB2->setStyleSheet("padding:0px 3px;");
-    LSB2->setAlignment(Qt::AlignCenter);
-    //LSB2->setFrameShape(QFrame::WinPanel);
-    //LSB2->setFrameShadow(QFrame::Sunken);
-    ui->statusBar->addWidget(LSB1);
-    ui->statusBar->addWidget(LSB2);
-    connect(imageWidget, SIGNAL(statusbar2Message(QString)), LSB2, SLOT(setText(QString)));    
+
 
     QStringList Largs=QApplication::arguments();
     qDebug() << Largs;
@@ -524,10 +527,7 @@ void MainWindow::on_action_invert_triggered()
 
 void MainWindow::on_action_transparent_triggered()
 {
-    QColor color = QColorDialog::getColor(Qt::white);
-    if (color.isValid()) {
-        imageWidget->transparent(color);
-    }
+    imageWidget->transparent();
 }
 
 void MainWindow::on_action_blur_triggered()
@@ -558,4 +558,15 @@ void MainWindow::dropEvent(QDropEvent *e) //释放对方时，执行的操作
         return;
 
     open(fileName);
+}
+
+void MainWindow::setPicker(QColor color)
+{
+    QPalette plt = btnColorBorder->palette();
+    plt.setColor(QPalette::ButtonText, color);
+    btnColorBorder->setPalette(plt);
+
+    plt = btnColorFill->palette();
+    plt.setColor(QPalette::ButtonText, color);
+    btnColorFill->setPalette(plt);
 }
