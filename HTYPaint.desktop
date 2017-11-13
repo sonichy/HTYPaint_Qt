@@ -1,10 +1,12 @@
 [Desktop Entry]
-Name=HTYPaint
-Comment=
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
 Exec=/media/sonichy/job/HY/Linux/Qt/HTYPaint/HTYPaint
 Icon=/media/sonichy/job/HY/Linux/Qt/HTYPaint/icon.png
-Path=/media/sonichy/job/HY/Linux/Qt/HTYPaint
-Terminal=false
-Type=Application
-MimeType=
-Categories=
+Path=/media/sonichy/job/HY/Linux/Qt/HTYPaint/
+Name=海天鹰画图
+Categories=Graphics;
+MimeType=image/bmp;image/gif;image/jpeg;image/jpg;image/pjpeg;image/png;image/tiff;image/x-bmp;image/x-gray;image/x-icb;image/x-ico;image/x-png;image/x-portable-anymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-xbitmap;image/x-xpixmap;image/x-pcx;image/svg+xml;image/svg+xml-compressed;image/vnd.wap.wbmp;
+Name[zh_CN]=海天鹰画图

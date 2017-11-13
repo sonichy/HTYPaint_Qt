@@ -54,9 +54,9 @@ public:
     void newsize(int width,int height);
     void scale(int ratioW,int ratioH);
     void moveImgbuf();
-
     void gray();
     void invert();
+    void transparent(QColor color);
     void blur(int p);
 
 public slots:

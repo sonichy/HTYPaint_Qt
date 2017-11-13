@@ -652,6 +652,29 @@ void ImageWidget::invert()
     moveImgbuf();
 }
 
+void ImageWidget::transparent(QColor color)
+{
+    int w,h;
+    w = imgtemp.width();
+    h = imgtemp.height();
+    QImage imgTansparent(w,h,QImage::Format_ARGB32);
+    for(int x=0; x<w; x++){
+        for(int y=0;y<h; y++){
+            QRgb RGB = image.pixel(x,y);
+            if (RGB == color.rgb()){
+                QRgb RGBT = qRgba(qRed(RGB),qGreen(RGB),qBlue(RGB),0);
+                imgTansparent.setPixel(x,y,RGBT);
+            }else{
+                imgTansparent.setPixel(x,y,RGB);
+            }
+        }
+    }
+    imgtemp = imgTansparent;
+    image = imgTansparent;
+    update();
+    moveImgbuf();
+}
+
 void ImageWidget::blur(int p)
 {
     int xs,xe,ys,ye;

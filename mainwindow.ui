@@ -64,6 +64,7 @@
     <addaction name="action_gray"/>
     <addaction name="action_invert"/>
     <addaction name="action_blur"/>
+    <addaction name="action_transparent"/>
    </widget>
    <widget class="QMenu" name="menu_about">
     <property name="title">
@@ -560,6 +561,14 @@
    </property>
    <property name="toolTip">
     <string>箭头</string>
+   </property>
+  </action>
+  <action name="action_transparent">
+   <property name="text">
+    <string>颜色透明</string>
+   </property>
+   <property name="toolTip">
+    <string>颜色透明</string>
    </property>
   </action>
  </widget>

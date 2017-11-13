@@ -43,6 +43,9 @@ private:
 private slots:
 //  void on_action_new_triggered();
     void on_action_open_triggered();
+    void on_action_save_triggered();
+    void on_action_saveas_triggered();
+    void on_action_import_triggered();
     void on_action_changelog_triggered();
     void on_action_aboutQt_triggered();
     void on_action_about_triggered();
@@ -55,30 +58,10 @@ private slots:
     void on_action_property_triggered();
     void on_action_help_triggered();
     void on_action_excude_triggered();
-    void on_action_gray_triggered();
+    void on_action_gray_triggered();    
     void on_action_invert_triggered();
-    void on_action_save_triggered();
-    void on_action_saveas_triggered();
-    void on_action_import_triggered();
     void on_action_blur_triggered();
-
-//    void on_actionPencil_triggered();
-//    void on_actionLine_triggered();
-//    void on_actionArrow_triggered();
-//    void on_actionRect_triggered();
-//    void on_actionEllipse_triggered();
-//    void on_actionText_triggered();
-//    void on_actionFill_triggered();
-//    void on_actionErase_triggered();
-//    void on_actionMove_triggered();
-//    void on_actionRectselect_triggered();
-//    void on_actionCutSelect_triggered();
-//    void on_actionZoomin_triggered();
-//    void on_actionZoomout_triggered();
-//    void on_actionZoom1_triggered();
-//    void on_actionColorPicker_triggered();
-//    void on_action_selectAll_triggered();
-//    void on_action_delete_triggered();
+    void on_action_transparent_triggered();
 
     void on_actionRotateLeft_triggered();
     void on_actionRotateRight_triggered();
