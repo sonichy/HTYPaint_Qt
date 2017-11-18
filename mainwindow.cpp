@@ -47,10 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->statusBar->addWidget(LSB1);
     ui->statusBar->addWidget(LSB2);
 
-    text="文字内容";
-    path="";
-    QDesktopWidget* desktop = QApplication::desktop();
-    move((desktop->width() - this->width())/2, (desktop->height() - this->height())/2);
+    text = "文字内容";
+    path = "";
+    move((QApplication::desktop()->width() - width())/2, (QApplication::desktop()->height() - height())/2);
     imageWidget = new ImageWidget;
     connect(imageWidget, SIGNAL(statusbar2Message(QString)), LSB2, SLOT(setText(QString)));
     connect(imageWidget, SIGNAL(pick(QColor)), this, SLOT(setPicker(QColor)));
@@ -59,47 +58,39 @@ MainWindow::MainWindow(QWidget *parent) :
     scrollArea->widget()->setMinimumSize(600,500);
     setCentralWidget(scrollArea);
 
-    QStyle* style = QApplication::style();
-    QIcon icon = style->standardIcon(QStyle::SP_FileDialogNewFolder);
-    ui->action_new->setIcon(icon);
-    icon = style->standardIcon(QStyle::SP_DialogOpenButton);
-    ui->action_open->setIcon(icon);
-    icon = style->standardIcon(QStyle::SP_DialogSaveButton);
-    ui->action_save->setIcon(icon);
-    icon = style->standardIcon(QStyle::SP_DialogCloseButton);
-    ui->action_quit->setIcon(icon);
-    icon = style->standardIcon(QStyle::SP_DialogCancelButton);
-    ui->action_undo->setIcon(icon);
-    icon = style->standardIcon(QStyle::SP_DialogCloseButton);
-    ui->action_quit->setIcon(icon);
-    icon = style->standardIcon(QStyle::SP_ComputerIcon);
-    ui->action_setWallpaper->setIcon(icon);
-    icon = style->standardIcon(QStyle::SP_DialogHelpButton);
-    ui->action_about->setIcon(icon);
+    ui->action_new->setIcon(style()->standardIcon(QStyle::SP_FileDialogNewFolder));
+    ui->action_open->setIcon(style()->standardIcon(QStyle::SP_DialogOpenButton));
+    ui->action_save->setIcon(style()->standardIcon(QStyle::SP_DialogSaveButton));
+    ui->action_quit->setIcon(style()->standardIcon(QStyle::SP_DialogCloseButton));
+    ui->action_undo->setIcon(style()->standardIcon(QStyle::SP_DialogCancelButton));
+    ui->action_quit->setIcon(style()->standardIcon(QStyle::SP_DialogCloseButton));
+    ui->action_setWallpaper->setIcon(style()->standardIcon(QStyle::SP_ComputerIcon));
+    ui->action_about->setIcon(style()->standardIcon(QStyle::SP_DialogHelpButton));
+
     btnColorBorder = new QToolButton(this);
     btnColorBorder->setText("□");
     btnColorBorder->setToolTip("边框");
     ui->mainToolBar->addWidget(btnColorBorder);
-    checkBorder=new QCheckBox(this);
+    checkBorder = new QCheckBox(this);
     checkBorder->setCheckState(Qt::Checked);
     ui->mainToolBar->addWidget(checkBorder);
     btnColorFill = new QToolButton(this);
     btnColorFill->setText("■");
     btnColorFill->setToolTip("填充");
     ui->mainToolBar->addWidget(btnColorFill);
-    checkFill=new QCheckBox(this);
+    checkFill = new QCheckBox(this);
     ui->mainToolBar->addWidget(checkFill);
-    spinbox=new QSpinBox(this);
+    spinbox = new QSpinBox(this);
     spinbox->setSingleStep(1);
     spinbox->setRange(1,100);
     spinbox->setValue(1);
     ui->mainToolBar->addWidget(spinbox);
-    labelFont=new QLabel;
-    ui->actionFont->setText(labelFont->font().family()+","+QString::number(labelFont->font().pointSize()));
+    labelFont = new QLabel;
+    ui->actionFont->setText(labelFont->font().family() + "," + QString::number(labelFont->font().pointSize()));
     lineEdit = new QLineEdit(text,this);
     lineEdit->setFixedWidth(60);
     ui->mainToolBar->addWidget(lineEdit);
-    imageWidget->text=text;
+    imageWidget->text = text;
 
     connect(ui->action_new,SIGNAL(triggered(bool)),imageWidget,SLOT(newfile()));
     connect(ui->action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
@@ -128,8 +119,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(textChange(QString)));
     connect(checkBorder, SIGNAL(stateChanged(int)), this, SLOT(checkBorderChanged(int)));
     connect(checkFill, SIGNAL(stateChanged(int)), this, SLOT(checkFillChanged(int)));
-
-
 
     QStringList Largs=QApplication::arguments();
     qDebug() << Largs;
