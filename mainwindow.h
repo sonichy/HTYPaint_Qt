@@ -21,12 +21,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     Ui::MainWindow *ui;
-    QToolButton *btnColorFill,*btnColorBorder;
+    QToolButton *btnColorFill, *btnColorBorder;
     QLineEdit *lineEdit;
-    QSpinBox *spinbox,*spinw,*spinwr,*spinh,*spinhr;
-    QString text,path;
+    QSpinBox *spinbox, *spinw, *spinwr, *spinh, *spinhr;
+    QString text, path;
     QColor colorf;
-    QCheckBox *checkFill,*checkBorder;
+    QCheckBox *checkFill, *checkBorder;
     QLabel *labelFont;
     QString filename;
 

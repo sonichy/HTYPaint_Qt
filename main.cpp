@@ -7,6 +7,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    qSetMessagePattern("[ %{file}: %{line} ] %{message}");
+
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     QTextCodec *tc = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForTr(tc);
