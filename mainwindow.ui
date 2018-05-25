@@ -17,7 +17,7 @@
    <string>海天鹰画图</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="filename.qrc">
+   <iconset resource="res.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget"/>
@@ -81,6 +81,9 @@
    <addaction name="menu_about"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="movable">
+    <bool>false</bool>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
@@ -269,7 +272,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/pencil.png</normaloff>:/pencil.png</iconset>
    </property>
    <property name="text">
@@ -281,7 +284,7 @@
   </action>
   <action name="actionLine">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/line.png</normaloff>:/line.png</iconset>
    </property>
    <property name="text">
@@ -293,7 +296,7 @@
   </action>
   <action name="actionEllipse">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/ellipse.png</normaloff>:/ellipse.png</iconset>
    </property>
    <property name="text">
@@ -305,7 +308,7 @@
   </action>
   <action name="actionRect">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/rect.png</normaloff>:/rect.png</iconset>
    </property>
    <property name="text">
@@ -317,7 +320,7 @@
   </action>
   <action name="actionText">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/text.png</normaloff>:/text.png</iconset>
    </property>
    <property name="text">
@@ -329,7 +332,7 @@
   </action>
   <action name="actionErase">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/eraser.png</normaloff>:/eraser.png</iconset>
    </property>
    <property name="text">
@@ -341,7 +344,7 @@
   </action>
   <action name="actionMove">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/move.png</normaloff>:/move.png</iconset>
    </property>
    <property name="text">
@@ -353,7 +356,7 @@
   </action>
   <action name="actionRectselect">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/rectselect.png</normaloff>:/rectselect.png</iconset>
    </property>
    <property name="text">
@@ -405,7 +408,7 @@
   </action>
   <action name="actionCutSelect">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/clip.png</normaloff>:/clip.png</iconset>
    </property>
    <property name="text">
@@ -417,7 +420,7 @@
   </action>
   <action name="actionFill">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/fill.png</normaloff>:/fill.png</iconset>
    </property>
    <property name="text">
@@ -434,7 +437,7 @@
   </action>
   <action name="actionZoomin">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/zoomin.png</normaloff>:/zoomin.png</iconset>
    </property>
    <property name="text">
@@ -446,7 +449,7 @@
   </action>
   <action name="actionZoomout">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/zoomout.png</normaloff>:/zoomout.png</iconset>
    </property>
    <property name="text">
@@ -458,7 +461,7 @@
   </action>
   <action name="actionZoom1">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/zoom1.png</normaloff>:/zoom1.png</iconset>
    </property>
    <property name="text">
@@ -470,7 +473,7 @@
   </action>
   <action name="actionRotateRight">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/rr.png</normaloff>:/rr.png</iconset>
    </property>
    <property name="text">
@@ -482,7 +485,7 @@
   </action>
   <action name="actionRotateLeft">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/rl.png</normaloff>:/rl.png</iconset>
    </property>
    <property name="text">
@@ -494,7 +497,7 @@
   </action>
   <action name="actionMirrorHorizontal">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/MirrorHorizontal.png</normaloff>:/MirrorHorizontal.png</iconset>
    </property>
    <property name="text">
@@ -506,7 +509,7 @@
   </action>
   <action name="actionMirrorVertical">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/MirrorVertical.png</normaloff>:/MirrorVertical.png</iconset>
    </property>
    <property name="text">
@@ -541,7 +544,7 @@
   </action>
   <action name="actionColorPicker">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/color_picker.png</normaloff>:/color_picker.png</iconset>
    </property>
    <property name="text">
@@ -553,7 +556,7 @@
   </action>
   <action name="actionArrow">
    <property name="icon">
-    <iconset resource="filename.qrc">
+    <iconset resource="res.qrc">
      <normaloff>:/arrow.png</normaloff>:/arrow.png</iconset>
    </property>
    <property name="text">
@@ -574,7 +577,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="filename.qrc"/>
+  <include location="res.qrc"/>
  </resources>
  <connections/>
 </ui>

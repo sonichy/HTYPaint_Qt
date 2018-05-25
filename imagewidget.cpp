@@ -23,18 +23,18 @@ ImageWidget::ImageWidget(QWidget *parent)
     brush.setColor(Qt::black);
     boolBorder = true;
     boolFill = false;
-    connect(new QShortcut(QKeySequence(Qt::ALT + Qt::Key_Up),this), SIGNAL(activated()),this, SLOT(moveUp()));
-    connect(new QShortcut(QKeySequence(Qt::ALT + Qt::Key_Down),this), SIGNAL(activated()),this, SLOT(moveDown()));
-    connect(new QShortcut(QKeySequence(Qt::ALT + Qt::Key_Left),this), SIGNAL(activated()),this, SLOT(moveLeft()));
-    connect(new QShortcut(QKeySequence(Qt::ALT + Qt::Key_Right),this), SIGNAL(activated()),this, SLOT(moveRight()));
-    connect(new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Up),this), SIGNAL(activated()),this, SLOT(moveTopUp()));
-    connect(new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Down),this), SIGNAL(activated()),this, SLOT(moveTopDown()));
-    connect(new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Left),this), SIGNAL(activated()),this, SLOT(moveLeftLeft()));
-    connect(new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Right),this), SIGNAL(activated()),this, SLOT(moveLeftRight()));
-    connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Left),this), SIGNAL(activated()),this, SLOT(moveRightLeft()));
-    connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Right),this), SIGNAL(activated()),this, SLOT(moveRightRight()));
-    connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Up),this), SIGNAL(activated()),this, SLOT(moveBottomUp()));
-    connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down),this), SIGNAL(activated()),this, SLOT(moveBottomDown()));
+    connect(new QShortcut(QKeySequence(Qt::ALT + Qt::Key_Up), this), SIGNAL(activated()), this, SLOT(moveUp()));
+    connect(new QShortcut(QKeySequence(Qt::ALT + Qt::Key_Down), this), SIGNAL(activated()), this, SLOT(moveDown()));
+    connect(new QShortcut(QKeySequence(Qt::ALT + Qt::Key_Left), this), SIGNAL(activated()), this, SLOT(moveLeft()));
+    connect(new QShortcut(QKeySequence(Qt::ALT + Qt::Key_Right), this), SIGNAL(activated()), this, SLOT(moveRight()));
+    connect(new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Up), this), SIGNAL(activated()), this, SLOT(moveTopUp()));
+    connect(new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Down), this), SIGNAL(activated()), this, SLOT(moveTopDown()));
+    connect(new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Left), this), SIGNAL(activated()), this, SLOT(moveLeftLeft()));
+    connect(new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Right), this), SIGNAL(activated()), this, SLOT(moveLeftRight()));
+    connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Left), this), SIGNAL(activated()), this, SLOT(moveRightLeft()));
+    connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Right), this), SIGNAL(activated()), this, SLOT(moveRightRight()));
+    connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Up), this), SIGNAL(activated()), this, SLOT(moveBottomUp()));
+    connect(new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down), this), SIGNAL(activated()), this, SLOT(moveBottomDown()));
 }
 
 ImageWidget::~ImageWidget()
@@ -63,33 +63,39 @@ void ImageWidget::draw(QImage &img)
         painter.drawLine(startPnt,endPnt);
         break;
     case ARROW_DRAW:{
-        if(boolFill){painter.setBrush(brush);}else{painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));}
-        if(!boolBorder){pen.setColor(Qt::transparent);}
-        QPen pena=pen;
+        if(boolFill){
+            painter.setBrush(brush);
+        }else{
+            painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));
+        }
+        if(!boolBorder){
+            pen.setColor(Qt::transparent);
+        }
+        QPen pena = pen;
         pena.setWidth(1);
         painter.setPen(pena);
         float pi = 3.14;
         float a = pi/9;
-        float l = sqrt(pow(endPnt.y()-startPnt.y(),2)+pow(endPnt.x()-startPnt.x(),2));
-        float b = asin((endPnt.y()-startPnt.y())/l);
+        float l = sqrt(pow(endPnt.y() - startPnt.y(),2) + pow(endPnt.x() - startPnt.x(),2));
+        float b = asin((endPnt.y() - startPnt.y())/l);
         int LW = pen.width();
         float x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,l56;
         l56 = LW/2;
         float d = (l56 + LW/2)/sin(a);
-        if(startPnt.x()>endPnt.x()){
+        if (startPnt.x() > endPnt.x()) {
             x1 = startPnt.x() - LW/2*sin(b);
             x2 = startPnt.x() + LW/2*sin(b);
             x4 = endPnt.x() + d*cos(b-a);
             x3 = x4 - l56*sin(b);
             x5 = endPnt.x() + d*cos(a + b);
             x6 = x5 + l56*sin(b);
-        }else{
+        } else {
             x1 = startPnt.x() + LW/2*sin(b);
             x2 = startPnt.x() - LW/2*sin(b);
             x4 = endPnt.x() - d*cos(b-a);
-            x3 = x4+l56*sin(b);
+            x3 = x4 + l56*sin(b);
             x5 = endPnt.x() - d*cos(a+b);
-            x6 = x5-l56*sin(b);
+            x6 = x5 - l56*sin(b);
         }
         y1 = startPnt.y() - LW/2*cos(b);
         y2 = startPnt.y() + LW/2*cos(b);
@@ -122,8 +128,8 @@ void ImageWidget::draw(QImage &img)
         break;}
     case SELECT_DRAW:{
         painter.setPen(QPen(Qt::black,1,Qt::DashLine));
-        painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));
-        QRect rect(startPnt,endPnt);
+        painter.setBrush(QBrush(Qt::transparent, Qt::SolidPattern));
+        QRect rect(startPnt, endPnt);
         painter.drawRect(rect);
         break;}
     case ELLIPSE_DRAW:{
@@ -148,17 +154,19 @@ void ImageWidget::draw(QImage &img)
         painter.drawEllipse(endPnt.x(),endPnt.y(),20,20);
         break;
     case DEL_DRAW:{
-        painter.setPen(QPen(Qt::white,1,Qt::SolidLine));
-        painter.setBrush(QBrush(Qt::white,Qt::SolidPattern));
-        //if(startPnt.x()<endPnt.x()){
-        //  startPnt.setX(startPnt.x()-1);
-        //  endPnt.setX(endPnt.x()+1);
-        //}
-        //if(startPnt.y()<endPnt.y()){
-        //  startPnt.setY(startPnt.y()-1);
-        //  endPnt.setY(endPnt.y()+1);
-        //}
-        QRect rect(startPnt,endPnt);
+        painter.setPen(QPen(Qt::white, 1, Qt::SolidLine));
+        painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
+//        QRect rect;
+//        if (startPnt.x() < endPnt.x()) {
+//          rect.setTopLeft(startPnt - QPoint(1,1));
+//          rect.setBottomRight(endPnt + QPoint(1,1));
+//        }
+//        if (startPnt.x() > endPnt.x() && startPnt.y() > endPnt.y()) {
+//          rect.setTopLeft(endPnt - QPoint(1,1));
+//          rect.setBottomRight(endPnt + QPoint(1,1));
+//        }
+        //QRect rect(startPnt-QPoint(1,1), endPnt+QPoint(1,1));
+        QRect rect(startPnt, endPnt);
         painter.drawRect(rect);
         painter.setPen(pen);
         painter.setBrush(brush);
@@ -188,15 +196,15 @@ void ImageWidget::mousePressEvent(QMouseEvent *e)
     switch(draw_type){
     case TEXT_DRAW:
         draw(imgtemp);
-        image=imgtemp;
+        image = imgtemp;
         moveImgbuf();
-        cundo=0;
+        cundo = 0;
         break;
     case ERASE_DRAW:
         draw(imgtemp);
-        image=imgtemp;
+        image = imgtemp;
         moveImgbuf();
-        cundo=0;
+        cundo = 0;
         break;
     case COLORPICKER_DRAW:
         draw(imgtemp);
@@ -227,28 +235,27 @@ void ImageWidget::mouseMoveEvent(QMouseEvent *e)
             draw(imgtemp);
         }
     }
-    emit statusbar2Message("("+QString::number(startPnt.x())+","+QString::number(startPnt.y())+") - ("+QString::number(endPnt.x())+","+QString::number(endPnt.y())+")");
+    emit statusbar2Message("("+QString::number(startPnt.x()) + "," + QString::number(startPnt.y()) + ") - (" + QString::number(endPnt.x()) + "," + QString::number(endPnt.y()) + ")");
 }
 
 void ImageWidget::mouseReleaseEvent(QMouseEvent *e)
 {
-    Q_UNUSED(e);
+    Q_UNUSED(e);    
     //this->isPressed = false;
-    if(draw_type!=SELECT_DRAW && draw_type!=MOVE_DRAW){
-        image=imgtemp;
-        moveImgbuf();
-        cundo=0;
-    }
-    if(draw_type==MOVE_DRAW){
-        imgtemp=image;
+    if (draw_type == MOVE_DRAW) {
+        imgtemp = image;
         draw(imgtemp);
+    }else if (draw_type != SELECT_DRAW) {
+        image = imgtemp;
+        moveImgbuf();
+        cundo = 0;
     }
 }
 
 void ImageWidget::zoomin()
 {
-    QImage imgzoom=imgtemp.scaled(imgtemp.width()*1.2,imgtemp.height()*1.2);
-    imgtemp=imgzoom;
+    QImage imgzoom = imgtemp.scaled(imgtemp.width() * 1.2, imgtemp.height() * 1.2);
+    imgtemp = imgzoom;
     //setMinimumSize(imgzoom.size());
     //resize(imgzoom.size());
     update();
@@ -256,8 +263,8 @@ void ImageWidget::zoomin()
 
 void ImageWidget::zoomout()
 {
-    QImage imgzoom=imgtemp.scaled(imgtemp.width()*0.8,imgtemp.height()*0.8);
-    imgtemp=imgzoom;
+    QImage imgzoom = imgtemp.scaled(imgtemp.width() * 0.8, imgtemp.height() * 0.8);
+    imgtemp = imgzoom;
     //resize(imgzoom.size());
     //setMinimumSize(imgzoom.size());
     update();
@@ -265,7 +272,7 @@ void ImageWidget::zoomout()
 
 void ImageWidget::zoom1()
 {
-    imgtemp=imgload;
+    imgtemp = imgload;
     //setMinimumSize(imgload.size());
     //resize(imgload.size());
     update();
@@ -273,9 +280,9 @@ void ImageWidget::zoom1()
 
 void ImageWidget::scale(int width,int height)
 {
-    QImage imgscale=imgtemp.scaled(width,height);
-    imgtemp=imgscale;
-    image=imgtemp;
+    QImage imgscale = imgtemp.scaled(width,height);
+    imgtemp = imgscale;
+    image = imgtemp;
     //resize(imgtemp.size());
     //setMinimumSize(imgtemp.size());
     update();
@@ -324,15 +331,15 @@ void ImageWidget::drawArrow()
 
 void ImageWidget::drawRect()
 {
-    image=imgtemp;
-    draw_type=RECT_DRAW;
+    image = imgtemp;
+    draw_type = RECT_DRAW;
     setCursor(QCursor(QPixmap(":/rect.png")));
 }
 
 void ImageWidget::drawEllipse()
 {
-    image=imgtemp;
-    draw_type=ELLIPSE_DRAW;
+    image = imgtemp;
+    draw_type = ELLIPSE_DRAW;
     setCursor(QCursor(QPixmap(":/ellipse.png")));
 }
 
@@ -392,11 +399,11 @@ void ImageWidget::selectAll()
 }
 
 void ImageWidget::delSelect()
-{
-    image = imgtemp;
-    draw_type = DEL_DRAW;
-    draw(imgtemp);
-    image = imgtemp;
+{    
+    draw_type = DEL_DRAW;    
+    draw(image);
+    imgtemp = image;
+    update();
 }
 
 void ImageWidget::newfile()
@@ -501,7 +508,7 @@ void ImageWidget::moveLeft()
 
 void ImageWidget::moveRight()
 {
-    if(endPnt.x()<imgtemp.width()-2 && startPnt.x()<imgtemp.width()-2){
+    if(endPnt.x() < imgtemp.width()-2 && startPnt.x() < imgtemp.width()-2){
         imgtemp = image;
         startPnt.setX(startPnt.x()+1);
         endPnt.setX(endPnt.x()+1);
