@@ -655,8 +655,8 @@ void ImageWidget::invert()
             imgInvert.setPixel(x,y,RGBi);
         }
     }
-    imgtemp=imgInvert;
-    image=imgInvert;
+    imgtemp = imgInvert;
+    image = imgInvert;
     update();
     moveImgbuf();
 }

@@ -300,7 +300,7 @@ void MainWindow::on_action_redo_triggered()
 
 void MainWindow::on_action_setWallpaper_triggered()
 {
-    QString str="gsettings set org.gnome.desktop.background picture-uri file://"+path;
+    QString str = "gsettings set org.gnome.desktop.background picture-uri file://" + path;
     QByteArray ba = str.toLocal8Bit();
     qDebug() << ba.data();
     system(ba.data());
