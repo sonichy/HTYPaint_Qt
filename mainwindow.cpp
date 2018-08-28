@@ -232,14 +232,14 @@ void MainWindow::open(QString filepath)
 }
 
 void MainWindow::on_action_import_triggered(){
-    QString filenamei="";
-    if(path==""){
+    QString filenamei = "";
+    if(path == ""){
         filenamei = QFileDialog::getOpenFileName(this,"导入图片", ".", "图片文件(*.jpg *.png *.bmp)");
     }else{
         filenamei = QFileDialog::getOpenFileName(this,"导入图片", path, "图片文件(*.jpg *.png *.bmp)");
     }
-    LSB1->setText("导入 "+filenamei);
-    if(path.length()!=0){
+    LSB1->setText("导入 " + filenamei);
+    if(path.length() != 0){
         imageWidget->image = imageWidget->imgtemp;
         QImage imgImport(filenamei);
         QApplication::clipboard()->setImage(imgImport, QClipboard::Clipboard);
@@ -344,7 +344,8 @@ void MainWindow::on_action_property_triggered()
 }
 
 void MainWindow::on_action_excude_triggered()
-{   int wo=imageWidget->imgtemp.width();
+{
+    int wo=imageWidget->imgtemp.width();
     int ho=imageWidget->imgtemp.height();
     QDialog *dialog=new QDialog(this);
     dialog->setWindowTitle("缩放");
@@ -488,7 +489,7 @@ void MainWindow::checkBorderChanged(int state)
 void MainWindow::checkFillChanged(int state)
 {
     if(state == Qt::Checked){
-       imageWidget->boolFill=true;
+       imageWidget->boolFill = true;
     }else if(state == Qt::PartiallyChecked){
     }else{
        imageWidget->boolFill=false;
