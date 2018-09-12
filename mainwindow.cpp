@@ -191,7 +191,7 @@ void MainWindow::setColorFill()
 {
     QPalette plt = btnColorFill->palette();
     QBrush brush = plt.color(QPalette::ButtonText);
-    colorf = QColorDialog::getColor(brush.color(), this);    
+    colorf = QColorDialog::getColor(brush.color(), this);
     imageWidget->brush.setColor(colorf);
     plt.setColor(QPalette::ButtonText, colorf);
     btnColorFill->setPalette(plt);
@@ -214,7 +214,7 @@ void MainWindow::on_action_open_triggered()
         path = QFileDialog::getOpenFileName(this,"打开图片", ".", "图片文件(*.jpg *.jpeg *.png *.bmp)");
     }else{
         path = QFileDialog::getOpenFileName(this,"打开图片", path, "图片文件(*.jpg *.jpeg *.png *.bmp)");
-    }    
+    }
     if(path.length() != 0){
         open(path);
     }
@@ -268,7 +268,7 @@ void MainWindow::on_action_saveas_triggered()
     }else{
         path = QFileDialog::getSaveFileName(this,"保存图片",path,"图片文件(*.jpg *.png *.bmp)");
     }
-    if(path.length() != 0){        
+    if(path.length() != 0){
         LSB1->setText("保存 " + path);
         imageWidget->image = imageWidget->imgtemp;
         imageWidget->save(path);
@@ -309,85 +309,85 @@ void MainWindow::on_action_setWallpaper_triggered()
 void MainWindow::on_action_property_triggered()
 {
     //qDebug() << image.width() << "X" << image.height();
-    QDialog *dialog=new QDialog(this);
+    QDialog *dialog = new QDialog(this);
     dialog->setWindowTitle("属性");
-    QVBoxLayout *vbox=new QVBoxLayout;
-    QHBoxLayout *hbox=new QHBoxLayout;
-    QLabel *label=new QLabel("宽度：");
-    QSpinBox *spinw=new QSpinBox;
-    spinw->setRange(0,10000);
+    QVBoxLayout *vbox = new QVBoxLayout;
+    QHBoxLayout *hbox = new QHBoxLayout;
+    QLabel *label = new QLabel("宽度：");
+    QSpinBox *spinw = new QSpinBox;
+    spinw->setRange(0, 20000);
     spinw->setValue(imageWidget->imgtemp.width());
-    hbox->addWidget(label,0,Qt::AlignCenter);
+    hbox->addWidget(label, 0, Qt::AlignCenter);
     hbox->addWidget(spinw);
     vbox->addLayout(hbox);
-    label=new QLabel("高度：");
-    QSpinBox *spinh=new QSpinBox;
-    spinh->setRange(0,10000);
+    label = new QLabel("高度：");
+    QSpinBox *spinh = new QSpinBox;
+    spinh->setRange(0, 20000);
     spinh->setValue(imageWidget->imgtemp.height());
     hbox=new QHBoxLayout;
-    hbox->addWidget(label,0,Qt::AlignCenter);
+    hbox->addWidget(label, 0, Qt::AlignCenter);
     hbox->addWidget(spinh);
     vbox->addLayout(hbox);
-    QPushButton *btnConfirm=new QPushButton("确定");
-    QPushButton *btnCancel=new QPushButton("取消");
-    hbox=new QHBoxLayout;
+    QPushButton *btnConfirm = new QPushButton("确定");
+    QPushButton *btnCancel = new QPushButton("取消");
+    hbox = new QHBoxLayout;
     hbox->addWidget(btnConfirm);
     hbox->addWidget(btnCancel);
     vbox->addLayout(hbox);
     dialog->setLayout(vbox);
     connect(btnConfirm, SIGNAL(clicked()), dialog, SLOT(accept()));
     connect(btnCancel, SIGNAL(clicked()), dialog, SLOT(reject()));
-    if(dialog->exec()==QDialog::Accepted){       
-        imageWidget->newsize(spinw->value(),spinh->value());
+    if(dialog->exec() == QDialog::Accepted){
+        imageWidget->newsize(spinw->value(), spinh->value());
     }
     dialog->close();
 }
 
 void MainWindow::on_action_excude_triggered()
 {
-    int wo=imageWidget->imgtemp.width();
-    int ho=imageWidget->imgtemp.height();
-    QDialog *dialog=new QDialog(this);
+    int wo = imageWidget->imgtemp.width();
+    int ho = imageWidget->imgtemp.height();
+    QDialog *dialog = new QDialog(this);
     dialog->setWindowTitle("缩放");
 
-    QVBoxLayout *vbox=new QVBoxLayout;
-    QHBoxLayout *hbox=new QHBoxLayout;
-    QLabel *label=new QLabel("宽度：");
-    spinw=new QSpinBox;
+    QVBoxLayout *vbox = new QVBoxLayout;
+    QHBoxLayout *hbox = new QHBoxLayout;
+    QLabel *label = new QLabel("宽度：");
+    spinw = new QSpinBox;
     spinw->setRange(1,10000);
     spinw->setValue(wo);
     hbox->addWidget(label,0,Qt::AlignCenter);
     hbox->addWidget(spinw);
-    label=new QLabel("px");
+    label = new QLabel("px");
     hbox->addWidget(label);
-    spinwr=new QSpinBox;
+    spinwr = new QSpinBox;
     spinwr->setRange(10,1000);
     spinwr->setValue(100);
     hbox->addWidget(spinwr);
-    label=new QLabel("%");
+    label = new QLabel("%");
     hbox->addWidget(label);
     vbox->addLayout(hbox);
 
-    hbox=new QHBoxLayout;
-    label=new QLabel("高度：");
+    hbox = new QHBoxLayout;
+    label = new QLabel("高度：");
     hbox->addWidget(label,0,Qt::AlignCenter);
-    spinh=new QSpinBox;
+    spinh = new QSpinBox;
     spinh->setRange(1,10000);
     spinh->setValue(ho);
     hbox->addWidget(spinh);
-    label=new QLabel("px");
+    label = new QLabel("px");
     hbox->addWidget(label);
-    spinhr=new QSpinBox;
+    spinhr = new QSpinBox;
     spinhr->setRange(10,1000);
     spinhr->setValue(100);
     hbox->addWidget(spinhr);
-    label=new QLabel("%");
+    label = new QLabel("%");
     hbox->addWidget(label);
     vbox->addLayout(hbox);
 
-    QPushButton *btnConfirm=new QPushButton("确定");
-    QPushButton *btnCancel=new QPushButton("取消");
-    hbox=new QHBoxLayout;
+    QPushButton *btnConfirm = new QPushButton("确定");
+    QPushButton *btnCancel = new QPushButton("取消");
+    hbox = new QHBoxLayout;
     hbox->addStretch();
     hbox->addWidget(btnConfirm);
     hbox->addWidget(btnCancel);
@@ -401,7 +401,7 @@ void MainWindow::on_action_excude_triggered()
     connect(spinhr, SIGNAL(valueChanged(int)), this, SLOT(onSpinhrChanged(int)));
     connect(btnConfirm, SIGNAL(clicked()), dialog, SLOT(accept()));
     connect(btnCancel, SIGNAL(clicked()), dialog, SLOT(reject()));
-    if(dialog->exec()==QDialog::Accepted){
+    if(dialog->exec() == QDialog::Accepted){
         imageWidget->scale(spinw->value(),spinh->value());
     }
     dialog->close();
