@@ -12,7 +12,7 @@
 
 ImageWidget::ImageWidget(QWidget *parent)
     : QWidget(parent)
-{    
+{
     qApp->installEventFilter(this);
     cundo=0;
     labelFont = new QLabel;
@@ -43,7 +43,7 @@ ImageWidget::~ImageWidget()
 }
 
 void ImageWidget::paintEvent(QPaintEvent *)
-{    
+{
     QPainter painter(this);
     painter.drawImage(0,0,imgtemp);
     resize(imgtemp.size());
@@ -57,6 +57,8 @@ void ImageWidget::draw(QImage &img)
     painter.setRenderHint(QPainter::Antialiasing, true);
     switch(draw_type){
     case POINT_DRAW:
+        pen.setCapStyle(Qt::RoundCap);
+        pen.setJoinStyle(Qt::RoundJoin);
         painter.drawLine(startPnt,endPnt);
         break;
     case LINE_DRAW:
@@ -115,6 +117,7 @@ void ImageWidget::draw(QImage &img)
         painter.drawPolygon(points,7);
         break;}
     case RECT_DRAW:{
+        pen.setJoinStyle(Qt::MiterJoin);
         if(boolFill){
             painter.setBrush(brush);
         }else{
@@ -240,7 +243,7 @@ void ImageWidget::mouseMoveEvent(QMouseEvent *e)
 
 void ImageWidget::mouseReleaseEvent(QMouseEvent *e)
 {
-    Q_UNUSED(e);    
+    Q_UNUSED(e);
     //this->isPressed = false;
     if (draw_type == MOVE_DRAW) {
         imgtemp = image;
@@ -399,8 +402,8 @@ void ImageWidget::selectAll()
 }
 
 void ImageWidget::delSelect()
-{    
-    draw_type = DEL_DRAW;    
+{
+    draw_type = DEL_DRAW;
     draw(image);
     imgtemp = image;
     update();
@@ -408,7 +411,7 @@ void ImageWidget::delSelect()
 
 void ImageWidget::newfile()
 {
-    QImage imgnew = QImage(800,600,QImage::Format_ARGB32);
+    QImage imgnew = QImage(800, 600, QImage::Format_ARGB32);
     imgnew.fill(Qt::transparent);
     imgtemp = imgnew;
     image = imgnew;
@@ -434,7 +437,7 @@ void ImageWidget::load(QString fileName)
 }
 
 void ImageWidget::save(QString path)
-{    
+{
     image.save(path,0,100);
 }
 
@@ -589,7 +592,7 @@ void ImageWidget::moveBottomDown()
 }
 
 void ImageWidget::moveImgbuf()
-{    
+{
     for(int i=9; i>0; i--){
         imgbuf[i] = imgbuf[i-1];
         //qDebug() << "imgbuf" << i << "=" << i-1;

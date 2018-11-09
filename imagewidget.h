@@ -34,7 +34,7 @@ public:
         COLORPICKER_DRAW
     } draw_type;
     ImageWidget(QWidget *parent = 0);
-    ~ImageWidget();    
+    ~ImageWidget();
     QImage image,imgtemp,imgbuf[10],imgmove;
     QPoint startPnt;   //起点
     QPoint endPnt;     //终点
@@ -42,7 +42,7 @@ public:
     QBrush brush;
     QString text;
     QLabel *labelFont;
-    bool boolBorder,boolFill;    
+    bool boolBorder,boolFill;
     void load(QString fileName);
     void save(QString path);
     void setAngle(qreal rotateAngle);
@@ -50,7 +50,7 @@ public:
     void mirror(bool bh,bool bv);
     void copy();
     void paste();
-    void draw(QImage &img);    
+    void draw(QImage &img);
     void newsize(int width,int height);
     void scale(int ratioW,int ratioH);
     void moveImgbuf();
@@ -81,7 +81,7 @@ public slots:
     void undo();
     void redo();
 
-private slots:    
+private slots:
     void moveUp();
     void moveDown();
     void moveLeft();

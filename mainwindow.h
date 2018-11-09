@@ -58,7 +58,7 @@ private slots:
     void on_action_property_triggered();
     void on_action_help_triggered();
     void on_action_excude_triggered();
-    void on_action_gray_triggered();    
+    void on_action_gray_triggered();
     void on_action_invert_triggered();
     void on_action_blur_triggered();
     void on_action_transparent_triggered();
@@ -79,6 +79,8 @@ private slots:
     void checkFillChanged(int);
     void open(QString);
     void setPicker(QColor color);
+    void addPenWidth();
+    void reducePenWidth();
 };
 
 #endif // MAINWINDOW_H
