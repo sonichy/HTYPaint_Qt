@@ -11,5 +11,5 @@
 ![alt](blur.jpg)  
 ### 1.2 新增导入图形
 ### 1.1 新增灰度和反色
-![alt](gray.png)  
-![alt](invert.png)  
+![alt](gray.jpg)  
+![alt](invert.jpg)  

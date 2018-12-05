@@ -740,7 +740,7 @@ void ImageWidget::mosaic(int p)
     if(startPnt.x()>endPnt.x() && startPnt.y()<endPnt.y()){xs=endPnt.x(); ys=startPnt.y(); xe=startPnt.x(); ye=endPnt.y();}
     if(startPnt.x()>endPnt.x() && startPnt.y()>endPnt.y()){xs=endPnt.x(); ys=endPnt.y(); xe=startPnt.x(); ye=startPnt.y();}
     if(startPnt.x()<endPnt.x() && startPnt.y()>endPnt.y()){xs=startPnt.x(); ys=endPnt.y(); xe=endPnt.x(); ye=startPnt.y();}
-    QImage imgMosaic(qAbs(endPnt.x()-startPnt.x())+2, qAbs(endPnt.y()-startPnt.y())+2, QImage::Format_RGB32);
+    QImage imgMosaic(qAbs(endPnt.x()-startPnt.x()), qAbs(endPnt.y()-startPnt.y()), QImage::Format_RGB32);
     QPainter painterm(&imgMosaic);
     for(int x=xs; x<xe; x+=p){
        for(int y=ys; y<ye; y+=p){
