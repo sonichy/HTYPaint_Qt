@@ -49,7 +49,6 @@ private slots:
     void on_action_changelog_triggered();
     void on_action_aboutQt_triggered();
     void on_action_about_triggered();
-
     void on_action_undo_triggered();
     void on_action_redo_triggered();
     void on_action_copy_triggered();
@@ -61,12 +60,15 @@ private slots:
     void on_action_gray_triggered();
     void on_action_invert_triggered();
     void on_action_blur_triggered();
+    void on_action_mosaic_triggered();
     void on_action_transparent_triggered();
+
     void on_actionRotateLeft_triggered();
     void on_actionRotateRight_triggered();
     void on_actionMirrorHorizontal_triggered();
     void on_actionMirrorVertical_triggered();
     void on_actionFont_triggered();
+
     void setColorFill();
     void setColorBorder();
     void spinValueChange(int);

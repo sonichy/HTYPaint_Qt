@@ -60,15 +60,6 @@ MainWindow::MainWindow(QWidget *parent) :
     scrollArea->widget()->setMinimumSize(600,500);
     setCentralWidget(scrollArea);
 
-    ui->action_new->setIcon(style()->standardIcon(QStyle::SP_FileDialogNewFolder));
-    ui->action_open->setIcon(style()->standardIcon(QStyle::SP_DialogOpenButton));
-    ui->action_save->setIcon(style()->standardIcon(QStyle::SP_DialogSaveButton));
-    ui->action_quit->setIcon(style()->standardIcon(QStyle::SP_DialogCloseButton));
-    ui->action_undo->setIcon(style()->standardIcon(QStyle::SP_DialogCancelButton));
-    ui->action_quit->setIcon(style()->standardIcon(QStyle::SP_DialogCloseButton));
-    ui->action_setWallpaper->setIcon(style()->standardIcon(QStyle::SP_ComputerIcon));
-    ui->action_about->setIcon(style()->standardIcon(QStyle::SP_DialogHelpButton));
-
     btnColorBorder = new QToolButton(this);
     btnColorBorder->setText("□");
     btnColorBorder->setToolTip("边框");
@@ -147,7 +138,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::on_action_changelog_triggered()
 {
-    QString s = "1.9\n(2018-11)\n增加：画笔粗细快捷键，画图更加方便。\n\n1.8\n(2018-05)\n修复：删除选区有虚线框，从右键打开方式无法打开文件。\n\n1.7\n(2017-11)\n颜色透明工具，取色后在边框色、填充色显示，超出边界清空鼠标位置信息。\n增加灰色背景，凸显绘图区域。\n优化代码。\n(2017-10)\n简化工具信号，简化setCursor()。\n(2017-09)\n增加箭头工具。\n增加抗锯齿。\n\n1.6\n(2017-07)\n更新日志消息窗口写不下了，改成带滚动条的文本框。\n自定义信号结合事件过滤器，把鼠标移动位置发送到主窗体信息栏。\n增加拖放打开文件。\n(2017-06)\n使用自定义信号解决子类发信息给主窗体状态栏问题，致谢rekols。\n(2017-05)\n右键打开文件记忆文件路径。\n\n1.5 (2017-04)\n透明色反色不改变。\n增加取色工具，橡皮擦颜色不再固定为白色，而是填充色。\n\n1.4 (2017-03)\n支持命令行打开文件和打开方式打开文件。\n修复鼠标指针引用本地文件，没引用资源文件，引起启动path参数改变不能加载图标的问题。\n菜单的SIGNAL-SLOT改为on_action_triggered()\n修复PNG图片裁剪丢失透明度问题。\n新建图像为透明图像。\n\n1.3 (2017-03)\n实现选区模糊。\n加入模糊滤镜。\n\n1.2 (2017-02)\n文件名显示在窗口标题栏。\n区别保存和另存为。\n增加导入图片。\n\n1.1 (2017-01)\n新增灰度、反色。\n\n1.0 (2017-01)\n解决删除选区后画不出选框的问题。\n恢复撤销。\n增加全选。\n实现选区或剪贴板移动！\n保存时自动获取打开文件的路径。\n增加按像素、比例缩放。\n实现在属性窗口设置画布大小。\n2016-12\n增加快捷键控制选框及其边框移动。\n绘图代码从MainWindow向imageWidget迁移。\n实现水平镜像、垂直镜像。\n实现放大、缩小、原始大小。\n为了增加滚动条，增加自定义imageWidget。\n状态栏显示绘图详情。\n复制选区到系统剪贴板，从系统剪贴板获取图像粘贴。\n优化颜色选择交互。\n增加撤销、重做功能，有BUG。\n设为壁纸。\n画选区，剪裁选区。\n新建图片，打开图片，保存图片。\n实现画点、线、框、圆、字。";
+    QString s = "1.10\n(2018-12)\n增加：选区马赛克。\n\n1.9\n(2018-11)\n增加：画笔粗细快捷键，画图更加方便。\n\n1.8\n(2018-05)\n修复：删除选区有虚线框，从右键打开方式无法打开文件。\n\n1.7\n(2017-11)\n颜色透明工具，取色后在边框色、填充色显示，超出边界清空鼠标位置信息。\n增加灰色背景，凸显绘图区域。\n优化代码。\n(2017-10)\n简化工具信号，简化setCursor()。\n(2017-09)\n增加箭头工具。\n增加抗锯齿。\n\n1.6\n(2017-07)\n更新日志消息窗口写不下了，改成带滚动条的文本框。\n自定义信号结合事件过滤器，把鼠标移动位置发送到主窗体信息栏。\n增加拖放打开文件。\n(2017-06)\n使用自定义信号解决子类发信息给主窗体状态栏问题，致谢rekols。\n(2017-05)\n右键打开文件记忆文件路径。\n\n1.5 (2017-04)\n透明色反色不改变。\n增加取色工具，橡皮擦颜色不再固定为白色，而是填充色。\n\n1.4 (2017-03)\n支持命令行打开文件和打开方式打开文件。\n修复鼠标指针引用本地文件，没引用资源文件，引起启动path参数改变不能加载图标的问题。\n菜单的SIGNAL-SLOT改为on_action_triggered()\n修复PNG图片裁剪丢失透明度问题。\n新建图像为透明图像。\n\n1.3 (2017-03)\n实现选区模糊。\n加入模糊滤镜。\n\n1.2 (2017-02)\n文件名显示在窗口标题栏。\n区别保存和另存为。\n增加导入图片。\n\n1.1 (2017-01)\n新增灰度、反色。\n\n1.0 (2017-01)\n解决删除选区后画不出选框的问题。\n恢复撤销。\n增加全选。\n实现选区或剪贴板移动！\n保存时自动获取打开文件的路径。\n增加按像素、比例缩放。\n实现在属性窗口设置画布大小。\n2016-12\n增加快捷键控制选框及其边框移动。\n绘图代码从MainWindow向imageWidget迁移。\n实现水平镜像、垂直镜像。\n实现放大、缩小、原始大小。\n为了增加滚动条，增加自定义imageWidget。\n状态栏显示绘图详情。\n复制选区到系统剪贴板，从系统剪贴板获取图像粘贴。\n优化颜色选择交互。\n增加撤销、重做功能，有BUG。\n设为壁纸。\n画选区，剪裁选区。\n新建图片，打开图片，保存图片。\n实现画点、线、框、圆、字。";
     QDialog *dialog = new QDialog;
     dialog->setWindowTitle("更新历史");
     dialog->setFixedSize(400,300);
@@ -515,6 +506,11 @@ void MainWindow::on_action_transparent_triggered()
 void MainWindow::on_action_blur_triggered()
 {
     imageWidget->blur(spinbox->value());
+}
+
+void MainWindow::on_action_mosaic_triggered()
+{
+    imageWidget->mosaic(spinbox->value());
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *e)

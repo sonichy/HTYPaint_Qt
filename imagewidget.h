@@ -58,6 +58,7 @@ public:
     void invert();
     void transparent();
     void blur(int p);
+    void mosaic(int p);
 
 public slots:
     void newfile();

@@ -671,7 +671,7 @@ void ImageWidget::transparent()
     h = imgtemp.height();
     QImage imgTansparent(w,h,QImage::Format_ARGB32);
     for(int x=0; x<w; x++){
-        for(int y=0;y<h; y++){
+        for(int y=0; y<h; y++){
             QRgb RGB = image.pixel(x,y);
             if (RGB == pen.color().rgb()){
                 QRgb RGBT = qRgba(qRed(RGB),qGreen(RGB),qBlue(RGB),0);
@@ -694,7 +694,7 @@ void ImageWidget::blur(int p)
     if(startPnt.x()>endPnt.x() && startPnt.y()<endPnt.y()){xs=endPnt.x(); ys=startPnt.y(); xe=startPnt.x(); ye=endPnt.y();}
     if(startPnt.x()>endPnt.x() && startPnt.y()>endPnt.y()){xs=endPnt.x(); ys=endPnt.y(); xe=startPnt.x(); ye=startPnt.y();}
     if(startPnt.x()<endPnt.x() && startPnt.y()>endPnt.y()){xs=startPnt.x(); ys=endPnt.y(); xe=endPnt.x(); ye=startPnt.y();}
-    QImage imgBlur(qAbs(endPnt.x()-startPnt.x())+2,qAbs(endPnt.y()-startPnt.y())+2,QImage::Format_RGB32);
+    QImage imgBlur(qAbs(endPnt.x()-startPnt.x())+2, qAbs(endPnt.y()-startPnt.y())+2, QImage::Format_RGB32);
     for(int x=xs; x<xe+2; x++){
         for(int y=ys;y<ye+2; y++){
             int red=0, green=0, blue=0, pc=0;
@@ -729,4 +729,29 @@ bool ImageWidget::eventFilter(QObject *obj, QEvent *event)
         emit statusbar2Message("");
     }
     return false;
+}
+
+void ImageWidget::mosaic(int p)
+{
+    imgtemp = image;
+    update();
+    int xs,xe,ys,ye;
+    if(startPnt.x()<endPnt.x() && startPnt.y()<endPnt.y()){xs=startPnt.x(); ys=startPnt.y(); xe=endPnt.x(); ye=endPnt.y();}
+    if(startPnt.x()>endPnt.x() && startPnt.y()<endPnt.y()){xs=endPnt.x(); ys=startPnt.y(); xe=startPnt.x(); ye=endPnt.y();}
+    if(startPnt.x()>endPnt.x() && startPnt.y()>endPnt.y()){xs=endPnt.x(); ys=endPnt.y(); xe=startPnt.x(); ye=startPnt.y();}
+    if(startPnt.x()<endPnt.x() && startPnt.y()>endPnt.y()){xs=startPnt.x(); ys=endPnt.y(); xe=endPnt.x(); ye=startPnt.y();}
+    QImage imgMosaic(qAbs(endPnt.x()-startPnt.x())+2, qAbs(endPnt.y()-startPnt.y())+2, QImage::Format_RGB32);
+    QPainter painterm(&imgMosaic);
+    for(int x=xs; x<xe; x+=p){
+       for(int y=ys; y<ye; y+=p){
+            QRgb rgb = image.pixel(x,y);
+            QColor colorm(qRed(rgb),qGreen(rgb),qBlue(rgb));
+            painterm.setPen(QPen(colorm));
+            painterm.setBrush(QBrush(colorm));
+            painterm.drawRect(QRect(x-xs,y-ys,p,p));
+        }
+    }
+    QPainter painter(&imgtemp);
+    painter.drawImage(xs,ys,imgMosaic);
+    update();
 }
