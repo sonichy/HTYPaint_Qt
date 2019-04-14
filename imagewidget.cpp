@@ -14,8 +14,9 @@ ImageWidget::ImageWidget(QWidget *parent)
     : QWidget(parent)
 {
     qApp->installEventFilter(this);
-    cundo=0;
-    labelFont = new QLabel;
+    cundo = 0;
+    //labelFont = new QLabel;
+    font = qApp->font();
     newfile();
     pen.setColor(Qt::black);
     pen.setWidth(1);
@@ -145,8 +146,8 @@ void ImageWidget::draw(QImage &img)
         painter.drawEllipse(rect);
         break;}
     case TEXT_DRAW:
-        painter.setFont(labelFont->font());
-        painter.drawText(startPnt.x(),startPnt.y(),text);
+        painter.setFont(font);
+        painter.drawText(endPnt.x(), endPnt.y(), text);
         break;
     case FILL_DRAW:
         break;
@@ -195,14 +196,7 @@ void ImageWidget::mousePressEvent(QMouseEvent *e)
 {
     startPnt = e->pos();
     endPnt = e->pos();
-    //this->isPressed = true;
     switch(draw_type){
-    case TEXT_DRAW:
-        draw(imgtemp);
-        image = imgtemp;
-        moveImgbuf();
-        cundo = 0;
-        break;
     case ERASE_DRAW:
         draw(imgtemp);
         image = imgtemp;
@@ -210,6 +204,10 @@ void ImageWidget::mousePressEvent(QMouseEvent *e)
         cundo = 0;
         break;
     case COLORPICKER_DRAW:
+        draw(imgtemp);
+    }
+    if(e->buttons() & Qt::RightButton){
+        imgtemp = image;
         draw(imgtemp);
     }
 }
@@ -220,8 +218,6 @@ void ImageWidget::mouseMoveEvent(QMouseEvent *e)
     if(e->buttons() & Qt::LeftButton){
         endPnt = e->pos();
         switch(draw_type){
-        case TEXT_DRAW:
-            break;
         case POINT_DRAW:
             draw(imgtemp);
             startPnt = endPnt;
@@ -234,7 +230,7 @@ void ImageWidget::mouseMoveEvent(QMouseEvent *e)
             moveImgbuf();
             break;
         default:
-            imgtemp=image;
+            imgtemp = image;
             draw(imgtemp);
         }
     }
@@ -244,15 +240,26 @@ void ImageWidget::mouseMoveEvent(QMouseEvent *e)
 void ImageWidget::mouseReleaseEvent(QMouseEvent *e)
 {
     Q_UNUSED(e);
-    //this->isPressed = false;
-    if (draw_type == MOVE_DRAW) {
-        imgtemp = image;
-        draw(imgtemp);
-    }else if (draw_type != SELECT_DRAW) {
-        image = imgtemp;
-        moveImgbuf();
-        cundo = 0;
-    }
+        switch(draw_type){
+        case MOVE_DRAW:
+            imgtemp = image;
+            draw(imgtemp);
+            break;
+        case SELECT_DRAW:
+            break;
+        case TEXT_DRAW:
+            imgtemp = image;
+            draw(imgtemp);
+            image = imgtemp;
+            moveImgbuf();
+            cundo = 0;
+            break;
+        default:
+            image = imgtemp;
+            moveImgbuf();
+            cundo = 0;
+        }
+
 }
 
 void ImageWidget::zoomin()
@@ -735,7 +742,7 @@ void ImageWidget::mosaic(int p)
 {
     imgtemp = image;
     update();
-    int xs,xe,ys,ye;
+    int xs, ys, xe, ye;
     if(startPnt.x()<endPnt.x() && startPnt.y()<endPnt.y()){xs=startPnt.x(); ys=startPnt.y(); xe=endPnt.x(); ye=endPnt.y();}
     if(startPnt.x()>endPnt.x() && startPnt.y()<endPnt.y()){xs=endPnt.x(); ys=startPnt.y(); xe=startPnt.x(); ye=endPnt.y();}
     if(startPnt.x()>endPnt.x() && startPnt.y()>endPnt.y()){xs=endPnt.x(); ys=endPnt.y(); xe=startPnt.x(); ye=startPnt.y();}

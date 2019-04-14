@@ -41,7 +41,7 @@ public:
     QPen pen;
     QBrush brush;
     QString text;
-    QLabel *labelFont;
+    QFont font;
     bool boolBorder,boolFill;
     void load(QString fileName);
     void save(QString path);

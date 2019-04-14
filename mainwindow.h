@@ -27,13 +27,14 @@ public:
     QString text, path;
     QColor colorf;
     QCheckBox *checkFill, *checkBorder;
-    QLabel *labelFont;
+    QFont font;
     QString filename;
 
 protected:
     void resizeEvent(QResizeEvent*);
     void dragEnterEvent(QDragEnterEvent*);
     void dropEvent(QDropEvent*);
+    void wheelEvent(QWheelEvent *e);
 
 private:
     QScrollArea *scrollArea;
@@ -83,6 +84,7 @@ private slots:
     void setPicker(QColor color);
     void addPenWidth();
     void reducePenWidth();
+
 };
 
 #endif // MAINWINDOW_H
