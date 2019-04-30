@@ -15,7 +15,6 @@ ImageWidget::ImageWidget(QWidget *parent)
 {
     qApp->installEventFilter(this);
     cundo = 0;
-    //labelFont = new QLabel;
     font = qApp->font();
     newfile();
     pen.setColor(Qt::black);
@@ -45,10 +44,25 @@ ImageWidget::~ImageWidget()
 
 void ImageWidget::paintEvent(QPaintEvent *)
 {
-    QPainter painter(this);
-    painter.drawImage(0,0,imgtemp);
     resize(imgtemp.size());
     setMinimumSize(imgtemp.size());
+    QPainter painter(this);
+
+    //生成棋盘背景
+    int dx=50;
+    int dy=50;
+    QBrush brush1(QColor(200,200,200));
+    QBrush brush2(QColor(255,255,255));
+    for(int y=0; y<imgtemp.height(); y+=dy){
+        for(int x=0; x<imgtemp.width(); x+=dx){
+            painter.fillRect(x, y, dx/2, dy/2, brush1);
+            painter.fillRect(x + dx/2, y, dx/2, dy/2, brush2);
+            painter.fillRect(x, y + dy/2, dx/2, dy/2, brush2);
+            painter.fillRect(x + dx/2, y + dy/2, dx/2, dy/2, brush1);
+        }
+    }
+
+    painter.drawImage(0,0,imgtemp);
 }
 
 void ImageWidget::draw(QImage &img)
@@ -158,23 +172,12 @@ void ImageWidget::draw(QImage &img)
         painter.drawEllipse(endPnt.x(),endPnt.y(),20,20);
         break;
     case DEL_DRAW:{
-        painter.setPen(QPen(Qt::white, 1, Qt::SolidLine));
-        painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
-//        QRect rect;
-//        if (startPnt.x() < endPnt.x()) {
-//          rect.setTopLeft(startPnt - QPoint(1,1));
-//          rect.setBottomRight(endPnt + QPoint(1,1));
-//        }
-//        if (startPnt.x() > endPnt.x() && startPnt.y() > endPnt.y()) {
-//          rect.setTopLeft(endPnt - QPoint(1,1));
-//          rect.setBottomRight(endPnt + QPoint(1,1));
-//        }
-        //QRect rect(startPnt-QPoint(1,1), endPnt+QPoint(1,1));
         QRect rect(startPnt, endPnt);
-        painter.drawRect(rect);
-        painter.setPen(pen);
-        painter.setBrush(brush);
-        draw_type = SELECT_DRAW;
+        for(int x = rect.x(); x<rect.x() + rect.width(); x++){
+            for(int y = rect.y(); y < rect.y() + rect.height(); y++){
+                image.setPixelColor(x, y, QColor(0,0,0,0));
+            }
+        }
         break;}
     case MOVE_DRAW:{
         QRect target(endPnt,imgmove.size());
@@ -266,8 +269,6 @@ void ImageWidget::zoomin()
 {
     QImage imgzoom = imgtemp.scaled(imgtemp.width() * 1.2, imgtemp.height() * 1.2);
     imgtemp = imgzoom;
-    //setMinimumSize(imgzoom.size());
-    //resize(imgzoom.size());
     update();
 }
 
@@ -275,16 +276,12 @@ void ImageWidget::zoomout()
 {
     QImage imgzoom = imgtemp.scaled(imgtemp.width() * 0.8, imgtemp.height() * 0.8);
     imgtemp = imgzoom;
-    //resize(imgzoom.size());
-    //setMinimumSize(imgzoom.size());
     update();
 }
 
 void ImageWidget::zoom1()
 {
     imgtemp = imgload;
-    //setMinimumSize(imgload.size());
-    //resize(imgload.size());
     update();
 }
 
@@ -293,8 +290,6 @@ void ImageWidget::scale(int width,int height)
     QImage imgscale = imgtemp.scaled(width,height);
     imgtemp = imgscale;
     image = imgtemp;
-    //resize(imgtemp.size());
-    //setMinimumSize(imgtemp.size());
     update();
 }
 
@@ -370,7 +365,7 @@ void ImageWidget::drawFill()
 void ImageWidget::drawErase()
 {
     image = imgtemp;
-    draw_type=ERASE_DRAW;
+    draw_type = ERASE_DRAW;
     setCursor(QCursor(QPixmap(":/eraser.png")));
     //spinbox->setValue(20);
 }
@@ -422,8 +417,6 @@ void ImageWidget::newfile()
     imgnew.fill(Qt::transparent);
     imgtemp = imgnew;
     image = imgnew;
-    //setMinimumSize(imgnew.size());
-    //resize(imgnew.size());
     update();
 }
 
@@ -432,7 +425,6 @@ void ImageWidget::load(QString fileName)
     imgload.load(fileName);
     imgtemp = imgload;
     image = imgload;
-    //setMinimumSize(imgload.size());
     resize(imgload.size());
     update();
     draw_type = NONE_DRAW;
