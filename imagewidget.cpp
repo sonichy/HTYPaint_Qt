@@ -629,13 +629,13 @@ void ImageWidget::gray()
     int w,h;
     w = imgtemp.width();
     h = imgtemp.height();
-    QImage imgGray(w,h,QImage::Format_RGB32);
+    QImage imgGray(w, h, QImage::Format_ARGB32);
     for(int x=0; x<w; x++){
-        for(int y=0;y<h; y++){
-            QRgb pixel = image.pixel(x,y);
-            int gray = qGray(pixel);
-            QRgb grayPixel = qRgb(gray,gray,gray);
-            imgGray.setPixel(x,y,grayPixel);
+        for(int y=0; y<h; y++){
+            QRgb rgba = image.pixel(x,y);
+            int gray = qGray(rgba);
+            QRgb grayRGBA = qRgba(gray, gray, gray, qAlpha(rgba));
+            imgGray.setPixel(x, y, grayRGBA);
         }
     }
     imgtemp = imgGray;
@@ -653,7 +653,7 @@ void ImageWidget::invert()
     for(int x=0; x<w; x++){
         for(int y=0;y<h; y++){
             QRgb RGB = image.pixel(x,y);
-            QRgb RGBi = qRgba(255-qRed(RGB),255-qGreen(RGB),255-qBlue(RGB),qAlpha(RGB));
+            QRgb RGBi = qRgba(255-qRed(RGB), 255-qGreen(RGB), 255-qBlue(RGB), qAlpha(RGB));
             imgInvert.setPixel(x,y,RGBi);
         }
     }
