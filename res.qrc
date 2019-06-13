@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>icon.png</file>
         <file>clip.png</file>
         <file>ellipse.png</file>
         <file>eraser.png</file>
@@ -20,5 +19,6 @@
         <file>MirrorVertical.png</file>
         <file>color_picker.png</file>
         <file>arrow.png</file>
+        <file>HTYPaint.png</file>
     </qresource>
 </RCC>

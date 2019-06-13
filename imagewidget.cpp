@@ -175,9 +175,10 @@ void ImageWidget::draw(QImage &img)
         QRect rect(startPnt, endPnt);
         for(int x = rect.x(); x<rect.x() + rect.width(); x++){
             for(int y = rect.y(); y < rect.y() + rect.height(); y++){
-                image.setPixelColor(x, y, QColor(0,0,0,0));
+                image.setPixelColor(x, y, brush.color());
             }
         }
+        draw_type = SELECT_DRAW;
         break;}
     case MOVE_DRAW:{
         QRect target(endPnt,imgmove.size());
@@ -672,8 +673,9 @@ void ImageWidget::transparent()
     for(int x=0; x<w; x++){
         for(int y=0; y<h; y++){
             QRgb RGB = image.pixel(x,y);
-            if (RGB == pen.color().rgb()){
-                QRgb RGBT = qRgba(qRed(RGB),qGreen(RGB),qBlue(RGB),0);
+            //if (RGB == pen.color().rgb()) {//颜色相等
+            if(qAbs(qRed(RGB) - pen.color().red()) <= pen.width() && qAbs(qGreen(RGB) - pen.color().green()) <= pen.width() && qAbs(qBlue(RGB) - pen.color().blue()) < pen.width()){//颜色近似
+                QRgb RGBT = qRgba(qRed(RGB), qGreen(RGB), qBlue(RGB), 0);
                 imgTansparent.setPixel(x,y,RGBT);
             }else{
                 imgTansparent.setPixel(x,y,RGB);
@@ -753,4 +755,29 @@ void ImageWidget::mosaic(int p)
     QPainter painter(&imgtemp);
     painter.drawImage(xs,ys,imgMosaic);
     update();
+}
+
+void ImageWidget::matting()
+{
+    //抠图，不可能完成的任务
+    int w,h;
+    w = imgtemp.width();
+    h = imgtemp.height();
+    QImage imgTansparent(w,h,QImage::Format_ARGB32);
+    int gray = qGray(pen.color().rgb());
+    for(int x=0; x<w; x++){
+        for(int y=0; y<h; y++){
+            QRgb RGB = image.pixel(x,y);
+            if (qAbs(qGray(RGB) - gray) < 5){//颜色近似
+                QRgb RGBT = qRgba(qRed(RGB), qGreen(RGB), qBlue(RGB), 0);
+                imgTansparent.setPixel(x,y,RGBT);
+            }else{
+                imgTansparent.setPixel(x,y,RGB);
+            }
+        }
+    }
+    imgtemp = imgTansparent;
+    image = imgTansparent;
+    update();
+    moveImgbuf();
 }

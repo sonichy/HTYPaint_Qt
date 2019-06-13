@@ -81,6 +81,7 @@ public slots:
     void selectAll();
     void undo();
     void redo();
+    void matting();
 
 private slots:
     void moveUp();
