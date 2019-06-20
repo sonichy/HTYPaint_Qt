@@ -84,6 +84,7 @@ private slots:
     void setPicker(QColor color);
     void addPenWidth();
     void reducePenWidth();
+    void cutSelect();
 
 };
 

@@ -49,8 +49,8 @@ void ImageWidget::paintEvent(QPaintEvent *)
     QPainter painter(this);
 
     //生成棋盘背景
-    int dx=50;
-    int dy=50;
+    int dx = 50;
+    int dy = 50;
     QBrush brush1(QColor(200,200,200));
     QBrush brush2(QColor(255,255,255));
     for(int y=0; y<imgtemp.height(); y+=dy){
@@ -62,7 +62,7 @@ void ImageWidget::paintEvent(QPaintEvent *)
         }
     }
 
-    painter.drawImage(0,0,imgtemp);
+    painter.drawImage(0, 0, imgtemp);
 }
 
 void ImageWidget::draw(QImage &img)
@@ -76,9 +76,11 @@ void ImageWidget::draw(QImage &img)
         pen.setJoinStyle(Qt::RoundJoin);
         painter.drawLine(startPnt,endPnt);
         break;
-    case LINE_DRAW:
+    case LINE_DRAW:{
+        int length = sqrt(pow(endPnt.x()-startPnt.x(),2) + pow(endPnt.y()-startPnt.y(),2));
         painter.drawLine(startPnt,endPnt);
-        break;
+        emit statusbar2Message("("+QString::number(startPnt.x()) + "," + QString::number(startPnt.y()) + ") - (" + QString::number(endPnt.x()) + "," + QString::number(endPnt.y()) + ") = " + QString::number(length));
+        break;}
     case ARROW_DRAW:{
         if(boolFill){
             painter.setBrush(brush);
@@ -130,6 +132,8 @@ void ImageWidget::draw(QImage &img)
             QPointF(x6,y6)
         };
         painter.drawPolygon(points,7);
+        int length = sqrt(pow(endPnt.x()-startPnt.x(),2) + pow(endPnt.y()-startPnt.y(),2));
+        emit statusbar2Message("("+QString::number(startPnt.x()) + "," + QString::number(startPnt.y()) + ") - (" + QString::number(endPnt.x()) + "," + QString::number(endPnt.y()) + ")" + QString::number(length));
         break;}
     case RECT_DRAW:{
         pen.setJoinStyle(Qt::MiterJoin);
@@ -143,21 +147,24 @@ void ImageWidget::draw(QImage &img)
             pen.setColor(Qt::transparent);
         }
         painter.drawRect(rect);
+        emit statusbar2Message("("+QString::number(startPnt.x()) + "," + QString::number(startPnt.y()) + ") - (" + QString::number(endPnt.x()) + "," + QString::number(endPnt.y()) + ") = (" + QString::number(rect.width()) + "," + QString::number(rect.height()) + ")");
         break;}
     case SELECT_DRAW:{
-        painter.setPen(QPen(Qt::black,1,Qt::DashLine));
+        painter.setPen(QPen(Qt::black, 1, Qt::DashLine));
         painter.setBrush(QBrush(Qt::transparent, Qt::SolidPattern));
         QRect rect(startPnt, endPnt);
         painter.drawRect(rect);
+        emit statusbar2Message("("+QString::number(startPnt.x()) + "," + QString::number(startPnt.y()) + ") - (" + QString::number(endPnt.x()) + "," + QString::number(endPnt.y()) + ") = (" + QString::number(rect.width()) + "," + QString::number(rect.height()) + ")");
         break;}
     case ELLIPSE_DRAW:{
         QRect rect(startPnt,endPnt);
         if(boolFill){
             painter.setBrush(brush);
         }else{
-            painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));
+            painter.setBrush(QBrush(Qt::transparent, Qt::SolidPattern));
         }
         painter.drawEllipse(rect);
+        emit statusbar2Message("("+QString::number(startPnt.x()) + "," + QString::number(startPnt.y()) +") = (" + QString::number(rect.width()) + "," + QString::number(rect.height()) + ")");
         break;}
     case TEXT_DRAW:
         painter.setFont(font);
@@ -169,7 +176,7 @@ void ImageWidget::draw(QImage &img)
         //painter.setPen(QPen(Qt::white,1));
         //painter.setBrush(QBrush(Qt::white,Qt::SolidPattern));
         painter.setBrush(QBrush(brush));
-        painter.drawEllipse(endPnt.x(),endPnt.y(),20,20);
+        painter.drawEllipse(endPnt.x(), endPnt.y(), 20, 20);
         break;
     case DEL_DRAW:{
         QRect rect(startPnt, endPnt);
@@ -238,7 +245,6 @@ void ImageWidget::mouseMoveEvent(QMouseEvent *e)
             draw(imgtemp);
         }
     }
-    emit statusbar2Message("("+QString::number(startPnt.x()) + "," + QString::number(startPnt.y()) + ") - (" + QString::number(endPnt.x()) + "," + QString::number(endPnt.y()) + ")");
 }
 
 void ImageWidget::mouseReleaseEvent(QMouseEvent *e)
@@ -443,10 +449,9 @@ void ImageWidget::save(QString path)
 
 void ImageWidget::cutSelect()
 {
-    imgtemp = imgtemp.copy(startPnt.x()+1,startPnt.y()+1,endPnt.x()-startPnt.x()-1,endPnt.y()-startPnt.y()-1);
+    //imgtemp = imgtemp.copy(startPnt.x()+1,startPnt.y()+1,endPnt.x()-startPnt.x()-1,endPnt.y()-startPnt.y()-1);
+    imgtemp = image.copy(startPnt.x(), startPnt.y(), endPnt.x() - startPnt.x() + 1, endPnt.y() - startPnt.y() + 1);
     image = imgtemp;
-    //resize(imgtemp.size());
-    //setMinimumSize(imgtemp.size());
     update();
 }
 
