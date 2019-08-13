@@ -67,6 +67,7 @@
     <addaction name="action_transparent"/>
     <addaction name="action_mosaic"/>
     <addaction name="action_matting"/>
+    <addaction name="action_brightness"/>
    </widget>
    <widget class="QMenu" name="menu_about">
     <property name="title">
@@ -688,6 +689,14 @@
   <action name="action_matting">
    <property name="text">
     <string>抠图</string>
+   </property>
+  </action>
+  <action name="action_brightness">
+   <property name="text">
+    <string>亮度</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
    </property>
   </action>
  </widget>

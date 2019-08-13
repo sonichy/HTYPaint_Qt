@@ -786,3 +786,38 @@ void ImageWidget::matting()
     update();
     moveImgbuf();
 }
+
+void ImageWidget::adjustBrightness(int v, bool b)
+{
+    int w,h;
+    w = image.width();
+    h = image.height();
+    QImage imga(w, h, QImage::Format_ARGB32);
+    for(int x=0; x<w; x++){
+        for(int y=0; y<h; y++){
+            QRgb RGB = image.pixel(x,y);
+            int R = qRed(RGB);
+            int G = qGreen(RGB);
+            int B = qBlue(RGB);
+            R += v;
+            G += v;
+            B += v;
+            if (R < 0) R = 0;
+            if (G < 0) G = 0;
+            if (B < 0) B = 0;
+            if (R > 255) R = 255;
+            if (G > 255) G = 255;
+            if (B > 255) B = 255;
+            //QRgb RGBa = qRgba(R, G, B, qAlpha(RGB));
+            QRgb RGBa = qRgb(R, G, B);
+            imga.setPixel(x, y, RGBa);
+        }
+    }
+    if(b){
+        image = imga;
+        moveImgbuf();
+    }else{
+        imgtemp = imga;
+    }
+    update();
+}

@@ -59,6 +59,7 @@ public:
     void transparent();
     void blur(int p);
     void mosaic(int p);
+    void adjustBrightness(int v, bool b);
 
 public slots:
     void newfile();
