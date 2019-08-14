@@ -25,7 +25,6 @@ public:
     QLineEdit *lineEdit;
     QSpinBox *spinbox, *spinw, *spinwr, *spinh, *spinhr;
     QString text, path;
-    QColor colorf;
     QCheckBox *checkFill, *checkBorder;
     QFont font;
     QString filename;
@@ -63,7 +62,7 @@ private slots:
     void on_action_blur_triggered();
     void on_action_mosaic_triggered();
     void on_action_transparent_triggered();
-    void on_action_brightness_triggered();
+    void on_action_adjustRGB_triggered();
 
     void on_actionRotateLeft_triggered();
     void on_actionRotateRight_triggered();

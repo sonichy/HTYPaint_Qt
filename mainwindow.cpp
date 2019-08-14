@@ -153,7 +153,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::on_action_changelog_triggered()
 {
-    QString s = "1.13\n(2019-06)\n增加：亮度调节。\n\n1.13\n(2019-06)\n修复：选区裁剪大小微差。删除选区操作后没有设置回到框选工具。\n优化：信息内容、选区裁剪。\n群组工具栏Action，实现互斥Checked。增加：画线长度信息，画框长、宽信息，微调显示信息，裁剪后滚动条回到0。\n\n1.12\n(2019-05)\n修复：PNG转灰度图透明度丢失。\n\n1.11\n(2019-04)\n修改：删除选取填充，白色改成透明色。\n增加：棋盘背景。\n增加：鼠标移动定位文字。\n增加：Ctrl+鼠标滚轮 改变线粗或字体大小。\n\n1.10\n(2018-12)\n增加：选区马赛克。\n\n1.9\n(2018-11)\n增加：画笔粗细快捷键，画图更加方便。\n\n1.8\n(2018-05)\n修复：删除选区有虚线框，从右键打开方式无法打开文件。\n\n1.7\n(2017-11)\n颜色透明工具，取色后在边框色、填充色显示，超出边界清空鼠标位置信息。\n增加灰色背景，凸显绘图区域。\n优化代码。\n(2017-10)\n简化工具信号，简化setCursor()。\n(2017-09)\n增加箭头工具。\n增加抗锯齿。\n\n1.6\n(2017-07)\n更新日志消息窗口写不下了，改成带滚动条的文本框。\n自定义信号结合事件过滤器，把鼠标移动位置发送到主窗体信息栏。\n增加拖放打开文件。\n(2017-06)\n使用自定义信号解决子类发信息给主窗体状态栏问题，致谢rekols。\n(2017-05)\n右键打开文件记忆文件路径。\n\n1.5 (2017-04)\n透明色反色不改变。\n增加取色工具，橡皮擦颜色不再固定为白色，而是填充色。\n\n1.4 (2017-03)\n支持命令行打开文件和打开方式打开文件。\n修复鼠标指针引用本地文件，没引用资源文件，引起启动path参数改变不能加载图标的问题。\n菜单的SIGNAL-SLOT改为on_action_triggered()\n修复PNG图片裁剪丢失透明度问题。\n新建图像为透明图像。\n\n1.3 (2017-03)\n实现选区模糊。\n加入模糊滤镜。\n\n1.2 (2017-02)\n文件名显示在窗口标题栏。\n区别保存和另存为。\n增加导入图片。\n\n1.1 (2017-01)\n新增灰度、反色。\n\n1.0 (2017-01)\n解决删除选区后画不出选框的问题。\n恢复撤销。\n增加全选。\n实现选区或剪贴板移动！\n保存时自动获取打开文件的路径。\n增加按像素、比例缩放。\n实现在属性窗口设置画布大小。\n2016-12\n增加快捷键控制选框及其边框移动。\n绘图代码从MainWindow向imageWidget迁移。\n实现水平镜像、垂直镜像。\n实现放大、缩小、原始大小。\n为了增加滚动条，增加自定义imageWidget。\n状态栏显示绘图详情。\n复制选区到系统剪贴板，从系统剪贴板获取图像粘贴。\n优化颜色选择交互。\n增加撤销、重做功能，有BUG。\n设为壁纸。\n画选区，剪裁选区。\n新建图片，打开图片，保存图片。\n实现画点、线、框、圆、字。";
+    QString s = "1.14\n(2019-08)\n增加：颜色调节。\n修复：选择颜色取消时颜色变黑色。\n\n1.13\n(2019-06)\n修复：选区裁剪大小微差。删除选区操作后没有设置回到框选工具。\n优化：信息内容、选区裁剪。群组工具栏Action，实现互斥Checked。\n增加：画线长度信息，画框长、宽信息，微调显示信息，裁剪后滚动条回到0。\n\n1.12\n(2019-05)\n修复：PNG转灰度图透明度丢失。\n\n1.11\n(2019-04)\n修改：删除选取填充，白色改成透明色。\n增加：棋盘背景。\n增加：鼠标移动定位文字。\n增加：Ctrl+鼠标滚轮 改变线粗或字体大小。\n\n1.10\n(2018-12)\n增加：选区马赛克。\n\n1.9\n(2018-11)\n增加：画笔粗细快捷键，画图更加方便。\n\n1.8\n(2018-05)\n修复：删除选区有虚线框，从右键打开方式无法打开文件。\n\n1.7\n(2017-11)\n颜色透明工具，取色后在边框色、填充色显示，超出边界清空鼠标位置信息。\n增加灰色背景，凸显绘图区域。\n优化代码。\n(2017-10)\n简化工具信号，简化setCursor()。\n(2017-09)\n增加箭头工具。\n增加抗锯齿。\n\n1.6\n(2017-07)\n更新日志消息窗口写不下了，改成带滚动条的文本框。\n自定义信号结合事件过滤器，把鼠标移动位置发送到主窗体信息栏。\n增加拖放打开文件。\n(2017-06)\n使用自定义信号解决子类发信息给主窗体状态栏问题，致谢rekols。\n(2017-05)\n右键打开文件记忆文件路径。\n\n1.5 (2017-04)\n透明色反色不改变。\n增加取色工具，橡皮擦颜色不再固定为白色，而是填充色。\n\n1.4 (2017-03)\n支持命令行打开文件和打开方式打开文件。\n修复鼠标指针引用本地文件，没引用资源文件，引起启动path参数改变不能加载图标的问题。\n菜单的SIGNAL-SLOT改为on_action_triggered()\n修复PNG图片裁剪丢失透明度问题。\n新建图像为透明图像。\n\n1.3 (2017-03)\n实现选区模糊。\n加入模糊滤镜。\n\n1.2 (2017-02)\n文件名显示在窗口标题栏。\n区别保存和另存为。\n增加导入图片。\n\n1.1 (2017-01)\n新增灰度、反色。\n\n1.0 (2017-01)\n解决删除选区后画不出选框的问题。\n恢复撤销。\n增加全选。\n实现选区或剪贴板移动！\n保存时自动获取打开文件的路径。\n增加按像素、比例缩放。\n实现在属性窗口设置画布大小。\n2016-12\n增加快捷键控制选框及其边框移动。\n绘图代码从MainWindow向imageWidget迁移。\n实现水平镜像、垂直镜像。\n实现放大、缩小、原始大小。\n为了增加滚动条，增加自定义imageWidget。\n状态栏显示绘图详情。\n复制选区到系统剪贴板，从系统剪贴板获取图像粘贴。\n优化颜色选择交互。\n增加撤销、重做功能，有BUG。\n设为壁纸。\n画选区，剪裁选区。\n新建图片，打开图片，保存图片。\n实现画点、线、框、圆、字。";
     QDialog *dialog = new QDialog;
     dialog->setWindowTitle("更新历史");
     dialog->setFixedSize(400,300);
@@ -183,7 +183,7 @@ void MainWindow::on_action_aboutQt_triggered()
 
 void MainWindow::on_action_about_triggered()
 {
-    QMessageBox aboutMB(QMessageBox::NoIcon, "关于", "海天鹰画图 1.13\n一款基于 Qt 的画图程序。\n作者：黄颖\nE-mail: sonichy@163.com\n主页：https://github.com/sonichy\n参考文献：\n绘图：\nhttp://tzc.is-programmer.com/posts/534.html\nhttp://lizhigg.love.blog.163.com/blog/static/62611781201222105550184/\n滚动条：http://down.51cto.com/data/233634\n灰度图：http://www.cnblogs.com/xianglan/archive/2010/12/24/1915905.html\n拖放打开文件：http://blog.csdn.net/rl529014/article/details/53057577");
+    QMessageBox aboutMB(QMessageBox::NoIcon, "关于", "海天鹰画图 1.14\n一款基于 Qt 的画图程序。\n作者：黄颖\nE-mail: sonichy@163.com\n主页：https://github.com/sonichy\n参考文献：\n绘图：\nhttp://tzc.is-programmer.com/posts/534.html\nhttp://lizhigg.love.blog.163.com/blog/static/62611781201222105550184/\n滚动条：http://down.51cto.com/data/233634\n灰度图：http://www.cnblogs.com/xianglan/archive/2010/12/24/1915905.html\n拖放打开文件：http://blog.csdn.net/rl529014/article/details/53057577");
     aboutMB.setIconPixmap(QPixmap(":/HTYPaint.png"));
     aboutMB.exec();
 }
@@ -193,19 +193,23 @@ void MainWindow::setColorBorder()
     QPalette plt = btnColorBorder->palette();
     QBrush brushb = plt.color(QPalette::ButtonText);
     QColor color = QColorDialog::getColor(brushb.color(), this);
-    imageWidget->pen.setColor(color);
-    plt.setColor(QPalette::ButtonText, color);
-    btnColorBorder->setPalette(plt);
+    if(color.isValid()){
+        imageWidget->pen.setColor(color);
+        plt.setColor(QPalette::ButtonText, color);
+        btnColorBorder->setPalette(plt);
+    }
 }
 
 void MainWindow::setColorFill()
 {
     QPalette plt = btnColorFill->palette();
     QBrush brush = plt.color(QPalette::ButtonText);
-    colorf = QColorDialog::getColor(brush.color(), this);
-    imageWidget->brush.setColor(colorf);
-    plt.setColor(QPalette::ButtonText, colorf);
-    btnColorFill->setPalette(plt);
+    QColor colorf = QColorDialog::getColor(brush.color(), this);
+    if(colorf.isValid()){
+        imageWidget->brush.setColor(colorf);
+        plt.setColor(QPalette::ButtonText, colorf);
+        btnColorFill->setPalette(plt);
+    }
 }
 
 void MainWindow::spinValueChange(int i)
@@ -220,9 +224,9 @@ void MainWindow::textChange(QString s)
 
 void MainWindow::on_action_open_triggered()
 {
-    if (path=="")
+    if (path == "")
         path = ".";
-    path = QFileDialog::getOpenFileName(this,"打开图片", path, "图片文件(*.jpg *.jpeg *.png *.bmp)");
+    path = QFileDialog::getOpenFileName(this, "打开图片", path, "图片文件(*.jpg *.jpeg *.png *.bmp)");
     if(path.length() != 0){
         open(path);
     }
@@ -637,21 +641,99 @@ void MainWindow::cutSelect()
     scrollArea->verticalScrollBar()->setSliderPosition(0);
 }
 
-void MainWindow::on_action_brightness_triggered()
+void MainWindow::on_action_adjustRGB_triggered()
 {
-    int bv = 0;
     QDialog *dialog = new QDialog;
-    dialog->setWindowTitle("亮度");
+    dialog->setWindowTitle("调色");
     dialog->setFixedSize(400, 200);
+
+    QVBoxLayout *vbox = new QVBoxLayout;
+    QGridLayout *gridLayout = new QGridLayout;
+
+    // RGB
+    QLabel *label = new QLabel("RGB");
+    gridLayout->addWidget(label, 0, 0);
+    QLabel *label_value_RGB = new QLabel("0");
+    gridLayout->addWidget(label_value_RGB, 0, 1);
     QSlider *slider = new QSlider(Qt::Horizontal);
     slider->setRange(-50, 50);
-    slider->setTickPosition(QSlider::TicksBelow);
-    connect(slider, &QSlider::valueChanged, [&](int v){
-        bv = v;
-        imageWidget->adjustBrightness(v, false);
+    gridLayout->addWidget(slider, 0, 2);
+    QPushButton *pushButton_reset_RGB = new QPushButton;
+    pushButton_reset_RGB->setIcon(QIcon::fromTheme("view-refresh"));
+    gridLayout->addWidget(pushButton_reset_RGB, 0, 3);
+
+    // Red
+    label = new QLabel("R");
+    gridLayout->addWidget(label, 1, 0, Qt::AlignCenter);
+    QLabel *label_value_R = new QLabel("0");
+    gridLayout->addWidget(label_value_R, 1, 1);
+    QSlider *sliderR = new QSlider(Qt::Horizontal);
+    sliderR->setRange(-50, 50);
+    gridLayout->addWidget(sliderR, 1, 2);
+    QPushButton *pushButton_reset_R = new QPushButton;
+    pushButton_reset_R->setIcon(QIcon::fromTheme("view-refresh"));
+    connect(pushButton_reset_R, &QPushButton::clicked, [&](){
+        sliderR->setValue(0);
     });
-    QVBoxLayout *vbox = new QVBoxLayout;
-    vbox->addWidget(slider);
+    gridLayout->addWidget(pushButton_reset_R, 1, 3);
+
+    // Green
+    label = new QLabel("G");
+    gridLayout->addWidget(label, 2, 0, Qt::AlignCenter);
+    QLabel *label_value_G = new QLabel("0");
+    gridLayout->addWidget(label_value_G, 2, 1);
+    QSlider *sliderG = new QSlider(Qt::Horizontal);
+    sliderG->setRange(-50, 50);
+    gridLayout->addWidget(sliderG, 2, 2);
+    QPushButton *pushButton_reset_G = new QPushButton;
+    pushButton_reset_G->setIcon(QIcon::fromTheme("view-refresh"));
+    connect(pushButton_reset_G, &QPushButton::clicked, [&](){
+        sliderG->setValue(0);
+    });
+    gridLayout->addWidget(pushButton_reset_G, 2, 3);
+
+    // Blue
+    label = new QLabel("B");
+    gridLayout->addWidget(label, 3, 0, Qt::AlignCenter);
+    QLabel *label_value_B = new QLabel("0");
+    gridLayout->addWidget(label_value_B, 3, 1);
+    QSlider *sliderB = new QSlider(Qt::Horizontal);
+    sliderB->setRange(-50, 50);
+    gridLayout->addWidget(sliderB, 3, 2);
+    QPushButton *pushButton_reset_B = new QPushButton;
+    pushButton_reset_B->setIcon(QIcon::fromTheme("view-refresh"));
+    connect(pushButton_reset_B, &QPushButton::clicked, [&](){
+        sliderB->setValue(0);
+    });
+    gridLayout->addWidget(pushButton_reset_B, 3, 3);
+
+    vbox->addLayout(gridLayout);
+
+    connect(slider, &QSlider::valueChanged, [&](int v){
+        label_value_RGB->setText(QString::number(v));
+        sliderR->setValue(v - sliderR->value());
+        sliderG->setValue(v - sliderG->value());
+        sliderB->setValue(v - sliderB->value());
+    });
+    connect(pushButton_reset_RGB, &QPushButton::clicked, [&](){
+        slider->setValue(0);
+        sliderR->setValue(0);
+        sliderG->setValue(0);
+        sliderB->setValue(0);
+    });
+    connect(sliderR, &QSlider::valueChanged, [&](int v){
+        label_value_R->setText(QString::number(v));
+        imageWidget->adjustRGB(v, sliderG->value(), sliderB->value(), false);
+    });
+    connect(sliderG, &QSlider::valueChanged, [&](int v){
+        label_value_G->setText(QString::number(v));
+        imageWidget->adjustRGB(sliderR->value(), v, sliderB->value(), false);
+    });
+    connect(sliderB, &QSlider::valueChanged, [&](int v){
+        label_value_B->setText(QString::number(v));
+        imageWidget->adjustRGB(sliderR->value(), sliderG->value(), v, false);
+    });
+
     QPushButton *pushButton_confirm = new QPushButton("确定");
     QPushButton *pushButton_cancel = new QPushButton("取消");
     QHBoxLayout *hbox = new QHBoxLayout;
@@ -664,6 +746,6 @@ void MainWindow::on_action_brightness_triggered()
     connect(pushButton_confirm, SIGNAL(clicked()), dialog, SLOT(accept()));
     connect(pushButton_cancel, SIGNAL(clicked()), dialog, SLOT(reject()));
     if(dialog->exec() == QDialog::Accepted){
-        imageWidget->adjustBrightness(bv, true);
+        imageWidget->adjustRGB(sliderR->value(), sliderG->value(), sliderB->value(), true);
     }
 }
