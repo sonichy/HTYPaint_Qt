@@ -643,6 +643,7 @@ void MainWindow::cutSelect()
 
 void MainWindow::on_action_adjustRGB_triggered()
 {
+    int ov = 0;
     QDialog *dialog = new QDialog;
     dialog->setWindowTitle("调色");
     dialog->setFixedSize(400, 200);
@@ -709,11 +710,14 @@ void MainWindow::on_action_adjustRGB_triggered()
 
     vbox->addLayout(gridLayout);
 
+    connect(slider, &QSlider::actionTriggered, [&](){
+        ov = slider->value();
+    });
     connect(slider, &QSlider::valueChanged, [&](int v){
         label_value_RGB->setText(QString::number(v));
-        sliderR->setValue(v - sliderR->value());
-        sliderG->setValue(v - sliderG->value());
-        sliderB->setValue(v - sliderB->value());
+        sliderR->setValue(sliderR->value() + v - ov);
+        sliderG->setValue(sliderG->value() + v - ov);
+        sliderB->setValue(sliderB->value() + v - ov);
     });
     connect(pushButton_reset_RGB, &QPushButton::clicked, [&](){
         slider->setValue(0);
