@@ -132,11 +132,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(new QShortcut(QKeySequence(Qt::Key_Equal), this), SIGNAL(activated()), this, SLOT(addPenWidth()));
     connect(new QShortcut(QKeySequence(Qt::Key_Minus), this), SIGNAL(activated()), this, SLOT(reducePenWidth()));
 
-    QStringList Largs = QApplication::arguments();
-    qDebug() << Largs;
-    if (Largs.length()>1) {
-        QUrl url(Largs.at(1));
-        open(url.toLocalFile());
+    QStringList SLargs = QApplication::arguments();
+    qDebug() << SLargs;
+    if (SLargs.length() > 1) {
+        QString filepath = SLargs.at(1);
+        if(filepath.startsWith("file://")){
+            QUrl url(filepath);
+            open(url.toLocalFile());
+        }else{
+            open(filepath);
+        }
     }
 }
 
