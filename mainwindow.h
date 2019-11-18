@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -25,7 +25,7 @@ public:
     QLineEdit *lineEdit;
     QSpinBox *spinbox, *spinw, *spinwr, *spinh, *spinhr;
     QString text, path;
-    QCheckBox *checkFill, *checkBorder;
+    QCheckBox *checkBox_color_fill, *checkBox_color_border;
     QFont font;
     QString filename;
 
@@ -78,8 +78,8 @@ private slots:
     void onSpinhChanged(int);
     void onSpinwrChanged(int);
     void onSpinhrChanged(int);
-    void checkBorderChanged(int);
-    void checkFillChanged(int);
+    void checkBox_color_borderChanged(int);
+    void checkBox_color_fillChanged(int);
     void open(QString);
     void setPicker(QColor color);
     void addPenWidth();

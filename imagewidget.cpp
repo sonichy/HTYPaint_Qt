@@ -142,7 +142,7 @@ void ImageWidget::draw(QImage &img)
         }else{
             painter.setBrush(QBrush(Qt::transparent,Qt::SolidPattern));
         }
-        QRect rect(startPnt,endPnt);
+        QRect rect(startPnt, endPnt);
         if(!boolBorder){
             pen.setColor(Qt::transparent);
         }
@@ -164,11 +164,19 @@ void ImageWidget::draw(QImage &img)
             painter.setBrush(QBrush(Qt::transparent, Qt::SolidPattern));
         }
         painter.drawEllipse(rect);
-        emit statusbar2Message("("+QString::number(startPnt.x()) + "," + QString::number(startPnt.y()) +") = (" + QString::number(rect.width()) + "," + QString::number(rect.height()) + ")");
+        emit statusbar2Message("(" + QString::number(startPnt.x()) + "," + QString::number(startPnt.y()) + ") = (" + QString::number(rect.width()) + "," + QString::number(rect.height()) + ")");
         break;}
     case TEXT_DRAW:
         painter.setFont(font);
-        painter.drawText(endPnt.x(), endPnt.y(), text);
+        if(boolFill){
+            painter.setBrush(brush);
+            QFontMetrics FM(font);
+            QRect rect(endPnt, FM.boundingRect(text).size() + QSize(FM.boundingRect("*").width(), 0));
+            painter.drawRect(rect);
+            painter.drawText(endPnt.x() + FM.boundingRect("*").width()/2, endPnt.y() + rect.height()/1.3, text);
+        }else{
+            painter.drawText(endPnt.x(), endPnt.y(), text);
+        }
         break;
     case FILL_DRAW:
         break;
@@ -193,12 +201,15 @@ void ImageWidget::draw(QImage &img)
         QRect source(p,imgmove.size());
         painter.drawImage(target,imgmove,source);
         break;}
-    case COLORPICKER_DRAW:
+    case COLORPICKER_DRAW:{
         QRgb RGB = imgtemp.pixel(startPnt.x(),startPnt.y());
         pen.setColor(RGB);
         brush.setColor(RGB);
         painter.setBrush(brush);
         emit pick(pen.color());
+        break;}
+    default:
+        break;
     }
     update();
 }
@@ -216,6 +227,9 @@ void ImageWidget::mousePressEvent(QMouseEvent *e)
         break;
     case COLORPICKER_DRAW:
         draw(imgtemp);
+        break;
+    default:
+        break;
     }
     if(e->buttons() & Qt::RightButton){
         imgtemp = image;

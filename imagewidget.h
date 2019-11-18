@@ -1,9 +1,10 @@
-#ifndef IMAGEWIDGET_H
+﻿#ifndef IMAGEWIDGET_H
 #define IMAGEWIDGET_H
 
 #include <QWidget>
 #include <QPen>
 #include <QLabel>
+
 //线段
 //typedef struct myLine{
 //    QPoint startPnt;
