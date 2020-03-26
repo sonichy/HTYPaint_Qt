@@ -158,26 +158,28 @@ void ImageWidget::draw(QImage &img)
         break;}
     case ELLIPSE_DRAW:{
         QRect rect(startPnt,endPnt);
-        if(boolFill){
+        if (boolFill) {
             painter.setBrush(brush);
-        }else{
+        } else {
             painter.setBrush(QBrush(Qt::transparent, Qt::SolidPattern));
         }
         painter.drawEllipse(rect);
         emit statusbar2Message("(" + QString::number(startPnt.x()) + "," + QString::number(startPnt.y()) + ") = (" + QString::number(rect.width()) + "," + QString::number(rect.height()) + ")");
         break;}
-    case TEXT_DRAW:
-        painter.setFont(font);
-        if(boolFill){
+    case TEXT_DRAW:{
+        //描边文字
+        QPainterPath path;
+        path.addText(endPnt, font, text);
+        if (boolBorder)
+            painter.setPen(pen);//描边
+        else
+            painter.setPen(Qt::transparent);
+        if (boolFill)
             painter.setBrush(brush);
-            QFontMetrics FM(font);
-            QRect rect(endPnt, FM.boundingRect(text).size() + QSize(FM.boundingRect("*").width(), 0));
-            painter.drawRect(rect);
-            painter.drawText(endPnt.x() + FM.boundingRect("*").width()/2, endPnt.y() + rect.height()/1.3, text);
-        }else{
-            painter.drawText(endPnt.x(), endPnt.y(), text);
-        }
-        break;
+        else
+            painter.setBrush(Qt::transparent);
+        painter.drawPath(path);
+        break;}
     case FILL_DRAW:
         break;
     case ERASE_DRAW:
@@ -469,7 +471,7 @@ void ImageWidget::cutSelect()
     update();
 }
 
-void ImageWidget::newsize(int width,int height)
+void ImageWidget::newSize(int width, int height)
 {
     imgtemp = QImage(width,height,QImage::Format_ARGB32);
     imgtemp.fill(Qt::transparent);
