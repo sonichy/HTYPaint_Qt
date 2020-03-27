@@ -63,6 +63,7 @@ private slots:
     void on_action_mosaic_triggered();
     void on_action_transparent_triggered();
     void on_action_adjustRGB_triggered();
+    void on_action_clipPath_triggered();
 
     void on_actionRotateLeft_triggered();
     void on_actionRotateRight_triggered();

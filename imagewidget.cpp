@@ -836,3 +836,23 @@ void ImageWidget::adjustRGB(int vr, int vg, int vb, bool b)
     }
     update();
 }
+
+void ImageWidget::clipPath(int x, int y, int width, int height, bool isConfirm)
+{
+    QPixmap pixmap0 = QPixmap::fromImage(image);
+    QPixmap pixmap(pixmap0.width(), pixmap0.height());
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    QPainterPath pPath;
+    pPath.addEllipse(x, y, width, height);
+    painter.setClipPath(pPath);
+    painter.drawPixmap(0, 0, pixmap0.width(), pixmap0.height(), pixmap0);
+    if (isConfirm) {
+        image = pixmap.toImage();
+        moveImgbuf();
+    } else {
+        imgtemp = pixmap.toImage();
+    }
+    update();
+}

@@ -36,7 +36,7 @@ public:
     } draw_type;
     ImageWidget(QWidget *parent = 0);
     ~ImageWidget();
-    QImage image,imgtemp,imgbuf[10],imgmove;
+    QImage image, imgtemp, imgbuf[10], imgmove;
     QPoint startPnt;   //起点
     QPoint endPnt;     //终点
     QPen pen;
@@ -61,6 +61,7 @@ public:
     void blur(int p);
     void mosaic(int p);
     void adjustRGB(int vr, int vg, int vb, bool b);
+    void clipPath(int x, int y, int width, int height, bool isConfirm);
 
 public slots:
     void newfile();

@@ -27,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>1050</width>
-     <height>28</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -68,6 +68,7 @@
     <addaction name="action_mosaic"/>
     <addaction name="action_matting"/>
     <addaction name="action_adjustRGB"/>
+    <addaction name="action_clipPath"/>
    </widget>
    <widget class="QMenu" name="menu_about">
     <property name="title">
@@ -700,6 +701,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+B</string>
+   </property>
+  </action>
+  <action name="action_clipPath">
+   <property name="text">
+    <string>路径裁剪</string>
    </property>
   </action>
  </widget>
