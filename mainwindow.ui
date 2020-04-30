@@ -104,7 +104,7 @@
    <addaction name="actionFill"/>
    <addaction name="actionErase"/>
    <addaction name="actionMove"/>
-   <addaction name="actionRectselect"/>
+   <addaction name="actionRectSelect"/>
    <addaction name="actionCutSelect"/>
    <addaction name="actionRotateLeft"/>
    <addaction name="actionRotateRight"/>
@@ -444,7 +444,7 @@
     <string>移动</string>
    </property>
   </action>
-  <action name="actionRectselect">
+  <action name="actionRectSelect">
    <property name="checkable">
     <bool>true</bool>
    </property>

@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     AG->addAction(ui->actionFill);
     AG->addAction(ui->actionErase);
     AG->addAction(ui->actionMove);
-    AG->addAction(ui->actionRectselect);
+    AG->addAction(ui->actionRectSelect);
 
     setStyleSheet("QScrollArea{ background-color:#cccccc; }");
     //状态栏
@@ -113,7 +113,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionLine, SIGNAL(triggered(bool)), imageWidget, SLOT(drawLine()));
     connect(ui->actionErase, SIGNAL(triggered(bool)), imageWidget, SLOT(drawErase()));
     connect(ui->actionMove, SIGNAL(triggered(bool)), imageWidget, SLOT(drawMove()));
-    connect(ui->actionRectselect, SIGNAL(triggered(bool)), imageWidget, SLOT(drawRectselect()));
+    connect(ui->actionRectSelect, SIGNAL(triggered(bool)), imageWidget, SLOT(drawRectSelect()));
     connect(ui->actionCutSelect, SIGNAL(triggered(bool)), this, SLOT(cutSelect()));
     connect(ui->actionColorPicker, SIGNAL(triggered(bool)), imageWidget, SLOT(colorPicker()));
     connect(ui->actionZoomin, SIGNAL(triggered(bool)), imageWidget, SLOT(zoomin()));
@@ -159,7 +159,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::on_action_changelog_triggered()
 {
-    QString s = "1.16\n(2020-03)\n增加：圆形路径裁剪。\n背景文字改成了描边文字。\n\n1.15\n(2019-11)\n增加：文字工具可以绘制矩形背景。\n\n1.14\n(2019-08)\n增加：颜色调节。\n修复：选择颜色取消时颜色变黑色。\n\n1.13\n(2019-06)\n修复：选区裁剪大小微差。删除选区操作后没有设置回到框选工具。\n优化：信息内容、选区裁剪。群组工具栏Action，实现互斥Checked。\n增加：画线长度信息，画框长、宽信息，微调显示信息，裁剪后滚动条回到0。\n\n1.12\n(2019-05)\n修复：PNG转灰度图透明度丢失。\n\n1.11\n(2019-04)\n修改：删除选取填充，白色改成透明色。\n增加：棋盘背景。\n增加：鼠标移动定位文字。\n增加：Ctrl+鼠标滚轮 改变线粗或字体大小。\n\n1.10\n(2018-12)\n增加：选区马赛克。\n\n1.9\n(2018-11)\n增加：画笔粗细快捷键，画图更加方便。\n\n1.8\n(2018-05)\n修复：删除选区有虚线框，从右键打开方式无法打开文件。\n\n1.7\n(2017-11)\n颜色透明工具，取色后在边框色、填充色显示，超出边界清空鼠标位置信息。\n增加灰色背景，凸显绘图区域。\n优化代码。\n(2017-10)\n简化工具信号，简化setCursor()。\n(2017-09)\n增加箭头工具。\n增加抗锯齿。\n\n1.6\n(2017-07)\n更新日志消息窗口写不下了，改成带滚动条的文本框。\n自定义信号结合事件过滤器，把鼠标移动位置发送到主窗体信息栏。\n增加拖放打开文件。\n(2017-06)\n使用自定义信号解决子类发信息给主窗体状态栏问题，致谢rekols。\n(2017-05)\n右键打开文件记忆文件路径。\n\n1.5 (2017-04)\n透明色反色不改变。\n增加取色工具，橡皮擦颜色不再固定为白色，而是填充色。\n\n1.4 (2017-03)\n支持命令行打开文件和打开方式打开文件。\n修复鼠标指针引用本地文件，没引用资源文件，引起启动path参数改变不能加载图标的问题。\n菜单的SIGNAL-SLOT改为on_action_triggered()\n修复PNG图片裁剪丢失透明度问题。\n新建图像为透明图像。\n\n1.3 (2017-03)\n实现选区模糊。\n加入模糊滤镜。\n\n1.2 (2017-02)\n文件名显示在窗口标题栏。\n区别保存和另存为。\n增加导入图片。\n\n1.1 (2017-01)\n新增灰度、反色。\n\n1.0 (2017-01)\n解决删除选区后画不出选框的问题。\n恢复撤销。\n增加全选。\n实现选区或剪贴板移动！\n保存时自动获取打开文件的路径。\n增加按像素、比例缩放。\n实现在属性窗口设置画布大小。\n2016-12\n增加快捷键控制选框及其边框移动。\n绘图代码从MainWindow向imageWidget迁移。\n实现水平镜像、垂直镜像。\n实现放大、缩小、原始大小。\n为了增加滚动条，增加自定义imageWidget。\n状态栏显示绘图详情。\n复制选区到系统剪贴板，从系统剪贴板获取图像粘贴。\n优化颜色选择交互。\n增加撤销、重做功能，有BUG。\n设为壁纸。\n画选区，剪裁选区。\n新建图片，打开图片，保存图片。\n实现画点、线、框、圆、字。";
+    QString s = "1.17\n(2020-04)\n修复：上个选区残留问题。\n增加：第一次全选可以填充颜色（因路径不能清空只能填充一次，再次填充需要关闭再打开）。\n\n1.16\n(2020-03)\n增加：圆形路径裁剪。\n背景文字改成了描边文字。\n\n1.15\n(2019-11)\n增加：文字工具可以绘制矩形背景。\n\n1.14\n(2019-08)\n增加：颜色调节。\n修复：选择颜色取消时颜色变黑色。\n\n1.13\n(2019-06)\n修复：选区裁剪大小微差。删除选区操作后没有设置回到框选工具。\n优化：信息内容、选区裁剪。群组工具栏Action，实现互斥Checked。\n增加：画线长度信息，画框长、宽信息，微调显示信息，裁剪后滚动条回到0。\n\n1.12\n(2019-05)\n修复：PNG转灰度图透明度丢失。\n\n1.11\n(2019-04)\n修改：删除选取填充，白色改成透明色。\n增加：棋盘背景。\n增加：鼠标移动定位文字。\n增加：Ctrl+鼠标滚轮 改变线粗或字体大小。\n\n1.10\n(2018-12)\n增加：选区马赛克。\n\n1.9\n(2018-11)\n增加：画笔粗细快捷键，画图更加方便。\n\n1.8\n(2018-05)\n修复：删除选区有虚线框，从右键打开方式无法打开文件。\n\n1.7\n(2017-11)\n颜色透明工具，取色后在边框色、填充色显示，超出边界清空鼠标位置信息。\n增加灰色背景，凸显绘图区域。\n优化代码。\n(2017-10)\n简化工具信号，简化setCursor()。\n(2017-09)\n增加箭头工具。\n增加抗锯齿。\n\n1.6\n(2017-07)\n更新日志消息窗口写不下了，改成带滚动条的文本框。\n自定义信号结合事件过滤器，把鼠标移动位置发送到主窗体信息栏。\n增加拖放打开文件。\n(2017-06)\n使用自定义信号解决子类发信息给主窗体状态栏问题，致谢rekols。\n(2017-05)\n右键打开文件记忆文件路径。\n\n1.5 (2017-04)\n透明色反色不改变。\n增加取色工具，橡皮擦颜色不再固定为白色，而是填充色。\n\n1.4 (2017-03)\n支持命令行打开文件和打开方式打开文件。\n修复鼠标指针引用本地文件，没引用资源文件，引起启动path参数改变不能加载图标的问题。\n菜单的SIGNAL-SLOT改为on_action_triggered()\n修复PNG图片裁剪丢失透明度问题。\n新建图像为透明图像。\n\n1.3 (2017-03)\n实现选区模糊。\n加入模糊滤镜。\n\n1.2 (2017-02)\n文件名显示在窗口标题栏。\n区别保存和另存为。\n增加导入图片。\n\n1.1 (2017-01)\n新增灰度、反色。\n\n1.0 (2017-01)\n解决删除选区后画不出选框的问题。\n恢复撤销。\n增加全选。\n实现选区或剪贴板移动！\n保存时自动获取打开文件的路径。\n增加按像素、比例缩放。\n实现在属性窗口设置画布大小。\n2016-12\n增加快捷键控制选框及其边框移动。\n绘图代码从MainWindow向imageWidget迁移。\n实现水平镜像、垂直镜像。\n实现放大、缩小、原始大小。\n为了增加滚动条，增加自定义imageWidget。\n状态栏显示绘图详情。\n复制选区到系统剪贴板，从系统剪贴板获取图像粘贴。\n优化颜色选择交互。\n增加撤销、重做功能，有BUG。\n设为壁纸。\n画选区，剪裁选区。\n新建图片，打开图片，保存图片。\n实现画点、线、框、圆、字。";
     QDialog *dialog = new QDialog;
     dialog->setWindowTitle("更新历史");
     dialog->setFixedSize(400,300);
@@ -325,6 +325,8 @@ void MainWindow::on_action_property_triggered()
     //qDebug() << image.width() << "X" << image.height();
     QDialog *dialog = new QDialog(this);
     dialog->setWindowTitle("属性");
+    dialog->setFixedSize(150,100);
+
     QVBoxLayout *vbox = new QVBoxLayout;
     QHBoxLayout *hbox = new QHBoxLayout;
     QLabel *label = new QLabel("宽度：");
@@ -334,23 +336,27 @@ void MainWindow::on_action_property_triggered()
     hbox->addWidget(label, 0, Qt::AlignCenter);
     hbox->addWidget(spinw);
     vbox->addLayout(hbox);
+
+    hbox = new QHBoxLayout;
     label = new QLabel("高度：");
+    hbox->addWidget(label, 0, Qt::AlignCenter);
     QSpinBox *spinh = new QSpinBox;
     spinh->setRange(0, 20000);
     spinh->setValue(imageWidget->imgtemp.height());
-    hbox = new QHBoxLayout;
-    hbox->addWidget(label, 0, Qt::AlignCenter);
     hbox->addWidget(spinh);
     vbox->addLayout(hbox);
-    QPushButton *btnConfirm = new QPushButton("确定");
-    QPushButton *btnCancel = new QPushButton("取消");
+
+    QPushButton *pushButton_confirm = new QPushButton("确定");
+    QPushButton *pushButton_cancel = new QPushButton("取消");
     hbox = new QHBoxLayout;
-    hbox->addWidget(btnConfirm);
-    hbox->addWidget(btnCancel);
+    hbox->addStretch();
+    hbox->addWidget(pushButton_confirm);
+    hbox->addWidget(pushButton_cancel);
     vbox->addLayout(hbox);
+    hbox->addStretch();
     dialog->setLayout(vbox);
-    connect(btnConfirm, SIGNAL(clicked()), dialog, SLOT(accept()));
-    connect(btnCancel, SIGNAL(clicked()), dialog, SLOT(reject()));
+    connect(pushButton_confirm, SIGNAL(clicked()), dialog, SLOT(accept()));
+    connect(pushButton_cancel, SIGNAL(clicked()), dialog, SLOT(reject()));
     if(dialog->exec() == QDialog::Accepted){
         imageWidget->newSize(spinw->value(), spinh->value());
     }
@@ -363,7 +369,7 @@ void MainWindow::on_action_excude_triggered()
     int ho = imageWidget->imgtemp.height();
     QDialog *dialog = new QDialog(this);
     dialog->setWindowTitle("缩放");
-
+    dialog->setFixedSize(250,150);
     QVBoxLayout *vbox = new QVBoxLayout;
     QHBoxLayout *hbox = new QHBoxLayout;
     QLabel *label = new QLabel("宽度：");
@@ -399,12 +405,12 @@ void MainWindow::on_action_excude_triggered()
     hbox->addWidget(label);
     vbox->addLayout(hbox);
 
-    QPushButton *btnConfirm = new QPushButton("确定");
-    QPushButton *btnCancel = new QPushButton("取消");
+    QPushButton *pushButton_confirm = new QPushButton("确定");
+    QPushButton *pushButton_cancel = new QPushButton("取消");
     hbox = new QHBoxLayout;
     hbox->addStretch();
-    hbox->addWidget(btnConfirm);
-    hbox->addWidget(btnCancel);
+    hbox->addWidget(pushButton_confirm);
+    hbox->addWidget(pushButton_cancel);
     hbox->addStretch();
     vbox->addLayout(hbox);
     dialog->setLayout(vbox);
@@ -413,8 +419,8 @@ void MainWindow::on_action_excude_triggered()
     connect(spinh, SIGNAL(valueChanged(int)), this, SLOT(onSpinhChanged(int)));
     connect(spinwr, SIGNAL(valueChanged(int)), this, SLOT(onSpinwrChanged(int)));
     connect(spinhr, SIGNAL(valueChanged(int)), this, SLOT(onSpinhrChanged(int)));
-    connect(btnConfirm, SIGNAL(clicked()), dialog, SLOT(accept()));
-    connect(btnCancel, SIGNAL(clicked()), dialog, SLOT(reject()));
+    connect(pushButton_confirm, SIGNAL(clicked()), dialog, SLOT(accept()));
+    connect(pushButton_cancel, SIGNAL(clicked()), dialog, SLOT(reject()));
     if(dialog->exec() == QDialog::Accepted){
         imageWidget->scale(spinw->value(),spinh->value());
     }

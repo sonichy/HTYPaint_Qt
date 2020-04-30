@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPen>
 #include <QLabel>
+//#include <QPainterPath>
 
 //线段
 //typedef struct myLine{
@@ -43,6 +44,7 @@ public:
     QBrush brush;
     QString text;
     QFont font;
+    QPainterPath painterPath;
     bool boolBorder, boolFill;
     void load(QString fileName);
     void save(QString path);
@@ -74,7 +76,7 @@ public slots:
     void drawFill();
     void drawErase();
     void drawMove();
-    void drawRectselect();
+    void drawRectSelect();
     void colorPicker();
     void cutSelect();
     void delSelect();

@@ -153,7 +153,7 @@ void ImageWidget::draw(QImage &img)
         painter.setPen(QPen(Qt::black, 1, Qt::DashLine));
         painter.setBrush(QBrush(Qt::transparent, Qt::SolidPattern));
         QRect rect(startPnt, endPnt);
-        painter.drawRect(rect);
+        painter.drawRect(rect.adjusted(1,1,-1,-1));
         emit statusbar2Message("("+QString::number(startPnt.x()) + "," + QString::number(startPnt.y()) + ") - (" + QString::number(endPnt.x()) + "," + QString::number(endPnt.y()) + ") = (" + QString::number(rect.width()) + "," + QString::number(rect.height()) + ")");
         break;}
     case ELLIPSE_DRAW:{
@@ -181,6 +181,11 @@ void ImageWidget::draw(QImage &img)
         painter.drawPath(path);
         break;}
     case FILL_DRAW:
+        qDebug() << painterPath;
+        if(!painterPath.isEmpty() && painterPath.contains(startPnt)){
+            painter.setBrush(brush);
+            painter.drawPath(painterPath);
+        }
         break;
     case ERASE_DRAW:
         //painter.setPen(QPen(Qt::white,1));
@@ -230,6 +235,10 @@ void ImageWidget::mousePressEvent(QMouseEvent *e)
     case COLORPICKER_DRAW:
         draw(imgtemp);
         break;
+    case FILL_DRAW:
+        draw(image);
+        imgtemp = image;
+        break;
     default:
         break;
     }
@@ -241,7 +250,6 @@ void ImageWidget::mousePressEvent(QMouseEvent *e)
 
 void ImageWidget::mouseMoveEvent(QMouseEvent *e)
 {
-    //if(this->isPressed){
     if(e->buttons() & Qt::LeftButton){
         endPnt = e->pos();
         switch(draw_type){
@@ -255,6 +263,8 @@ void ImageWidget::mouseMoveEvent(QMouseEvent *e)
             draw(imgtemp);
             cundo=0;
             moveImgbuf();
+            break;
+        case FILL_DRAW:
             break;
         default:
             imgtemp = image;
@@ -272,6 +282,7 @@ void ImageWidget::mouseReleaseEvent(QMouseEvent *e)
             draw(imgtemp);
             break;
         case SELECT_DRAW:
+            painterPath.addRect(QRect(startPnt, endPnt));
             break;
         case TEXT_DRAW:
             imgtemp = image;
@@ -404,9 +415,10 @@ void ImageWidget::drawMove()
     setCursor(QCursor(QPixmap(":/move.png")));
 }
 
-void ImageWidget::drawRectselect()
+void ImageWidget::drawRectSelect()
 {
-    image = imgtemp;
+    if(draw_type != SELECT_DRAW)
+        image = imgtemp;
     draw_type = SELECT_DRAW;
     setCursor(QCursor(QPixmap(":/rectselect.png")));
 }
@@ -419,10 +431,16 @@ void ImageWidget::colorPicker()
 
 void ImageWidget::selectAll()
 {
-    //image=imgtemp;
-    draw_type = SELECT_DRAW;
+    if(draw_type == SELECT_DRAW){
+        imgtemp = image;
+        update();
+    }else{
+        draw_type = SELECT_DRAW;
+    }
     startPnt = QPoint(0,0);
-    endPnt = QPoint(imgtemp.width()-2,imgtemp.height()-2);
+    endPnt = QPoint(imgtemp.width()-1,imgtemp.height()-1);
+    painterPath.addRect(QRect(startPnt, endPnt));
+    qDebug() << painterPath;
     draw(imgtemp);
 }
 
