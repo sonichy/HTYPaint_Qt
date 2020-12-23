@@ -18,7 +18,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="res.qrc">
-    <normaloff>:/HTYPaint.png</normaloff>:/HTYPaint.png</iconset>
+    <normaloff>:/icon/HTYPaint.png</normaloff>:/icon/HTYPaint.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget"/>
   <widget class="QMenuBar" name="menuBar">
@@ -27,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>1050</width>
-     <height>26</height>
+     <height>36</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -345,7 +345,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/pencil.png</normaloff>:/pencil.png</iconset>
+     <normaloff>:/icon/pencil.png</normaloff>:/icon/pencil.png</iconset>
    </property>
    <property name="text">
     <string>铅笔</string>
@@ -360,7 +360,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/line.png</normaloff>:/line.png</iconset>
+     <normaloff>:/icon/line.png</normaloff>:/icon/line.png</iconset>
    </property>
    <property name="text">
     <string>直线</string>
@@ -375,7 +375,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/ellipse.png</normaloff>:/ellipse.png</iconset>
+     <normaloff>:/icon/ellipse.png</normaloff>:/icon/ellipse.png</iconset>
    </property>
    <property name="text">
     <string>椭圆</string>
@@ -390,7 +390,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/rect.png</normaloff>:/rect.png</iconset>
+     <normaloff>:/icon/rect.png</normaloff>:/icon/rect.png</iconset>
    </property>
    <property name="text">
     <string>矩形</string>
@@ -405,7 +405,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/text.png</normaloff>:/text.png</iconset>
+     <normaloff>:/icon/text.png</normaloff>:/icon/text.png</iconset>
    </property>
    <property name="text">
     <string>文本</string>
@@ -420,7 +420,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/eraser.png</normaloff>:/eraser.png</iconset>
+     <normaloff>:/icon/eraser.png</normaloff>:/icon/eraser.png</iconset>
    </property>
    <property name="text">
     <string>擦子</string>
@@ -435,7 +435,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/move.png</normaloff>:/move.png</iconset>
+     <normaloff>:/icon/move.png</normaloff>:/icon/move.png</iconset>
    </property>
    <property name="text">
     <string>move</string>
@@ -450,7 +450,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/rectselect.png</normaloff>:/rectselect.png</iconset>
+     <normaloff>:/icon/rectselect.png</normaloff>:/icon/rectselect.png</iconset>
    </property>
    <property name="text">
     <string>rectselect</string>
@@ -505,7 +505,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/clip.png</normaloff>:/clip.png</iconset>
+     <normaloff>:/icon/clip.png</normaloff>:/icon/clip.png</iconset>
    </property>
    <property name="text">
     <string>剪切选区</string>
@@ -520,7 +520,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/fill.png</normaloff>:/fill.png</iconset>
+     <normaloff>:/icon/fill.png</normaloff>:/icon/fill.png</iconset>
    </property>
    <property name="text">
     <string>Fill</string>
@@ -536,7 +536,7 @@
   </action>
   <action name="actionZoomin">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset theme="zoom-in">
      <normaloff>:/zoomin.png</normaloff>:/zoomin.png</iconset>
    </property>
    <property name="text">
@@ -548,7 +548,7 @@
   </action>
   <action name="actionZoomout">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset theme="zoom-out">
      <normaloff>:/zoomout.png</normaloff>:/zoomout.png</iconset>
    </property>
    <property name="text">
@@ -560,7 +560,7 @@
   </action>
   <action name="actionZoom1">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset theme="zoom-original">
      <normaloff>:/zoom1.png</normaloff>:/zoom1.png</iconset>
    </property>
    <property name="text">
@@ -572,7 +572,7 @@
   </action>
   <action name="actionRotateRight">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset theme="object-rotate-right">
      <normaloff>:/rr.png</normaloff>:/rr.png</iconset>
    </property>
    <property name="text">
@@ -584,7 +584,7 @@
   </action>
   <action name="actionRotateLeft">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset theme="object-rotate-left">
      <normaloff>:/rl.png</normaloff>:/rl.png</iconset>
    </property>
    <property name="text">
@@ -596,7 +596,7 @@
   </action>
   <action name="actionMirrorHorizontal">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset theme="object-flip-horizontal">
      <normaloff>:/MirrorHorizontal.png</normaloff>:/MirrorHorizontal.png</iconset>
    </property>
    <property name="text">
@@ -608,7 +608,7 @@
   </action>
   <action name="actionMirrorVertical">
    <property name="icon">
-    <iconset resource="res.qrc">
+    <iconset theme="object-flip-vertical">
      <normaloff>:/MirrorVertical.png</normaloff>:/MirrorVertical.png</iconset>
    </property>
    <property name="text">
@@ -647,7 +647,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/color_picker.png</normaloff>:/color_picker.png</iconset>
+     <normaloff>:/icon/color_picker.png</normaloff>:/icon/color_picker.png</iconset>
    </property>
    <property name="text">
     <string>颜色拾取</string>
@@ -662,7 +662,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/arrow.png</normaloff>:/arrow.png</iconset>
+     <normaloff>:/icon/arrow.png</normaloff>:/icon/arrow.png</iconset>
    </property>
    <property name="text">
     <string>箭头</string>

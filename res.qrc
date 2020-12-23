@@ -1,24 +1,24 @@
 <RCC>
     <qresource prefix="/">
-        <file>clip.png</file>
-        <file>ellipse.png</file>
-        <file>eraser.png</file>
-        <file>line.png</file>
-        <file>move.png</file>
-        <file>pencil.png</file>
-        <file>rect.png</file>
-        <file>rectselect.png</file>
-        <file>text.png</file>
-        <file>fill.png</file>
-        <file>zoomin.png</file>
-        <file>zoomout.png</file>
-        <file>zoom1.png</file>
-        <file>rl.png</file>
-        <file>rr.png</file>
-        <file>MirrorHorizontal.png</file>
-        <file>MirrorVertical.png</file>
-        <file>color_picker.png</file>
-        <file>arrow.png</file>
-        <file>HTYPaint.png</file>
+        <file>icon/clip.png</file>
+        <file>icon/ellipse.png</file>
+        <file>icon/eraser.png</file>
+        <file>icon/line.png</file>
+        <file>icon/move.png</file>
+        <file>icon/pencil.png</file>
+        <file>icon/rect.png</file>
+        <file>icon/rectselect.png</file>
+        <file>icon/text.png</file>
+        <file>icon/fill.png</file>
+        <file>icon/zoomin.png</file>
+        <file>icon/zoomout.png</file>
+        <file>icon/zoom1.png</file>
+        <file>icon/RotateLeft.png</file>
+        <file>icon/RotateRight.png</file>
+        <file>icon/MirrorHorizontal.png</file>
+        <file>icon/MirrorVertical.png</file>
+        <file>icon/color_picker.png</file>
+        <file>icon/arrow.png</file>
+        <file>icon/HTYPaint.png</file>
     </qresource>
 </RCC>

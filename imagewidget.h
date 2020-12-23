@@ -35,7 +35,7 @@ public:
         DEL_DRAW,
         COLORPICKER_DRAW
     } draw_type;
-    ImageWidget(QWidget *parent = 0);
+    ImageWidget(QWidget *parent = nullptr);
     ~ImageWidget();
     QImage image, imgtemp, imgbuf[10], imgmove;
     QPoint startPnt;   //起点
@@ -114,7 +114,8 @@ private:
     bool eventFilter(QObject *obj, QEvent *event);
 
 signals:
-    void statusbar2Message(QString);
+    void statusBar1Message(QString);
+    void statusBar2Message(QString);
     void pick(QColor color);
 };
 
