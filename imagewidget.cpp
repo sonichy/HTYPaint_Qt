@@ -352,56 +352,56 @@ void ImageWidget::drawPoint()
 {
     image = imgtemp;
     draw_type = POINT_DRAW;
-    setCursor(QCursor(QPixmap(":/pencil.png")));
+    setCursor(QCursor(QPixmap(":/icon/pencil.png")));
 }
 
 void ImageWidget::drawLine()
 {
     image = imgtemp;
     draw_type = LINE_DRAW;
-    setCursor(QCursor(QPixmap(":/line.png")));
+    setCursor(QCursor(QPixmap(":/icon/line.png")));
 }
 
 void ImageWidget::drawArrow()
 {
     image = imgtemp;
     draw_type = ARROW_DRAW;
-    setCursor(QCursor(QPixmap(":/arrow.png")));
+    setCursor(QCursor(QPixmap(":/icon/arrow.png")));
 }
 
 void ImageWidget::drawRect()
 {
     image = imgtemp;
     draw_type = RECT_DRAW;
-    setCursor(QCursor(QPixmap(":/rect.png")));
+    setCursor(QCursor(QPixmap(":/icon/rect.png")));
 }
 
 void ImageWidget::drawEllipse()
 {
     image = imgtemp;
     draw_type = ELLIPSE_DRAW;
-    setCursor(QCursor(QPixmap(":/ellipse.png")));
+    setCursor(QCursor(QPixmap(":/icon/ellipse.png")));
 }
 
 void ImageWidget::drawText()
 {
     image = imgtemp;
     draw_type = TEXT_DRAW;
-    setCursor(QCursor(QPixmap(":/text.png")));
+    setCursor(QCursor(QPixmap(":/icon/text.png")));
 }
 
 void ImageWidget::drawFill()
 {
     image = imgtemp;
     draw_type = FILL_DRAW;
-    setCursor(QCursor(QPixmap(":/fill.png")));
+    setCursor(QCursor(QPixmap(":/icon/fill.png")));
 }
 
 void ImageWidget::drawErase()
 {
     image = imgtemp;
     draw_type = ERASE_DRAW;
-    setCursor(QCursor(QPixmap(":/eraser.png")));
+    setCursor(QCursor(QPixmap(":/icon/eraser.png")));
     //spinbox->setValue(20);
 }
 
@@ -413,7 +413,7 @@ void ImageWidget::drawMove()
         imgmove = imgpaste;
     }
     draw_type = MOVE_DRAW;
-    setCursor(QCursor(QPixmap(":/move.png")));
+    setCursor(QCursor(QPixmap(":/icon/move.png")));
 }
 
 void ImageWidget::drawRectSelect()
@@ -421,13 +421,13 @@ void ImageWidget::drawRectSelect()
     if(draw_type != SELECT_DRAW)
         image = imgtemp;
     draw_type = SELECT_DRAW;
-    setCursor(QCursor(QPixmap(":/rectselect.png")));
+    setCursor(QCursor(QPixmap(":/icon/rectselect.png")));
 }
 
 void ImageWidget::colorPicker()
 {
     draw_type = COLORPICKER_DRAW;
-    setCursor(QCursor(QPixmap(":/color_picker.png")));
+    setCursor(QCursor(QPixmap(":/icon/color_picker.png")));
 }
 
 void ImageWidget::selectAll()
