@@ -320,9 +320,9 @@ void ImageWidget::zoom1()
     update();
 }
 
-void ImageWidget::scale(int width,int height)
+void ImageWidget::scale(int width, int height)
 {
-    QImage imgscale = imgtemp.scaled(width,height);
+    QImage imgscale = imgtemp.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     imgtemp = imgscale;
     image = imgtemp;
     update();

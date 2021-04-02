@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QPen>
 #include <QLabel>
-//#include <QPainterPath>
+#include <QPainterPath>
 
 //线段
 //typedef struct myLine{
